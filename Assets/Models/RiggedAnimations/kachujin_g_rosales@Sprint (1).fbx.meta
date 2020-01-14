@@ -9,7 +9,13 @@ ModelImporter:
   - first:
       74: -8086047558812005389
     second: Sprint
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: kachujin_MAT
+    second: {fileID: -8884399124712359907, guid: cbaa0a73d4bb38e4a90bd8bc2785e98d,
+      type: 3}
   materials:
     importMaterials: 1
     materialName: 0
@@ -51,10 +57,10 @@ ModelImporter:
       hasAdditiveReferencePose: 0
       loopTime: 1
       loopBlend: 1
-      loopBlendOrientation: 0
+      loopBlendOrientation: 1
       loopBlendPositionY: 0
       loopBlendPositionXZ: 0
-      keepOriginalOrientation: 0
+      keepOriginalOrientation: 1
       keepOriginalPositionY: 1
       keepOriginalPositionXZ: 0
       heightFromFeet: 0
