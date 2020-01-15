@@ -1,14 +1,11 @@
 fileFormatVersion: 2
-guid: 385e59538aa8f1e4ea0d894ec35a6b20
+guid: b1191ea7053651b49897851a65a0fea1
 ModelImporter:
   serializedVersion: 26
   internalIDToNameTable:
   - first:
       74: -203655887218126122
-    second: Idle (1)
-  - first:
-      74: -3100369314251171874
-    second: Idle
+    second: Running Backward
   externalObjects: {}
   materials:
     importMaterials: 1
@@ -38,25 +35,25 @@ ModelImporter:
     extraUserProperties: []
     clipAnimations:
     - serializedVersion: 16
-      name: Idle
+      name: Running Backward
       takeName: mixamo.com
       internalID: 0
       firstFrame: 0
-      lastFrame: 499
+      lastFrame: 19
       wrapMode: 0
-      orientationOffsetY: 0
+      orientationOffsetY: -0.15
       level: 0
       cycleOffset: 0
       loop: 0
       hasAdditiveReferencePose: 0
       loopTime: 1
       loopBlend: 0
-      loopBlendOrientation: 0
-      loopBlendPositionY: 0
+      loopBlendOrientation: 1
+      loopBlendPositionY: 1
       loopBlendPositionXZ: 0
       keepOriginalOrientation: 1
       keepOriginalPositionY: 1
-      keepOriginalPositionXZ: 1
+      keepOriginalPositionXZ: 0
       heightFromFeet: 0
       mirror: 0
       bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000

@@ -62,12 +62,6 @@ public class GameCameraControls : MonoBehaviour
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
 
-        if (playerController.isLeftStrifing)
-            SetCameraXOffset(50f);
-        else if (playerController.isRightStrifing)
-            SetCameraXOffset(-50f);
-        else
-            SetCameraXOffset(0f);
     }
 
     private void FixedUpdate()

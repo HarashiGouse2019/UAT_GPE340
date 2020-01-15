@@ -6,7 +6,7 @@ public class PlayerController : Controller
 {
     CharacterController playerCharController;
     PlayerPawn pawn;
-    public float movementSpeed, rotationSpeed;
+    public float horMoveSpeed, verMoveSpeed;
 
     public float vSpeed = 0f;
     public float gravity = 90f;
@@ -29,48 +29,13 @@ public class PlayerController : Controller
 
     private void FixedUpdate()
     {
-        playerAnimator.SetBool("isMoving", isMoving);
-        playerAnimator.SetBool("isLeftStrifing", isLeftStrifing);
-        playerAnimator.SetBool("isRightStrifing", isRightStrifing);
+        float horSpeed = horMoveSpeed * Input.GetAxis("Horizontal");
+        float verSpeed = verMoveSpeed * Input.GetAxis("Vertical");
 
-        Vector3 directionToMove = Vector3.zero;
+        playerAnimator.SetFloat("Horizontal", horSpeed);
+        playerAnimator.SetFloat("Vertical", verSpeed);
 
-        if (Input.GetKey(KeyCode.W))
-        {
-            directionToMove += Vector3.forward * movementSpeed * Time.deltaTime;
-            isMoving = true;
-        }
-
-        if (Input.GetKey(KeyCode.S))
-        {
-            directionToMove += Vector3.back* movementSpeed * Time.deltaTime;
-            isMoving = true;
-        }
-
-        if (Input.GetKey(KeyCode.A))
-        {
-            directionToMove += Vector3.left * movementSpeed * Time.deltaTime;
-            isLeftStrifing = true;
-            isRightStrifing = !isLeftStrifing;
-        }
-
-        if (Input.GetKey(KeyCode.D))
-        {
-            directionToMove += Vector3.right * movementSpeed * Time.deltaTime;
-            isRightStrifing = true;
-            isLeftStrifing = !isRightStrifing;
-        }
-
-        if (Input.GetKeyUp(KeyCode.W) || Input.GetKeyUp(KeyCode.S) || Input.GetKeyUp(KeyCode.A) || Input.GetKeyUp(KeyCode.D))
-        {
-            isMoving = false;
-
-            if (Input.GetKeyUp(KeyCode.A))
-                isLeftStrifing = false;
-            if (Input.GetKeyUp(KeyCode.D))
-                isRightStrifing = false;
-        }
-
+        Vector3 directionToMove = new Vector3(horSpeed, 0f, verSpeed);
         Move(directionToMove);
     }
 

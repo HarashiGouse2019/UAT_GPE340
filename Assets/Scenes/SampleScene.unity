@@ -2551,8 +2551,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pawn: {fileID: 0}
-  movementSpeed: 500
-  rotationSpeed: 0
+  horMoveSpeed: 10
+  verMoveSpeed: 10
   vSpeed: 0
   gravity: 90
   isLeftStrifing: 0
