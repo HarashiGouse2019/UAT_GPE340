@@ -6,7 +6,7 @@ public class PlayerController : Controller
 {
     CharacterController playerCharController;
     PlayerPawn pawn;
-    public float horMoveSpeed, verMoveSpeed;
+    public float movementSpeed;
 
     public float vSpeed = 0f;
     public float gravity = 90f;
@@ -16,6 +16,7 @@ public class PlayerController : Controller
     bool isMoving;
     public bool isLeftStrifing;
     public bool isRightStrifing;
+
 
 
     // Start is called before the first frame update
@@ -29,13 +30,17 @@ public class PlayerController : Controller
 
     private void FixedUpdate()
     {
-        float horSpeed = horMoveSpeed * Input.GetAxis("Horizontal");
-        float verSpeed = verMoveSpeed * Input.GetAxis("Vertical");
+        Vector3 input = new Vector3(Input.GetAxis("Horizontal"), 0f, Input.GetAxis("Vertical"));
 
-        playerAnimator.SetFloat("Horizontal", horSpeed);
-        playerAnimator.SetFloat("Vertical", verSpeed);
+        input = Vector3.ClampMagnitude(input, 4f);
 
-        Vector3 directionToMove = new Vector3(horSpeed, 0f, verSpeed);
+        input *= movementSpeed;
+
+        playerAnimator.SetFloat("Horizontal", input.x);
+        playerAnimator.SetFloat("Vertical", input.z);
+
+
+        Vector3 directionToMove = new Vector3(input.x, 0f, input.z);
         Move(directionToMove);
     }
 
@@ -51,6 +56,6 @@ public class PlayerController : Controller
             vSpeed -= gravity * Time.deltaTime;
             directionToMove.y = vSpeed;
         }
-        playerCharController.SimpleMove(directionToMove * Time.deltaTime);
+        playerCharController.Move(directionToMove * Time.deltaTime);
     }
 }
