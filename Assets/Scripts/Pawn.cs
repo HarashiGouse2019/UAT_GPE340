@@ -2,10 +2,15 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Pawn : MonoBehaviour
+public abstract class Pawn : MonoBehaviour
 {
+    public CharacterController charController;
+
     //Movement
-    public float moveSpeed;
+    public float movementSpeed;
+
+    public float vSpeed = 0f;
+    public float gravity = 90f;
 
     // Start is called before the first frame update
     void Start()
@@ -18,4 +23,6 @@ public class Pawn : MonoBehaviour
     {
         
     }
+
+   public virtual void Move(Vector3 worldDirectionToMove) { }
 }

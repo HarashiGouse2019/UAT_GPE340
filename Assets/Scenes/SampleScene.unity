@@ -653,7 +653,8 @@ Light:
   m_BounceIntensity: 1
   m_ColorTemperature: 6570
   m_UseColorTemperature: 0
-  m_BoundingSphereOverride: {x: 0, y: 0, z: 0, w: 0}
+  m_BoundingSphereOverride: {x: 1.3555956e-19, y: 1.3563156e-19, z: 1.5320568e+31,
+    w: 61.09907}
   m_UseBoundingSphereOverride: 0
   m_ShadowRadius: 0
   m_ShadowAngle: 0
@@ -3349,6 +3350,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6c507ea0bc3b507418ed3fe3e6b81877, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  charController: {fileID: 0}
+  movementSpeed: 250
+  vSpeed: 0
+  gravity: 90
 --- !u!114 &8296172668426037406
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3361,10 +3366,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe540f9d473594d4c89b0ecbe3a773b1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pawn: {fileID: 0}
-  movementSpeed: 250
-  vSpeed: 0
-  gravity: 10
+  pawn: {fileID: 8296172668426037405}
   isLeftStrifing: 0
   isRightStrifing: 0
 --- !u!54 &8296172668426037407

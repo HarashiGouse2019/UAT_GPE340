@@ -4,25 +4,17 @@ using UnityEngine;
 
 public class PlayerController : Controller
 {
-    CharacterController playerCharController;
-    PlayerPawn pawn;
-    public float movementSpeed;
-
-    public float vSpeed = 0f;
-    public float gravity = 90f;
-
     //Animator
     Animator playerAnimator;
-    bool isMoving;
     public bool isLeftStrifing;
     public bool isRightStrifing;
 
 
 
     // Start is called before the first frame update
-    void Start()
+    public override void Start()
     {
-        playerCharController = GetComponent<CharacterController>();
+        pawn.charController = GetComponent<CharacterController>();
         playerAnimator = GetComponent<Animator>();
         pawn = GetComponent<PlayerPawn>();
         base.Start();
@@ -34,28 +26,15 @@ public class PlayerController : Controller
 
         input = Vector3.ClampMagnitude(input, 4f);
 
-        input *= movementSpeed;
+        input *= pawn.movementSpeed;
 
         playerAnimator.SetFloat("Horizontal", input.x);
         playerAnimator.SetFloat("Vertical", input.z);
 
 
         Vector3 directionToMove = new Vector3(input.x, 0f, input.z);
-        Move(directionToMove);
+        pawn.Move(directionToMove);
     }
 
-    void Move(Vector3 worldDirectionToMove)
-    {
-        //Calculate our direction based on our rotation (so 0,0,1 becomes our forward)
-        Vector3 directionToMove = pawn.transform.TransformDirection(worldDirectionToMove);
 
-        //Actually move
-        if (playerCharController.isGrounded) vSpeed = 0;
-        else
-        {
-            vSpeed -= gravity * Time.deltaTime;
-            directionToMove.y = vSpeed;
-        }
-        playerCharController.Move(directionToMove * Time.deltaTime);
-    }
 }
