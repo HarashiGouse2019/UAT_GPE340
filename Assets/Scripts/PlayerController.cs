@@ -30,7 +30,7 @@ public class PlayerController : Controller
 
     private void FixedUpdate()
     {
-        Vector3 input = new Vector3(Input.GetAxis("Horizontal"), 0f, Input.GetAxis("Vertical"));
+        Vector3 input = new Vector3(Input.GetAxis("Horizontal"), 0f, Input.GetAxis("Vertical")) * Time.fixedDeltaTime;
 
         input = Vector3.ClampMagnitude(input, 4f);
 
