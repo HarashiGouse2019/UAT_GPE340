@@ -8,6 +8,7 @@ public abstract class Pawn : MonoBehaviour
 
     //Movement
     public float movementSpeed;
+    public float rollingSpeed = 1;
 
     public float vSpeed = 0f;
     public float gravity = 90f;

@@ -4,20 +4,8 @@ using UnityEngine;
 
 public class PlayerPawn : Pawn
 {
-    
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
+    //Our movement function for our player pawn
     public override void Move(Vector3 worldDirectionToMove)
     {
         //Calculate our direction based on our rotation (so 0,0,1 becomes our forward)

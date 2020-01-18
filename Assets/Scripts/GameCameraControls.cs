@@ -62,6 +62,18 @@ public class GameCameraControls : MonoBehaviour
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
 
+
+        //We create a plane that is using the world's z-coordinates
+        Plane plane = new Plane(Vector3.up, transform.parent.position);
+
+        //We take the position of the mouse to our ray point into the world
+        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        float distance;
+
+        //And then if our raycast hits anything, we return what position our mouse is on in world space
+        if (plane.Raycast(ray, out distance))
+            Debug.Log(ray.GetPoint(distance));
+
     }
 
     private void FixedUpdate()
@@ -70,20 +82,31 @@ public class GameCameraControls : MonoBehaviour
         ViewObstructed();
     }
 
+    //This is the main mouse controls
     void RunMouseControls()
     {
+        //Both x and y position take the Axis of Mouse X and Y
+        //which is a value between -1 and 1
+        //multiply by the rotation speed
+        //over a period amount of time.
         mousePositionX += Input.GetAxis("Mouse X") * cameraRotationSpeed * Time.deltaTime;
         mousePositionY -= Input.GetAxis("Mouse Y") * cameraRotationSpeed * Time.deltaTime;
 
-        //Huh?
+        //We make sure that mouse position y is within -35 and 60
         mousePositionY = Mathf.Clamp(mousePositionY, -35, 60);
 
+        //We want to look at the target object
+        //or in this cause, have the camera point to
+        //a point for it to pivot around
         transform.LookAt(camPivotPoint);
 
+        //Our camera and player will rotate using Euler rotations
         camPivotPoint.rotation = Quaternion.Euler(mousePositionY + camOffsetY, mousePositionX + camOffsetX, 0);
         playerPoint.rotation = Quaternion.Euler(0, mousePositionX, 0);
     }
 
+    //If the camera happens to be behind a while, it will obstruct that wall
+    //allowing us to see the player.
     void ViewObstructed()
     {
         MeshRenderer obstructionRender = obstructionTarget.gameObject.GetComponent<MeshRenderer>();
