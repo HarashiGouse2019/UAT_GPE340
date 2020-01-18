@@ -52,7 +52,7 @@ public class PlayerController : Controller
         //This makes sure that our magnitude is not higher than 4
         input = Vector3.ClampMagnitude(input, 4f);
 
-        input = transform.InverseTransformDirection(input);
+        //input = transform.InverseTransformDirection(input);
 
         //Our input is amplified by our movement speed
         //since input utimately only had values of 1, 0, and -1
