@@ -68,11 +68,6 @@ public class GameCameraControls : MonoBehaviour
 
         //We take the position of the mouse to our ray point into the world
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-        float distance;
-
-        //And then if our raycast hits anything, we return what position our mouse is on in world space
-        if (plane.Raycast(ray, out distance))
-            Debug.Log(ray.GetPoint(distance));
 
     }
 

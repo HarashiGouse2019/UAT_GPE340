@@ -28,7 +28,7 @@ public class PlayerHealthUiHandler : MonoBehaviour
     {
         while(true)
         {
-            S_PLAYERHEALTH.value = damageableObj.objHealth / 100f;
+            S_PLAYERHEALTH.value = damageableObj.GetObjHealthVal() / 100f;
 
             yield return new WaitForEndOfFrame();
         }

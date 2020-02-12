@@ -18,6 +18,9 @@ public class PlayerController : Controller
     //A const reset value
     const uint reset = 0;
 
+    //Player Exhaustible Object
+    ExhaustibleObj exhaustibleObj;
+
     // Start is called before the first frame update
     public override void Start()
     {
@@ -26,6 +29,7 @@ public class PlayerController : Controller
         pawn.charController = GetComponent<CharacterController>();
         playerAnimator = GetComponent<Animator>();
         pawn = GetComponent<PlayerPawn>();
+        exhaustibleObj = GetComponent<ExhaustibleObj>();
         base.Start();
     }
 
@@ -46,8 +50,12 @@ public class PlayerController : Controller
         //We have the player roll with the middle mouse button
         bool rollInput = Input.GetMouseButtonDown(2);
 
-        if (rollInput)
+        if (rollInput && isRolling == false)
+        {
             SetRollingTo(true);
+            exhaustibleObj.UseObjStamina(10f);
+            StartCoroutine(exhaustibleObj.CheckForRecovery());
+        }
 
         //This makes sure that our magnitude is not higher than 4
         input = Vector3.ClampMagnitude(input, 4f);
@@ -75,6 +83,7 @@ public class PlayerController : Controller
     //Set if our player is rolling or not
     public void SetRollingTo(bool state)
     {
+        
         isRolling = state;
     }
 

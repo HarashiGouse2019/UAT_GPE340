@@ -10,10 +10,10 @@ public class DamageableObj : MonoBehaviour
      Strength will be subtracted from the health, which will be the overall damage that it'll take.
      */
     [Header("Health Value")]
-    public float objHealth = 100f;
+    [SerializeField] private float objHealth = 100f;
 
     [Header("Strength Value")]
-    public float objStrength = 1;
+    [SerializeField] private float objStrength = 1;
 
     [Header("Events")]
     [SerializeField] private UnityEvent onHeal;

@@ -2040,6 +2040,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1969552741}
   - component: {fileID: 1969552742}
+  - component: {fileID: 1969552743}
   m_Layer: 5
   m_Name: S_PLAYERSTAMINA
   m_TagString: Untagged
@@ -2119,6 +2120,18 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &1969552743
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1969552740}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9067888b785eb064aa8b586db14ec121, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2042757495
 GameObject:
   m_ObjectHideFlags: 0
@@ -4312,6 +4325,7 @@ GameObject:
   - component: {fileID: 8296172668426037406}
   - component: {fileID: 8296172668426037405}
   - component: {fileID: 8296172668426037408}
+  - component: {fileID: 8296172668426037409}
   - component: {fileID: 8655858184320802736}
   - component: {fileID: 3166231813116196853}
   - component: {fileID: 8296172668426037407}
@@ -4394,6 +4408,20 @@ MonoBehaviour:
   onDie:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &8296172668426037409
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8296172668426037404}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: beab34fe5bc8c9047ac171e7aa8db087, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  objStamina: 0
+  maxObjStamina: 100
 --- !u!4 &8471817553578595997
 Transform:
   m_ObjectHideFlags: 0
