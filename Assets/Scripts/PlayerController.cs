@@ -30,6 +30,7 @@ public class PlayerController : Controller
         playerAnimator = GetComponent<Animator>();
         pawn = GetComponent<PlayerPawn>();
         exhaustibleObj = GetComponent<ExhaustibleObj>();
+
         base.Start();
     }
 
@@ -78,6 +79,14 @@ public class PlayerController : Controller
         //and moves every frame
         Vector3 directionToMove = new Vector3(input.x, 0f, input.z);
         pawn.Move(directionToMove);
+
+        //Equip a weapon
+        if(Input.GetKeyDown(KeyCode.Space))
+        {
+            pawn.isEquipped = true;
+            playerAnimator.SetBool("isEquipped", pawn.isEquipped);
+            pawn.EquipWeapon(pawn.weapons[0]);
+        }
     }
 
     //Set if our player is rolling or not

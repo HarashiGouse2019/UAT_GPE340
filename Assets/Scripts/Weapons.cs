@@ -4,15 +4,16 @@ using UnityEngine;
 
 public class Weapons : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    public string weaponName;
+    public enum WeaponType
     {
-        
+        Melee,
+        Projectile
     }
+    public WeaponType weaponType;
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    public void Shoot() { }
+    public void Reload() { }
+    public void Use() { }
+
 }
