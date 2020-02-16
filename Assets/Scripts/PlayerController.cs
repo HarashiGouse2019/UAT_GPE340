@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class PlayerController : Controller
 {
@@ -20,6 +21,10 @@ public class PlayerController : Controller
 
     //Player Exhaustible Object
     ExhaustibleObj exhaustibleObj;
+
+    //Unity Events
+    [Header("Control Events")]
+    [SerializeField] private List<UnityEvent> unityEvents;
 
     // Start is called before the first frame update
     public override void Start()
