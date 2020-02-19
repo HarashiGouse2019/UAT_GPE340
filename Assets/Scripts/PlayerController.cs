@@ -88,9 +88,18 @@ public class PlayerController : Controller
         //Equip a weapon
         if(Input.GetKeyDown(KeyCode.Space))
         {
-            pawn.isEquipped = true;
-            playerAnimator.SetBool("isEquipped", pawn.isEquipped);
-            pawn.EquipWeapon(pawn.weapons[0]);
+            if (pawn.isEquipped == false)
+            {
+                pawn.isEquipped = true;
+                playerAnimator.SetBool("isEquipped", pawn.isEquipped);
+                pawn.EquipWeapon(pawn.weapons[0]);
+                GameCameraControls.Instance.GoToArmedPosition();
+            } else
+            {
+                pawn.UnequipWeapon();
+                playerAnimator.SetBool("isEquipped", pawn.isEquipped);
+                GameCameraControls.Instance.GoToUnArmedPosition();
+            }
         }
     }
 

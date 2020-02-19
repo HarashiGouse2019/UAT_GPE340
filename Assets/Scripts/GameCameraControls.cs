@@ -7,6 +7,13 @@ public class GameCameraControls : MonoBehaviour
 {
     public static GameCameraControls Instance;
 
+    //Reference our camera so we can make the transition between armed and unarmed
+    public Camera m_camera;
+
+    //Armed and Unarmed Position for camera
+    public Transform armedPosition;
+    public Transform unarmedPosition;
+
     //Reference our PlayerController so we can keep if we're strifing
     public PlayerController playerController;
 
@@ -18,21 +25,8 @@ public class GameCameraControls : MonoBehaviour
     float mousePositionX, mousePositionY;
 
     //We'll have a camera offset so that when we are strifing, we look at what our model is looking at
-    float camOffsetX, camOffsetY;
-    public float CameraOffsetX
-    {
-        get
-        {
-            return camOffsetX;
-        }
-    }
-    public float CameraOffsetY
-    {
-        get
-        {
-            return camOffsetX;
-        }
-    }
+    public float camOffsetX, camOffsetY, camOffsetZ;
+    public float camRotOffsetX, camRotOffsetY;
 
     //This will be for if there's a wall in the way
     public Transform obstructionTarget;
@@ -88,7 +82,7 @@ public class GameCameraControls : MonoBehaviour
         mousePositionY -= Input.GetAxis("Mouse Y") * cameraRotationSpeed * Time.deltaTime;
 
         //We make sure that mouse position y is within -35 and 60
-        mousePositionY = Mathf.Clamp(mousePositionY, -35, 60);
+        mousePositionY = Mathf.Clamp(mousePositionY, -60, 60);
 
         //We want to look at the target object
         //or in this cause, have the camera point to
@@ -96,7 +90,7 @@ public class GameCameraControls : MonoBehaviour
         transform.LookAt(camPivotPoint);
 
         //Our camera and player will rotate using Euler rotations
-        camPivotPoint.rotation = Quaternion.Euler(mousePositionY + camOffsetY, mousePositionX + camOffsetX, 0);
+        camPivotPoint.rotation = Quaternion.Euler(mousePositionY + camRotOffsetY, mousePositionX + camRotOffsetX, 0);
         playerPoint.rotation = Quaternion.Euler(0, mousePositionX, 0);
     }
 
@@ -130,13 +124,22 @@ public class GameCameraControls : MonoBehaviour
         }
     }
 
-    public void SetCameraXOffset(float val)
+    public void SetCameraXRotateOffset(float val)
     {
         camOffsetX = val;
     }
 
-    public void SetCameraYOffset(float val)
+    public void GoToArmedPosition()
     {
-        camOffsetY = val;
+        SetCameraXRotateOffset(-10);
+        m_camera.transform.position = armedPosition.position;
+        m_camera.transform.rotation = armedPosition.rotation;
+    }
+
+    public void GoToUnArmedPosition()
+    {
+        SetCameraXRotateOffset(0);
+        m_camera.transform.position = unarmedPosition.position;
+        m_camera.transform.rotation = unarmedPosition.rotation;
     }
 }

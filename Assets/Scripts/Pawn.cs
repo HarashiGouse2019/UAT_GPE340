@@ -27,7 +27,14 @@ public abstract class Pawn : MonoBehaviour
     {
         equippedWeapon = Instantiate(weapon) as Weapons;
         equippedWeapon.GetComponent<Transform>().SetParent(weaponAttachedPoint);
-        equippedWeapon.GetComponent<Transform>().localPosition = weaponAttachedPoint.localPosition;
-        equippedWeapon.GetComponent<Transform>().localRotation = weaponAttachedPoint.localRotation;
+        equippedWeapon.GetComponent<Transform>().position = weaponAttachedPoint.position;
+        equippedWeapon.GetComponent<Transform>().rotation = weaponAttachedPoint.rotation;
+    }
+
+    public virtual void UnequipWeapon()
+    {
+        Destroy(equippedWeapon.gameObject);
+        equippedWeapon = null;
+        isEquipped = false;
     }
 }
