@@ -32,6 +32,8 @@ public class GameCameraControls : MonoBehaviour
     public Transform obstructionTarget;
     float zoomSpeed = 2f;
 
+    bool playerIsArmed = false;
+
     private void Awake()
     {
         #region Singleton
@@ -68,7 +70,7 @@ public class GameCameraControls : MonoBehaviour
     private void FixedUpdate()
     {
         RunMouseControls();
-        ViewObstructed();
+        if (playerIsArmed == false) ViewObstructed();
     }
 
     //This is the main mouse controls
@@ -81,8 +83,8 @@ public class GameCameraControls : MonoBehaviour
         mousePositionX += Input.GetAxis("Mouse X") * cameraRotationSpeed * Time.deltaTime;
         mousePositionY -= Input.GetAxis("Mouse Y") * cameraRotationSpeed * Time.deltaTime;
 
-        //We make sure that mouse position y is within -35 and 60
-        mousePositionY = Mathf.Clamp(mousePositionY, -60, 60);
+        //We make sure that mouse position y is within -90 and 60
+        mousePositionY = Mathf.Clamp(mousePositionY, -90, 35);
 
         //We want to look at the target object
         //or in this cause, have the camera point to
@@ -134,6 +136,7 @@ public class GameCameraControls : MonoBehaviour
         SetCameraXRotateOffset(-10);
         m_camera.transform.position = armedPosition.position;
         m_camera.transform.rotation = armedPosition.rotation;
+        playerIsArmed = true;
     }
 
     public void GoToUnArmedPosition()
@@ -141,5 +144,6 @@ public class GameCameraControls : MonoBehaviour
         SetCameraXRotateOffset(0);
         m_camera.transform.position = unarmedPosition.position;
         m_camera.transform.rotation = unarmedPosition.rotation;
+        playerIsArmed = false;
     }
 }

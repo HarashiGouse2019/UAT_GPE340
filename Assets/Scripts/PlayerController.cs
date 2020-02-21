@@ -5,9 +5,6 @@ using UnityEngine.Events;
 
 public class PlayerController : Controller
 {
-    //Animator
-    Animator playerAnimator;
-
     //Animator booleans to control our animations
     public bool isLeftStrifing;
     public bool isRightStrifing;
@@ -31,9 +28,9 @@ public class PlayerController : Controller
     {
         //We have to get our reference from CharactorController, our player animation
         //and our player pawn
-        pawn.charController = GetComponent<CharacterController>();
-        playerAnimator = GetComponent<Animator>();
         pawn = GetComponent<PlayerPawn>();
+        pawn.charController = GetComponent<CharacterController>();
+        
         exhaustibleObj = GetComponent<ExhaustibleObj>();
 
         base.Start();
@@ -76,9 +73,9 @@ public class PlayerController : Controller
        
 
         //Every frame, we assign our values into the player animator
-        playerAnimator.SetFloat("Horizontal", input.x);
-        playerAnimator.SetFloat("Vertical", input.z);
-        playerAnimator.SetBool("isRolling", isRolling);
+        pawn.animator.SetFloat("Horizontal", input.x);
+        pawn.animator.SetFloat("Vertical", input.z);
+        pawn.animator.SetBool("isRolling", isRolling);
 
         //We create another vector that takes the x and z coordinates of our player
         //and moves every frame
@@ -91,13 +88,13 @@ public class PlayerController : Controller
             if (pawn.isEquipped == false)
             {
                 pawn.isEquipped = true;
-                playerAnimator.SetBool("isEquipped", pawn.isEquipped);
+                pawn.animator.SetBool("isEquipped", pawn.isEquipped);
                 pawn.EquipWeapon(pawn.weapons[0]);
                 GameCameraControls.Instance.GoToArmedPosition();
             } else
             {
                 pawn.UnequipWeapon();
-                playerAnimator.SetBool("isEquipped", pawn.isEquipped);
+                pawn.animator.SetBool("isEquipped", pawn.isEquipped);
                 GameCameraControls.Instance.GoToUnArmedPosition();
             }
         }

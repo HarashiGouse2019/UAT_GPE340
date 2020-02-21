@@ -12,8 +12,11 @@ public class Weapons : MonoBehaviour
     }
     public WeaponType weaponType;
 
+    [Header("IK Targets")]
+    public Transform RightHandIKTarget;
+    public Transform LeftHandIKTarget;
+
     public void Shoot() { }
     public void Reload() { }
     public void Use() { }
-
 }

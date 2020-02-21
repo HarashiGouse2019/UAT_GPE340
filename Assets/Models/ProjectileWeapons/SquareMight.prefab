@@ -345,6 +345,8 @@ Transform:
   - {fileID: 6623717804869577638}
   - {fileID: 1500048118570909528}
   - {fileID: 3713230189593974919}
+  - {fileID: 444329254166804825}
+  - {fileID: 6793462127318319354}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -362,6 +364,38 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   weaponName: SquareMight
   weaponType: 1
+  RightHandIKTarget: {fileID: 444329254166804825}
+  LeftHandIKTarget: {fileID: 6793462127318319354}
+--- !u!1 &5655968688912613955
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6793462127318319354}
+  m_Layer: 0
+  m_Name: LeftHandIKTarget
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6793462127318319354
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5655968688912613955}
+  m_LocalRotation: {x: -0.65148455, y: 0.077338785, z: 0.74944735, w: -0.088968106}
+  m_LocalPosition: {x: 0.176, y: -0.2, z: -0.26}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 8122164380182410813}
+  m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 0, y: -82, z: 193.54}
 --- !u!1 &7513322294897091782
 GameObject:
   m_ObjectHideFlags: 0
@@ -440,3 +474,33 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!1 &7861785607885507486
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 444329254166804825}
+  m_Layer: 0
+  m_Name: RightHandIKTarget
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &444329254166804825
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7861785607885507486}
+  m_LocalRotation: {x: 0.39438975, y: -0.51317585, z: -0.5150954, w: 0.56194663}
+  m_LocalPosition: {x: 0.439, y: -1.18, z: 0.4}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 8122164380182410813}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: -4.9, y: -80.63, z: -80.86}
