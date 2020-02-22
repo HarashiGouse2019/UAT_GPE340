@@ -57,10 +57,15 @@ public abstract class Pawn : MonoBehaviour, ISpawnable
             animator.SetIKPositionWeight(AvatarIKGoal.RightHand, 1f);
             animator.SetIKRotation(AvatarIKGoal.RightHand, equippedWeapon.RightHandIKTarget.rotation);
             animator.SetIKRotationWeight(AvatarIKGoal.RightHand, 1f);
+
+            animator.SetIKHintPosition(AvatarIKHint.RightElbow, equippedWeapon.RightHandIKHintTarget.position);
+            animator.SetIKHintPositionWeight(AvatarIKHint.RightElbow, 1f);
         } else
         {
             animator.SetIKPositionWeight(AvatarIKGoal.RightHand, 0f);
             animator.SetIKRotationWeight(AvatarIKGoal.RightHand, 0f);
+
+            animator.SetIKHintPositionWeight(AvatarIKHint.RightElbow, 0f);
         }
 
         if (equippedWeapon.LeftHandIKTarget)
@@ -69,11 +74,16 @@ public abstract class Pawn : MonoBehaviour, ISpawnable
             animator.SetIKPositionWeight(AvatarIKGoal.LeftHand, 1f);
             animator.SetIKRotation(AvatarIKGoal.LeftHand, equippedWeapon.LeftHandIKTarget.rotation);
             animator.SetIKRotationWeight(AvatarIKGoal.LeftHand, 1f);
+
+            animator.SetIKHintPosition(AvatarIKHint.LeftElbow, equippedWeapon.LeftHandIKHintTarget.position);
+            animator.SetIKHintPositionWeight(AvatarIKHint.LeftElbow, 1f);
         }
         else
         {
             animator.SetIKPositionWeight(AvatarIKGoal.LeftHand, 0f);
             animator.SetIKRotationWeight(AvatarIKGoal.LeftHand, 0f);
+
+            animator.SetIKHintPositionWeight(AvatarIKHint.LeftElbow, 0f);
         }
     }
 
