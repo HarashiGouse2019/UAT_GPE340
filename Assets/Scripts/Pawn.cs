@@ -42,15 +42,24 @@ public abstract class Pawn : MonoBehaviour, ISpawnable
         isEquipped = false;
     }
 
-    public virtual void OnSpawn() {
+    public virtual void OnSpawn()
+    {
 
         animator = GetComponent<Animator>();
     }
 
-    protected virtual void OnAnimatorIK()
+    protected virtual void OnAnimatorIK(int indexLayer)
     {
         if (!equippedWeapon)
             return;
+
+        SetRightArmIK();
+        SetLeftArmIK();
+
+    }
+
+    public virtual void SetRightArmIK()
+    {
         if (equippedWeapon.RightHandIKTarget)
         {
             animator.SetIKPosition(AvatarIKGoal.RightHand, equippedWeapon.RightHandIKTarget.position);
@@ -60,14 +69,18 @@ public abstract class Pawn : MonoBehaviour, ISpawnable
 
             animator.SetIKHintPosition(AvatarIKHint.RightElbow, equippedWeapon.RightHandIKHintTarget.position);
             animator.SetIKHintPositionWeight(AvatarIKHint.RightElbow, 1f);
-        } else
+        }
+        else
         {
             animator.SetIKPositionWeight(AvatarIKGoal.RightHand, 0f);
             animator.SetIKRotationWeight(AvatarIKGoal.RightHand, 0f);
 
             animator.SetIKHintPositionWeight(AvatarIKHint.RightElbow, 0f);
         }
+    }
 
+    public virtual void SetLeftArmIK()
+    {
         if (equippedWeapon.LeftHandIKTarget)
         {
             animator.SetIKPosition(AvatarIKGoal.LeftHand, equippedWeapon.LeftHandIKTarget.position);

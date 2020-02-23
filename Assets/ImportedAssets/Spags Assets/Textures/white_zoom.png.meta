@@ -1,0 +1,487 @@
+fileFormatVersion: 2
+guid: 449bde3d1675bf34c9c8d6adf165eb1d
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 6061461063907171499
+    second: white_zoom_0
+  - first:
+      213: 6713694024181508953
+    second: white_zoom_1
+  - first:
+      213: -1198574591602861462
+    second: white_zoom_2
+  - first:
+      213: 8403861635787658873
+    second: white_zoom_3
+  - first:
+      213: 7686563521027939176
+    second: white_zoom_4
+  - first:
+      213: 9217541273538948530
+    second: white_zoom_5
+  - first:
+      213: 6068943321715546167
+    second: white_zoom_6
+  - first:
+      213: 5500263946671612686
+    second: white_zoom_7
+  - first:
+      213: -2330621364607915628
+    second: white_zoom_8
+  - first:
+      213: -15459021304097848
+    second: white_zoom_9
+  - first:
+      213: 1443129868185772943
+    second: white_zoom_10
+  - first:
+      213: 6593055231181573216
+    second: white_zoom_11
+  - first:
+      213: 7418660495453730253
+    second: white_zoom_12
+  - first:
+      213: -6744317036780672510
+    second: white_zoom_13
+  - first:
+      213: 1194741649064183172
+    second: white_zoom_14
+  - first:
+      213: -6317052087108624686
+    second: white_zoom_15
+  externalObjects: {}
+  serializedVersion: 10
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: -1
+    aniso: -1
+    mipBias: -100
+    wrapU: 1
+    wrapV: 1
+    wrapW: -1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: white_zoom_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 2250
+        width: 750
+        height: 750
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 005429398c48dfd48b0f81f319e004fd
+      internalID: 6061461063907171499
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: white_zoom_1
+      rect:
+        serializedVersion: 2
+        x: 750
+        y: 2250
+        width: 750
+        height: 750
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fcf6b5d1ab12adf49a1bfeb2fccef6d6
+      internalID: 6713694024181508953
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: white_zoom_2
+      rect:
+        serializedVersion: 2
+        x: 1500
+        y: 2250
+        width: 750
+        height: 750
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: daa2d609974651b4d949692cca535f62
+      internalID: -1198574591602861462
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: white_zoom_3
+      rect:
+        serializedVersion: 2
+        x: 2250
+        y: 2250
+        width: 750
+        height: 750
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9bc7734610a388c4a9e52057f10e1225
+      internalID: 8403861635787658873
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: white_zoom_4
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 1500
+        width: 750
+        height: 750
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fc0ed1acedd09c948bbe0afaedf006ec
+      internalID: 7686563521027939176
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: white_zoom_5
+      rect:
+        serializedVersion: 2
+        x: 750
+        y: 1500
+        width: 750
+        height: 750
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6c4823f70325585498975fc430c30893
+      internalID: 9217541273538948530
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: white_zoom_6
+      rect:
+        serializedVersion: 2
+        x: 1500
+        y: 1500
+        width: 750
+        height: 750
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0eaf983b9c26b0a428109e9a35fa62f0
+      internalID: 6068943321715546167
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: white_zoom_7
+      rect:
+        serializedVersion: 2
+        x: 2250
+        y: 1500
+        width: 750
+        height: 750
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7bccd3443450b7041b1660e8d0e0b0b6
+      internalID: 5500263946671612686
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: white_zoom_8
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 750
+        width: 750
+        height: 750
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fad2491ad8e668e47beeb6520cb682dd
+      internalID: -2330621364607915628
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: white_zoom_9
+      rect:
+        serializedVersion: 2
+        x: 750
+        y: 750
+        width: 750
+        height: 750
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 078470ba50dc3d940af861bd173726e2
+      internalID: -15459021304097848
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: white_zoom_10
+      rect:
+        serializedVersion: 2
+        x: 1500
+        y: 750
+        width: 750
+        height: 750
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 51533cebaeb8a2a47a24ea00eee313fe
+      internalID: 1443129868185772943
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: white_zoom_11
+      rect:
+        serializedVersion: 2
+        x: 2250
+        y: 750
+        width: 750
+        height: 750
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a7d7eafcfb0a59245aa003e8b487725e
+      internalID: 6593055231181573216
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: white_zoom_12
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 750
+        height: 750
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: dec72f85158aaec4aa0799368459e9c2
+      internalID: 7418660495453730253
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: white_zoom_13
+      rect:
+        serializedVersion: 2
+        x: 750
+        y: 0
+        width: 750
+        height: 750
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f7e213261f5deab439b504937fe934db
+      internalID: -6744317036780672510
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: white_zoom_14
+      rect:
+        serializedVersion: 2
+        x: 1500
+        y: 0
+        width: 750
+        height: 750
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1da0471a25bd7234c8d6c24acac8fe85
+      internalID: 1194741649064183172
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: white_zoom_15
+      rect:
+        serializedVersion: 2
+        x: 2250
+        y: 0
+        width: 750
+        height: 750
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f5f6bddbd59b18f48857f564534a5ec9
+      internalID: -6317052087108624686
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+  spritePackingTag: 
+  pSDRemoveMatte: 0
+  pSDShowRemoveMatteOption: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
