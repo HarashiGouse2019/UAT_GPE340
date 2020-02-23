@@ -25,6 +25,13 @@ public abstract class Pawn : MonoBehaviour, ISpawnable
 
     public Animator animator;
 
+    protected DamageableObj health;
+
+    public virtual void Awake()
+    {
+        health = gameObject.AddComponent<DamageableObj>();
+    }
+
     public virtual void Move(Vector3 worldDirectionToMove) { }
 
     public virtual void EquipWeapon(Weapons weapon)

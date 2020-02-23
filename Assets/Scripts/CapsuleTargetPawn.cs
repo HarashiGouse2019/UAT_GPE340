@@ -5,6 +5,12 @@ using UnityEngine.AI;
 
 public class CapsuleTargetPawn : Pawn
 {
+    private void OnTriggerStay(Collider collision)
+    {
+        if (collision.gameObject.tag == "bullet")
+            GetComponent<DamageableObj>().TakeDamage(collision.gameObject.GetComponent<Bullet>().bulletDamage);
+    }
+
     public override void OnSpawn()
     {
         GetComponent<CapsuleTargetController>().target = GameObject.FindGameObjectWithTag("Player").transform;

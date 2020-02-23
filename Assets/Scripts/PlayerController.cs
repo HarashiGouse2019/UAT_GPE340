@@ -10,6 +10,9 @@ public class PlayerController : Controller
     public bool isRightStrifing;
     public bool isRolling;
 
+    //Check if the player can shoot
+    public bool canShoot;
+
     //Our timer float for dodging primarily
     float time;
 
@@ -30,7 +33,7 @@ public class PlayerController : Controller
         //and our player pawn
         pawn = GetComponent<PlayerPawn>();
         pawn.charController = GetComponent<CharacterController>();
-        
+
         exhaustibleObj = GetComponent<ExhaustibleObj>();
 
         base.Start();
@@ -54,7 +57,7 @@ public class PlayerController : Controller
         bool rollInput = Input.GetMouseButtonDown(2);
 
         //The shoot button
-        bool shootInput = Input.GetMouseButtonDown(0);
+        bool shootInput = Input.GetMouseButton(0);
 
         if (rollInput && isRolling == false)
         {
@@ -64,7 +67,9 @@ public class PlayerController : Controller
         }
 
         if (shootInput)
+        {
             pawn.equippedWeapon.OnShoot();
+        }
 
         //This makes sure that our magnitude is not higher than 4
         input = Vector3.ClampMagnitude(input, 4f);
@@ -76,7 +81,7 @@ public class PlayerController : Controller
         //by multiplying with our pawn movement, we can go more than 1 and still
         //account for the signs.
         input *= pawn.movementSpeed;
-       
+
 
         //Every frame, we assign our values into the player animator
         pawn.animator.SetFloat("Horizontal", input.x);
@@ -89,7 +94,7 @@ public class PlayerController : Controller
         pawn.Move(directionToMove);
 
         //Equip a weapon
-        if(Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.Space))
         {
             if (pawn.isEquipped == false)
             {
@@ -97,7 +102,8 @@ public class PlayerController : Controller
                 pawn.animator.SetBool("isEquipped", pawn.isEquipped);
                 pawn.EquipWeapon(pawn.weapons[0]);
                 GameCameraControls.Instance.GoToArmedPosition();
-            } else
+            }
+            else
             {
                 pawn.UnequipWeapon();
                 pawn.animator.SetBool("isEquipped", pawn.isEquipped);
@@ -109,7 +115,7 @@ public class PlayerController : Controller
     //Set if our player is rolling or not
     public void SetRollingTo(bool state)
     {
-        
+
         isRolling = state;
     }
 

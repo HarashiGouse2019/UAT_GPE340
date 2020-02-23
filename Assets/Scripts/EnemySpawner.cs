@@ -6,12 +6,17 @@ public class EnemySpawner : Spawner
 {
     public override void SetSpawningInterval(float _duration)
     {
-        time += Time.deltaTime;
-        if(time > _duration && FindTotalObjectsSpawned() < spawnLimit)
+        if (time < _duration && FindTotalObjectsSpawned() < spawnLimit)
+            time += Time.deltaTime;
+
+        else if (time > _duration && FindTotalObjectsSpawned() < spawnLimit)
         {
             SpawnObj(false);
             ResetTime();
         }
+
+        else if (FindTotalObjectsSpawned() == spawnLimit)
+            ResetTime();
     }
 
     public override IEnumerator SpawningRoutine()

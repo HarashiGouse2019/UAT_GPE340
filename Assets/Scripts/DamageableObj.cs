@@ -21,16 +21,22 @@ public class DamageableObj : MonoBehaviour
     [SerializeField] private UnityEvent onDie;
 
     //We want to be able to know what object this script is attact to, and what it's affecting
-    private GameObject attachedObj;
+    public GameObject attachedObj;
 
     private void Awake()
     {
-        attachedObj = GetComponent<GameObject>();
+        attachedObj = gameObject;
+    }
+
+    private void Update()
+    {
+        if (objHealth < 0)
+            Destroy(attachedObj);
     }
 
     public void TakeDamage(float _damageVal)
     {
-        objHealth = _damageVal / objStrength;
+        objHealth -= _damageVal / objStrength;
     }
 
     public void Heal(float _healVal)

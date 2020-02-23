@@ -23,6 +23,7 @@ public class Bullet : MonoBehaviour
 
     public void Release(PhysicalProperty _physicalProperty)
     {
+        gameObject.tag = "bullet";
         switch (_physicalProperty)
         {
             case PhysicalProperty.NONE:

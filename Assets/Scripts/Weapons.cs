@@ -21,6 +21,8 @@ public abstract class Weapons : MonoBehaviour
     public Transform RightHandIKHintTarget;
     public Transform LeftHandIKHintTarget;
 
+    protected bool canShoot;
+
     public virtual void OnShoot() { }
     public virtual void OnReload() { }
     public virtual void OnUse() { }

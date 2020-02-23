@@ -396,7 +396,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   weaponName: SquareMight
-  weaponType: 0
+  weaponType: 2
   RightHandIKTarget: {fileID: 444329254166804825}
   LeftHandIKTarget: {fileID: 6793462127318319354}
   RightHandIKHintTarget: {fileID: 2713247919358679968}
@@ -404,7 +404,7 @@ MonoBehaviour:
   bulletPrefab: {fileID: 2941774647536580244, guid: 79040fb6092e5034a93487c37b4c1733,
     type: 3}
   ammoSource: {fileID: 8317058059972926339}
-  ammoAmount: 10
+  ammoAmount: 1000
 --- !u!1 &5655968688912613955
 GameObject:
   m_ObjectHideFlags: 0
