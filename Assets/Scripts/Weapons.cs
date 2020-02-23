@@ -2,13 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Weapons : MonoBehaviour
+public abstract class Weapons : MonoBehaviour
 {
     public string weaponName;
     public enum WeaponType
     {
         Melee,
-        Projectile
+        Projectile,
+        Projectile_Automatic
     }
     public WeaponType weaponType;
 
@@ -20,7 +21,7 @@ public class Weapons : MonoBehaviour
     public Transform RightHandIKHintTarget;
     public Transform LeftHandIKHintTarget;
 
-    public void Shoot() { }
-    public void Reload() { }
-    public void Use() { }
+    public virtual void OnShoot() { }
+    public virtual void OnReload() { }
+    public virtual void OnUse() { }
 }

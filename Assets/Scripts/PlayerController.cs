@@ -53,12 +53,18 @@ public class PlayerController : Controller
         //We have the player roll with the middle mouse button
         bool rollInput = Input.GetMouseButtonDown(2);
 
+        //The shoot button
+        bool shootInput = Input.GetMouseButtonDown(0);
+
         if (rollInput && isRolling == false)
         {
             SetRollingTo(true);
             exhaustibleObj.UseObjStamina(10f);
             StartCoroutine(exhaustibleObj.CheckForRecovery());
         }
+
+        if (shootInput)
+            pawn.equippedWeapon.OnShoot();
 
         //This makes sure that our magnitude is not higher than 4
         input = Vector3.ClampMagnitude(input, 4f);

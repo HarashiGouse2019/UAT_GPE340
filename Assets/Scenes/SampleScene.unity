@@ -988,7 +988,7 @@ Transform:
   m_GameObject: {fileID: 705507993}
   m_LocalRotation: {x: 0.40821788, y: -0.23456968, z: 0.10938163, w: 0.8754261}
   m_LocalPosition: {x: 239, y: 429.8, z: -270.7}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1, y: 1.0000001, z: 0.99999994}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 2
@@ -4612,7 +4612,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   charController: {fileID: 0}
   weapons:
-  - {fileID: 113227451712722092, guid: 66d25c77ef31e5e45a3e9729f14d7c7f, type: 3}
+  - {fileID: 5201913263496605058, guid: 66d25c77ef31e5e45a3e9729f14d7c7f, type: 3}
   equippedWeapon: {fileID: 0}
   isEquipped: 0
   weaponAttachedPoint: {fileID: 990135241}
