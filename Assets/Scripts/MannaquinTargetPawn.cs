@@ -6,7 +6,7 @@ public class MannaquinTargetPawn : Pawn
 {
     public override void Start()
     {
-        Weapons weapon = EquipWeapon(weapons[0]);
+        Weapons weapon = weaponHandler.EquipWeapon(weaponHandler.weapons[0]);
         weapon.claimed = true;
     }
 

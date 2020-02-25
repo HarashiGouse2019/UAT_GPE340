@@ -1,8 +1,6 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
-public class SquareMight : Weapons
+public class PrimitivePistol092Weapon : Weapons
 {
     public override void Start()
     {
@@ -33,6 +31,6 @@ public class SquareMight : Weapons
 
     protected override void OnTriggerEnter(Collider collision)
     {
-        if(claimed == false) OnPickUp(collision.gameObject);
+        if (claimed == false) OnPickUp(collision.gameObject);
     }
 }

@@ -396,17 +396,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 55930ef76c667f249b402180029f892d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rotationVal: 0
   weaponName: SquareMight
   claimed: 0
-  weaponType: 2
+  weaponType: 1
+  bulletPrefab: {fileID: 2941774647536580244, guid: 79040fb6092e5034a93487c37b4c1733,
+    type: 3}
+  ammoSource: {fileID: 8317058059972926339}
+  ammoCapacity: 1000
+  ammoAmount: 0
+  roundsPerSec: 10
+  areRoundsInside: 1
+  isPistol: 0
   RightHandIKTarget: {fileID: 444329254166804825}
   LeftHandIKTarget: {fileID: 6793462127318319354}
   RightHandIKHintTarget: {fileID: 2713247919358679968}
   LeftHandIKHintTarget: {fileID: 1367047539440649853}
-  bulletPrefab: {fileID: 2941774647536580244, guid: 79040fb6092e5034a93487c37b4c1733,
-    type: 3}
-  ammoSource: {fileID: 8317058059972926339}
-  ammoAmount: 1000
 --- !u!65 &468965757
 BoxCollider:
   m_ObjectHideFlags: 0

@@ -6,15 +6,13 @@ public abstract class Pawn : MonoBehaviour, ISpawnable
 {
     public CharacterController charController;
 
-    public List<Weapons> weapons = new List<Weapons>();
-
-    public Weapons equippedWeapon = null;
-
-    public bool isEquipped;
-
     public Transform weaponAttachedPoint;
 
+    public Transform weaponAttachedPointPistol;
+
     public Controller controller;
+
+    public WeaponHandler weaponHandler;
 
     //Movement
     public float movementSpeed;
@@ -30,6 +28,8 @@ public abstract class Pawn : MonoBehaviour, ISpawnable
     public virtual void Awake()
     {
         health = gameObject.AddComponent<DamageableObj>();
+        weaponHandler = gameObject.AddComponent<WeaponHandler>();
+        weaponHandler.pawn = this;
     }
 
     public virtual void Start()
@@ -44,28 +44,6 @@ public abstract class Pawn : MonoBehaviour, ISpawnable
 
     public virtual void Move(Vector3 worldDirectionToMove) { }
 
-    public virtual Weapons EquipWeapon(Weapons weapon)
-    {
-        equippedWeapon = weapon;
-        if (!equippedWeapon.gameObject.activeInHierarchy)
-        {
-            equippedWeapon.enabled = true;
-            equippedWeapon.gameObject.SetActive(true);
-            equippedWeapon.GetComponent<Transform>().SetParent(weaponAttachedPoint);
-            equippedWeapon.GetComponent<Transform>().position = weaponAttachedPoint.position;
-            equippedWeapon.GetComponent<Transform>().rotation = weaponAttachedPoint.rotation;
-        }
-
-        return weapon;
-    }
-
-    public virtual void UnequipWeapon()
-    {
-        equippedWeapon.gameObject.SetActive(false);
-        equippedWeapon = null;
-        isEquipped = false;
-    }
-
     public virtual void OnSpawn()
     {
 
@@ -74,24 +52,25 @@ public abstract class Pawn : MonoBehaviour, ISpawnable
 
     protected virtual void OnAnimatorIK(int indexLayer)
     {
-        if (!equippedWeapon)
+        if (!weaponHandler.equippedWeapon)
             return;
 
         SetRightArmIK();
+
         SetLeftArmIK();
 
     }
 
     public virtual void SetRightArmIK()
     {
-        if (equippedWeapon.RightHandIKTarget)
+        if (weaponHandler.equippedWeapon.RightHandIKTarget)
         {
-            animator.SetIKPosition(AvatarIKGoal.RightHand, equippedWeapon.RightHandIKTarget.position);
+            animator.SetIKPosition(AvatarIKGoal.RightHand, weaponHandler.equippedWeapon.RightHandIKTarget.position);
             animator.SetIKPositionWeight(AvatarIKGoal.RightHand, 1f);
-            animator.SetIKRotation(AvatarIKGoal.RightHand, equippedWeapon.RightHandIKTarget.rotation);
+            animator.SetIKRotation(AvatarIKGoal.RightHand, weaponHandler.equippedWeapon.RightHandIKTarget.rotation);
             animator.SetIKRotationWeight(AvatarIKGoal.RightHand, 1f);
 
-            animator.SetIKHintPosition(AvatarIKHint.RightElbow, equippedWeapon.RightHandIKHintTarget.position);
+            animator.SetIKHintPosition(AvatarIKHint.RightElbow, weaponHandler.equippedWeapon.RightHandIKHintTarget.position);
             animator.SetIKHintPositionWeight(AvatarIKHint.RightElbow, 1f);
         }
         else
@@ -105,14 +84,14 @@ public abstract class Pawn : MonoBehaviour, ISpawnable
 
     public virtual void SetLeftArmIK()
     {
-        if (equippedWeapon.LeftHandIKTarget)
+        if (weaponHandler.equippedWeapon.LeftHandIKTarget)
         {
-            animator.SetIKPosition(AvatarIKGoal.LeftHand, equippedWeapon.LeftHandIKTarget.position);
+            animator.SetIKPosition(AvatarIKGoal.LeftHand, weaponHandler.equippedWeapon.LeftHandIKTarget.position);
             animator.SetIKPositionWeight(AvatarIKGoal.LeftHand, 1f);
-            animator.SetIKRotation(AvatarIKGoal.LeftHand, equippedWeapon.LeftHandIKTarget.rotation);
+            animator.SetIKRotation(AvatarIKGoal.LeftHand, weaponHandler.equippedWeapon.LeftHandIKTarget.rotation);
             animator.SetIKRotationWeight(AvatarIKGoal.LeftHand, 1f);
 
-            animator.SetIKHintPosition(AvatarIKHint.LeftElbow, equippedWeapon.LeftHandIKHintTarget.position);
+            animator.SetIKHintPosition(AvatarIKHint.LeftElbow, weaponHandler.equippedWeapon.LeftHandIKHintTarget.position);
             animator.SetIKHintPositionWeight(AvatarIKHint.LeftElbow, 1f);
         }
         else

@@ -603,6 +603,7 @@ MonoBehaviour:
   equippedWeapon: {fileID: 0}
   isEquipped: 0
   weaponAttachedPoint: {fileID: 6005348642277597678}
+  weaponAttachedPointPistol: {fileID: 6005348642277597678}
   controller: {fileID: 6005348643131208421}
   movementSpeed: 0
   rollingSpeed: 1
@@ -1908,14 +1909,18 @@ MonoBehaviour:
   weaponName: SquareMight
   claimed: 0
   weaponType: 2
+  bulletPrefab: {fileID: 2941774647536580244, guid: 79040fb6092e5034a93487c37b4c1733,
+    type: 3}
+  ammoSource: {fileID: 6005348641705516601}
+  ammoCapacity: 0
+  ammoAmount: 1000
+  roundsPerSec: 10
+  areRoundsInside: 1
+  isPistol: 1
   RightHandIKTarget: {fileID: 6005348641738262110}
   LeftHandIKTarget: {fileID: 6005348642802465449}
   RightHandIKHintTarget: {fileID: 6005348641908127924}
   LeftHandIKHintTarget: {fileID: 6005348642022070882}
-  bulletPrefab: {fileID: 2941774647536580244, guid: 79040fb6092e5034a93487c37b4c1733,
-    type: 3}
-  ammoSource: {fileID: 6005348641705516601}
-  ammoAmount: 1000
 --- !u!65 &6005348642042245221
 BoxCollider:
   m_ObjectHideFlags: 0

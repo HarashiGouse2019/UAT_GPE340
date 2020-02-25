@@ -46,23 +46,52 @@ public class PlayerController : Controller
         if (isRolling)
             RollDuration(1f);
 
+        //The current weapon previously on
+        int weaponIndex = pawn.weaponHandler.weaponIndex;
+
         //Equip a weapon
-        if (Input.GetKeyDown(KeyCode.Space) && pawn.weapons.Count != 0)
+        if (Input.GetKeyDown(KeyCode.Space) && pawn.weaponHandler.weapons.Count != 0)
         {
-            if (pawn.isEquipped == false)
+            if (pawn.weaponHandler.isEquipped == false)
             {
-                pawn.EquipWeapon(pawn.weapons[0]);
-                pawn.weapons[0].GetComponent<Weapons>().claimed = true;
-                pawn.isEquipped = true;
-                pawn.animator.SetBool("isEquipped", pawn.isEquipped);
+                pawn.weaponHandler.EquipWeapon(pawn.weaponHandler.weapons[weaponIndex]);
+                pawn.weaponHandler.weapons[weaponIndex].GetComponent<Weapons>().claimed = true;
+                pawn.animator.SetBool("isEquipped", pawn.weaponHandler.isEquipped);
                 GameCameraControls.Instance.GoToArmedPosition();
             }
             else
             {
-                pawn.UnequipWeapon();
-                pawn.animator.SetBool("isEquipped", pawn.isEquipped);
+                pawn.weaponHandler.UnequipWeapon();
+                pawn.animator.SetBool("isEquipped", pawn.weaponHandler.isEquipped);
                 GameCameraControls.Instance.GoToUnArmedPosition();
             }
+        }
+
+        //Change Weapons
+        if (Input.GetKeyDown(KeyCode.R) && pawn.weaponHandler.weapons.Count != 0)
+        {
+            /*We have to do something a big different if we want to change weapons.
+             Firstly, if we were to change weapons without Equpping and UnEqupping, there's
+             a likely chance of having a pistol be where a rifle weapon is suppose to spawn, etc.
+             
+             So we unequip as usual, then we change the weaponIndex in our WeaponHandler.
+             After the index has been changed, we equip our weapon like normal. This allows checking if it's
+             a pistol, a rifle, or a melee weapon without any confusion. Which is why we go through this step.*/
+            if (pawn.weaponHandler.isEquipped == true)
+                pawn.weaponHandler.ChangeToNextWeapon();
+        }
+
+        if (Input.GetKeyDown(KeyCode.Q) && pawn.weaponHandler.weapons.Count != 0)
+        {
+            /*We have to do something a big different if we want to change weapons.
+             Firstly, if we were to change weapons without Equpping and UnEqupping, there's
+             a likely chance of having a pistol be where a rifle weapon is suppose to spawn, etc.
+             
+             So we unequip as usual, then we change the weaponIndex in our WeaponHandler.
+             After the index has been changed, we equip our weapon like normal. This allows checking if it's
+             a pistol, a rifle, or a melee weapon without any confusion. Which is why we go through this step.*/
+            if (pawn.weaponHandler.isEquipped == true)
+                pawn.weaponHandler.ChangeToPreviousWeapon();
         }
     }
 
@@ -85,9 +114,9 @@ public class PlayerController : Controller
             StartCoroutine(exhaustibleObj.CheckForRecovery());
         }
 
-        if (shootInput && pawn.equippedWeapon != null)
+        if (shootInput && pawn.weaponHandler.equippedWeapon != null)
         {
-            pawn.equippedWeapon.OnShoot();
+            pawn.weaponHandler.equippedWeapon.OnShoot();
         }
 
         //This makes sure that our magnitude is not higher than 4
