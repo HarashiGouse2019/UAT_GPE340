@@ -353,6 +353,7 @@ GameObject:
   - component: {fileID: 8122164380182410813}
   - component: {fileID: 5201913263496605058}
   - component: {fileID: 468965757}
+  - component: {fileID: 5164336477463908882}
   m_Layer: 0
   m_Name: SquareMight
   m_TagString: Untagged
@@ -399,13 +400,14 @@ MonoBehaviour:
   rotationVal: 0
   weaponName: SquareMight
   claimed: 0
-  weaponType: 1
+  claimedBy: {fileID: 0}
+  weaponType: 2
   bulletPrefab: {fileID: 2941774647536580244, guid: 79040fb6092e5034a93487c37b4c1733,
     type: 3}
   ammoSource: {fileID: 8317058059972926339}
-  ammoCapacity: 1000
+  ammoCapacity: 100
   ammoAmount: 0
-  roundsPerSec: 10
+  roundsPerSec: 2
   areRoundsInside: 1
   isPistol: 0
   RightHandIKTarget: {fileID: 444329254166804825}
@@ -425,6 +427,27 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 4.379636, z: 1.8368744}
   m_Center: {x: 0, y: -1.6898181, z: -0.07289292}
+--- !u!114 &5164336477463908882
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2960126385947003094}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e3fc456a3e9330d48a9988fca69ddfae, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spawnInParent: 0
+  itemsToPool:
+  - name: Sphere
+    size: 50
+    prefab: {fileID: 2941774647536580244, guid: 79040fb6092e5034a93487c37b4c1733,
+      type: 3}
+    expandPool: 1
+  pooledObjects: []
+  poolIndex: 0
 --- !u!1 &5655968688912613955
 GameObject:
   m_ObjectHideFlags: 0

@@ -346,6 +346,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8807208127794607418}
   - component: {fileID: 6262328874513981669}
+  - component: {fileID: 7836302509791158590}
   m_Layer: 0
   m_Name: PrimitivePistol092
   m_TagString: Untagged
@@ -393,6 +394,7 @@ MonoBehaviour:
   rotationVal: 0
   weaponName: Primitive Pistol 092
   claimed: 0
+  claimedBy: {fileID: 0}
   weaponType: 1
   bulletPrefab: {fileID: 2941774647536580244, guid: 79040fb6092e5034a93487c37b4c1733,
     type: 3}
@@ -406,6 +408,27 @@ MonoBehaviour:
   LeftHandIKTarget: {fileID: 1468551178112907732}
   RightHandIKHintTarget: {fileID: 6840288432376939192}
   LeftHandIKHintTarget: {fileID: 4195769938343684085}
+--- !u!114 &7836302509791158590
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2823063592581973077}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e3fc456a3e9330d48a9988fca69ddfae, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spawnInParent: 0
+  itemsToPool:
+  - name: Sphere
+    size: 10
+    prefab: {fileID: 2941774647536580244, guid: 79040fb6092e5034a93487c37b4c1733,
+      type: 3}
+    expandPool: 1
+  pooledObjects: []
+  poolIndex: 0
 --- !u!1 &3550690935925013196
 GameObject:
   m_ObjectHideFlags: 0

@@ -8,29 +8,48 @@ public class WeaponHandler : MonoBehaviour
 
     public Weapons equippedWeapon = null;
 
+    public int ammoLeft { get; set; }
+    public int packOfAmmoLeft { get; set; } = 1000;
+
+    public string ammoKind;
+
     public bool isEquipped;
 
     public int weaponIndex;
 
     public Pawn pawn;
 
+    public bool needReload = false;
+
     const uint reset = 0;
 
 
     public void ChangeToNextWeapon()
     {
+        /*Because equipping a weapon validates the kind of weapon we're equipping to,
+         this is why we unequip first, change our index, check rather the value exceeds the min 
+         and max total of weapons on the player, and THEN we equip to that weapon.*/
         UnequipWeapon();
         weaponIndex++;
+
         MonitorWeaponIndex();
         EquipWeapon(weapons[weaponIndex]);
+
+        UpdateAmmoProperties();
     }
 
     public void ChangeToPreviousWeapon()
     {
+        /*Because equipping a weapon validates the kind of weapon we're equipping to,
+         this is why we unequip first, change our index, check rather the value exceeds the min 
+         and max total of weapons on the player, and THEN we equip to that weapon.*/
         UnequipWeapon();
         weaponIndex--;
+        
         MonitorWeaponIndex();
         EquipWeapon(weapons[weaponIndex]);
+
+        UpdateAmmoProperties();
     }
 
     public Weapons EquipWeapon(Weapons weapon)
@@ -41,6 +60,8 @@ public class WeaponHandler : MonoBehaviour
         {
             equippedWeapon.enabled = true;
             equippedWeapon.gameObject.SetActive(true);
+
+            UpdateAmmoProperties();
 
             //Check if it's a pistol or rifle
             if (!equippedWeapon.isPistol)
@@ -69,7 +90,7 @@ public class WeaponHandler : MonoBehaviour
         isEquipped = false;
     }
 
-    public void MonitorWeaponIndex() 
+    public void MonitorWeaponIndex()
     {
         if (weaponIndex > weapons.Count - 1)
         {
@@ -82,5 +103,18 @@ public class WeaponHandler : MonoBehaviour
             weaponIndex = weapons.Count - 1;
             return;
         }
+    }
+
+    public void UpdateAmmoProperties()
+    {
+        if (equippedWeapon != null)
+            ammoLeft = equippedWeapon.ammoAmount;
+        else
+            ammoLeft = (int)reset;
+    }
+
+    public void CallForReload()
+    {
+        needReload = true;
     }
 }

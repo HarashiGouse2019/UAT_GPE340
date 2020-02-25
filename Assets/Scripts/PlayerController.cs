@@ -107,6 +107,9 @@ public class PlayerController : Controller
         //The shoot button
         bool shootInput = Input.GetMouseButton(0);
 
+        //Reloading
+        bool reloadInput = Input.GetMouseButtonDown(1);
+
         if (rollInput && isRolling == false)
         {
             SetRollingTo(true);
@@ -114,10 +117,11 @@ public class PlayerController : Controller
             StartCoroutine(exhaustibleObj.CheckForRecovery());
         }
 
-        if (shootInput && pawn.weaponHandler.equippedWeapon != null)
-        {
-            pawn.weaponHandler.equippedWeapon.OnShoot();
-        }
+        if (shootInput && pawn.weaponHandler.equippedWeapon != null) 
+                pawn.weaponHandler.equippedWeapon.OnShoot();
+
+        if (reloadInput && pawn.weaponHandler.equippedWeapon != null)
+            pawn.weaponHandler.equippedWeapon.OnReload();
 
         //This makes sure that our magnitude is not higher than 4
         input = Vector3.ClampMagnitude(input, 4f);

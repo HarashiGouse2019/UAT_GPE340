@@ -5,6 +5,7 @@ public abstract class Weapons : PickUps, IPickable
 {
     public string weaponName;
     public bool claimed = false;
+    public Pawn claimedBy;
     public enum WeaponType
     {
         Melee,
@@ -36,17 +37,19 @@ public abstract class Weapons : PickUps, IPickable
     public Transform RightHandIKHintTarget;
     public Transform LeftHandIKHintTarget;
 
-    protected bool canShoot;
+    protected bool canShoot = true;
 
-    IEnumerator recoil;
+    protected float time;
+
+    protected ObjectPooler weaponBulletPooler;
 
     public virtual void Start()
     {
-        recoil = Recoil();
-
         //The gun is already loaded with bullets
-        if(areRoundsInside)
+        if (areRoundsInside)
             ammoAmount = ammoCapacity;
+
+        weaponBulletPooler = GetComponent<ObjectPooler>();
     }
 
     public override void Update()
@@ -55,69 +58,95 @@ public abstract class Weapons : PickUps, IPickable
          so that I can use the correct functions in order to perfectly simulate the weapon.
          */
 
-        switch (weaponType)
-        {
-            case WeaponType.Projectile:
-                if (Input.GetMouseButtonUp(0))
-                    SetNextRound();
-                break;
-            case WeaponType.Projectile_Automatic:
-                if (Input.GetMouseButton(0))
-                {
-                    canShoot = false;
-                    StartCoroutine(recoil);
-                } 
-                break;
-            default:
-                break;
-        }
+        if (Input.GetMouseButtonUp(0))
+            SetNextRound();
+
+        if (!canShoot && weaponType == WeaponType.Projectile_Automatic)
+            Recoil();
 
         if (!claimed)
             base.Update();
     }
 
-    public virtual void OnShoot() {
-        if (canShoot && !OutOfAmmo())
+    public virtual void OnShoot()
+    {
+        if (canShoot && !OutOfAmmo() && claimedBy != null)
         {
-            Bullet bullet = Instantiate(bulletPrefab).GetComponent<Bullet>();
-            bullet.transform.position = ammoSource.position;
-            bullet.transform.rotation = ammoSource.rotation;
-            bullet.Release(bullet.physicalProperty);
-            canShoot = false;
-            ammoAmount--;
+            
+            Bullet bullet = weaponBulletPooler.GetMember(claimedBy.weaponHandler.ammoKind).GetComponent<Bullet>();
+            if (!bullet.gameObject.activeInHierarchy)
+            {
+                bullet.gameObject.SetActive(true);
+                bullet.transform.position = ammoSource.position;
+                bullet.transform.rotation = ammoSource.rotation;
+                bullet.Release(bullet.physicalProperty);
+                canShoot = false;
+                ammoAmount--;
+                claimedBy.weaponHandler.UpdateAmmoProperties();
+            }
+        }
+        else
+            claimedBy.weaponHandler.CallForReload();
+
+    }
+    public virtual void OnReload()
+    {
+        if (claimedBy != null)
+        {
+            //We want to check how much ammmo we need to put in first.
+            //It'll basically be a transfer between the weaponHandler's packOfAmmo to ammoLeft
+            //which then that value will be set back to it's ammoCapacity
+            int ammoToFill = ammoCapacity - ammoAmount; //This will get use the value of how much we need to into our weapon
+
+            //Now we "Send the packOfAmmo" to the "ammoLeft"
+            ammoAmount += ammoToFill;
+            claimedBy.weaponHandler.packOfAmmoLeft -= ammoToFill;
+
+            claimedBy.weaponHandler.UpdateAmmoProperties();
         }
     }
-    public virtual void OnReload() { }
     public virtual void OnUse() { }
 
     public override void OnPickUp(GameObject _source)
     {
-        Pawn pawn = _source.GetComponent<Pawn>();
-        pawn.weaponHandler.weapons.Add(this);
-        
-        claimed = true;
-        
-        gameObject.SetActive(false);
+        try
+        {
+            Pawn pawn = _source.GetComponent<Pawn>();
 
-        if (!isPistol)
-            gameObject.transform.SetParent(pawn.weaponAttachedPoint);
-        else
-            gameObject.transform.SetParent(pawn.weaponAttachedPointPistol);
+            pawn.weaponHandler.weapons.Add(this);
+
+            claimed = true;
+
+            claimedBy = pawn;
+
+            claimedBy.weaponHandler.UpdateAmmoProperties();
+
+            claimedBy.weaponHandler.ammoKind = bulletPrefab.name;
+
+            gameObject.SetActive(false);
+
+            if (!isPistol)
+                gameObject.transform.SetParent(pawn.weaponAttachedPoint);
+            else
+                gameObject.transform.SetParent(pawn.weaponAttachedPointPistol);
+        }
+        catch { }
     }
 
     //For Projectile Type Weapons
     public virtual void SetNextRound()
     {
+        time = (int)reset;
         canShoot = true;
     }
 
     public virtual bool OutOfAmmo() => ammoAmount < 1;
 
-    public virtual IEnumerator Recoil()
+    public virtual void Recoil()
     {
-        canShoot = false;
-        yield return new WaitForSeconds(1/roundsPerSec);
-
-        canShoot = true;
+        time += Time.deltaTime;
+        if(time >= (1 / roundsPerSec))
+            SetNextRound();
+            
     }
 }

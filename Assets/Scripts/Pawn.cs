@@ -27,8 +27,8 @@ public abstract class Pawn : MonoBehaviour, ISpawnable
 
     public virtual void Awake()
     {
-        health = gameObject.AddComponent<DamageableObj>();
-        weaponHandler = gameObject.AddComponent<WeaponHandler>();
+        if (health == null) health = gameObject.AddComponent<DamageableObj>();
+        if (weaponHandler == null) weaponHandler = gameObject.AddComponent<WeaponHandler>();
         weaponHandler.pawn = this;
     }
 
