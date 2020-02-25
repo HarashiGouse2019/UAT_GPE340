@@ -11,10 +11,13 @@ public class SquareMight : Weapons
     //How much ammo it can hold
     public int ammoAmount = 10;
 
-    void Update()
+    public override void Update()
     {
         if (Input.GetMouseButtonUp(0))
             SetNextRound();
+
+        if (!claimed)
+            base.Update();
     }
 
     public override void OnShoot()
@@ -29,8 +32,21 @@ public class SquareMight : Weapons
         }
     }
 
+    public override void OnPickUp(GameObject _source)
+    {
+        Pawn pawn = _source.GetComponent<Pawn>();
+        pawn.weapons.Add(this);
+        gameObject.SetActive(false);
+        gameObject.transform.SetParent(pawn.weaponAttachedPoint);
+    }
+
     void SetNextRound()
     {
         canShoot = true;
+    }
+
+    protected override void OnTriggerEnter(Collider collision)
+    {
+        if(claimed == false) OnPickUp(collision.gameObject);
     }
 }

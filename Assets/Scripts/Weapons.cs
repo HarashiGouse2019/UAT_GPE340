@@ -1,10 +1,9 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
-public abstract class Weapons : MonoBehaviour
+public abstract class Weapons : PickUps, IPickable
 {
     public string weaponName;
+    public bool claimed = false;
     public enum WeaponType
     {
         Melee,
@@ -26,4 +25,6 @@ public abstract class Weapons : MonoBehaviour
     public virtual void OnShoot() { }
     public virtual void OnReload() { }
     public virtual void OnUse() { }
+
+    public override void OnPickUp(GameObject _source) { }
 }

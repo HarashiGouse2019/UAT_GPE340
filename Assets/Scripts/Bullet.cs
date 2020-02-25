@@ -9,7 +9,7 @@ public class Bullet : MonoBehaviour
      of having Gravity. If you wanna get goofy, you can have your bullet bounce around.
      Other than that, the bullet will just launch straight!*/
     private Rigidbody rb;
-    private Collider collider;
+    private Collider m_collider;
     public enum PhysicalProperty
     {
         NONE,
@@ -34,7 +34,7 @@ public class Bullet : MonoBehaviour
                 StartCoroutine(RUN_BULLET_PROPERTIES());
                 break;
             case PhysicalProperty.BUOYANCY:
-                collider.material = (PhysicMaterial)Resources.Load(Application.dataPath + @"/PhysicsMaterial/BuoyancyMat.mat");
+                m_collider.material = (PhysicMaterial)Resources.Load(Application.dataPath + @"/PhysicsMaterial/BuoyancyMat.mat");
                 StartCoroutine(RUN_BULLET_PROPERTIES());
                 break;
             case PhysicalProperty.BOTH:
@@ -49,7 +49,7 @@ public class Bullet : MonoBehaviour
     IEnumerator RUN_BULLET_PROPERTIES()
     {
         rb = GetComponent<Rigidbody>();
-        collider = GetComponent<Collider>();
+        m_collider = GetComponent<Collider>();
         while(true)
         {
             rb.velocity = transform.right * bulletVelocity;

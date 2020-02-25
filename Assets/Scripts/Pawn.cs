@@ -32,19 +32,36 @@ public abstract class Pawn : MonoBehaviour, ISpawnable
         health = gameObject.AddComponent<DamageableObj>();
     }
 
+    public virtual void Start()
+    {
+
+    }
+
+    public virtual void Update()
+    {
+
+    }
+
     public virtual void Move(Vector3 worldDirectionToMove) { }
 
-    public virtual void EquipWeapon(Weapons weapon)
+    public virtual Weapons EquipWeapon(Weapons weapon)
     {
-        equippedWeapon = Instantiate(weapon) as Weapons;
-        equippedWeapon.GetComponent<Transform>().SetParent(weaponAttachedPoint);
-        equippedWeapon.GetComponent<Transform>().position = weaponAttachedPoint.position;
-        equippedWeapon.GetComponent<Transform>().rotation = weaponAttachedPoint.rotation;
+        equippedWeapon = weapon;
+        if (!equippedWeapon.gameObject.activeInHierarchy)
+        {
+            equippedWeapon.enabled = true;
+            equippedWeapon.gameObject.SetActive(true);
+            equippedWeapon.GetComponent<Transform>().SetParent(weaponAttachedPoint);
+            equippedWeapon.GetComponent<Transform>().position = weaponAttachedPoint.position;
+            equippedWeapon.GetComponent<Transform>().rotation = weaponAttachedPoint.rotation;
+        }
+
+        return weapon;
     }
 
     public virtual void UnequipWeapon()
     {
-        Destroy(equippedWeapon.gameObject);
+        equippedWeapon.gameObject.SetActive(false);
         equippedWeapon = null;
         isEquipped = false;
     }
@@ -108,4 +125,15 @@ public abstract class Pawn : MonoBehaviour, ISpawnable
     }
 
     public virtual GameObject GetGameObject() { return null; }
+
+    public virtual GameObject FindGameObjectOnLayer(string _layerName)
+    {
+        GameObject[] allGameObjects = FindObjectsOfType<GameObject>();
+        foreach (GameObject obj in allGameObjects)
+        {
+            if (obj.layer == SortingLayer.GetLayerValueFromName(_layerName))
+                return obj;
+        }
+        return null;
+    }
 }

@@ -16,7 +16,7 @@ public class CapsuleTargetPawn : Pawn
         GetComponent<CapsuleTargetController>().target = GameObject.FindGameObjectWithTag("Player").transform;
     }
 
-    public GameObject FindGameObjectOnLayer(string _layerName)
+    public override GameObject FindGameObjectOnLayer(string _layerName)
     {
         GameObject[] allGameObjects = FindObjectsOfType<GameObject>();
         foreach(GameObject obj in allGameObjects)

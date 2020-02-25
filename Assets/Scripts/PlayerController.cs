@@ -12,7 +12,7 @@ public class PlayerController : Controller
 
     //Check if the player can shoot
     public bool canShoot;
-
+    
     //Our timer float for dodging primarily
     float time;
 
@@ -45,6 +45,25 @@ public class PlayerController : Controller
         //since the whole rolling animation last that long
         if (isRolling)
             RollDuration(1f);
+
+        //Equip a weapon
+        if (Input.GetKeyDown(KeyCode.Space) && pawn.weapons.Count != 0)
+        {
+            if (pawn.isEquipped == false)
+            {
+                pawn.EquipWeapon(pawn.weapons[0]);
+                pawn.weapons[0].GetComponent<Weapons>().claimed = true;
+                pawn.isEquipped = true;
+                pawn.animator.SetBool("isEquipped", pawn.isEquipped);
+                GameCameraControls.Instance.GoToArmedPosition();
+            }
+            else
+            {
+                pawn.UnequipWeapon();
+                pawn.animator.SetBool("isEquipped", pawn.isEquipped);
+                GameCameraControls.Instance.GoToUnArmedPosition();
+            }
+        }
     }
 
     private void FixedUpdate()
@@ -66,15 +85,13 @@ public class PlayerController : Controller
             StartCoroutine(exhaustibleObj.CheckForRecovery());
         }
 
-        if (shootInput)
+        if (shootInput && pawn.equippedWeapon != null)
         {
             pawn.equippedWeapon.OnShoot();
         }
 
         //This makes sure that our magnitude is not higher than 4
         input = Vector3.ClampMagnitude(input, 4f);
-
-        //input = transform.InverseTransformDirection(input);
 
         //Our input is amplified by our movement speed
         //since input utimately only had values of 1, 0, and -1
@@ -83,33 +100,15 @@ public class PlayerController : Controller
         input *= pawn.movementSpeed;
 
 
-        //Every frame, we assign our values into the player animator
+        //Every fixed frame, we assign our values into the player animator
         pawn.animator.SetFloat("Horizontal", input.x);
         pawn.animator.SetFloat("Vertical", input.z);
         pawn.animator.SetBool("isRolling", isRolling);
 
         //We create another vector that takes the x and z coordinates of our player
-        //and moves every frame
+        //and moves every fixed frame
         Vector3 directionToMove = new Vector3(input.x, 0f, input.z);
         pawn.Move(directionToMove);
-
-        //Equip a weapon
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            if (pawn.isEquipped == false)
-            {
-                pawn.isEquipped = true;
-                pawn.animator.SetBool("isEquipped", pawn.isEquipped);
-                pawn.EquipWeapon(pawn.weapons[0]);
-                GameCameraControls.Instance.GoToArmedPosition();
-            }
-            else
-            {
-                pawn.UnequipWeapon();
-                pawn.animator.SetBool("isEquipped", pawn.isEquipped);
-                GameCameraControls.Instance.GoToUnArmedPosition();
-            }
-        }
     }
 
     //Set if our player is rolling or not

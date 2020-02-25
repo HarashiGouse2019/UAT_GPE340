@@ -352,6 +352,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8122164380182410813}
   - component: {fileID: 5201913263496605058}
+  - component: {fileID: 468965757}
   m_Layer: 0
   m_Name: SquareMight
   m_TagString: Untagged
@@ -366,8 +367,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2960126385947003094}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 15.373701, y: 1.2719997, z: 18.316998}
   m_LocalScale: {x: 1.16226, y: 0.10566, z: 0.05283}
   m_Children:
   - {fileID: 4418662308139441998}
@@ -396,6 +397,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   weaponName: SquareMight
+  claimed: 0
   weaponType: 2
   RightHandIKTarget: {fileID: 444329254166804825}
   LeftHandIKTarget: {fileID: 6793462127318319354}
@@ -405,6 +407,19 @@ MonoBehaviour:
     type: 3}
   ammoSource: {fileID: 8317058059972926339}
   ammoAmount: 1000
+--- !u!65 &468965757
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2960126385947003094}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 4.379636, z: 1.8368744}
+  m_Center: {x: 0, y: -1.6898181, z: -0.07289292}
 --- !u!1 &5655968688912613955
 GameObject:
   m_ObjectHideFlags: 0
