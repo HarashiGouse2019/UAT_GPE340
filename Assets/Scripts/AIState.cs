@@ -130,7 +130,7 @@ public class AIState : MonoBehaviour
 
     IEnumerator ManageAIStates()
     {
-        while (true)
+        while (!AI_Controller.pawn.IsDead())
         {
             if (AI_Controller.pawn.weaponHandler.weapons != null)
             {

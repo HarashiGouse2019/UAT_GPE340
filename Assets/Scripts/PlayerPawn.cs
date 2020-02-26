@@ -20,4 +20,18 @@ public class PlayerPawn : Pawn
         }
         charController.Move(directionToMove * Time.deltaTime);
     }
+
+    public override void EnableRagDoll()
+    {
+        try
+        {
+            GameCameraControls.Instance.GoToUnArmedPosition();
+            weaponHandler.UnequipWeapon();
+            animator.enabled = false;
+            charController.enabled = false;
+            GetComponent<Rigidbody>().isKinematic = true;
+            isDead = true;
+        }
+        catch { }
+    }
 }

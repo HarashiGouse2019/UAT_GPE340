@@ -23,7 +23,10 @@ public abstract class Pawn : MonoBehaviour, ISpawnable
 
     public Animator animator;
 
+    [SerializeField]
     protected DamageableObj health;
+
+    protected bool isDead;
 
     public virtual void Awake()
     {
@@ -118,6 +121,19 @@ public abstract class Pawn : MonoBehaviour, ISpawnable
         return null;
     }
 
+    public virtual void EnableRagDoll()
+    {
+        try
+        {
+            weaponHandler.UnequipWeapon();
+            animator.enabled = false;
+            charController.enabled = false;
+            GetComponent<Rigidbody>().isKinematic = true;
+            isDead = true;
+        }
+        catch { }
+    }
+
     public virtual void OnTriggerStay(Collider collider)
     {
         Bullet bullet = null;
@@ -129,5 +145,12 @@ public abstract class Pawn : MonoBehaviour, ISpawnable
                 GetDamageableObj().TakeDamage(collider.GetComponent<Bullet>().bulletDamage);
         }
         catch { }
+    }
+
+    public virtual bool IsDead() => isDead;
+
+    public virtual void DestroySelf()
+    {
+        Destroy(gameObject);
     }
 }

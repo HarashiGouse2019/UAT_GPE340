@@ -19,4 +19,9 @@ public class MannaquinTargetPawn : Pawn
     {
         GetComponent<MannaquinTargetController>().target = GameObject.FindGameObjectWithTag("Player").transform;
     }
+
+    public override void EnableRagDoll()
+    {
+        base.EnableRagDoll();
+    }
 }

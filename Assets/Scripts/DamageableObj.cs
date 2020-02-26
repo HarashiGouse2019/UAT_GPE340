@@ -19,6 +19,10 @@ public class DamageableObj : MonoBehaviour
     [SerializeField] private UnityEvent onHeal;
     [SerializeField] private UnityEvent onDamage;
     [SerializeField] private UnityEvent onDie;
+    [SerializeField] private UnityEvent onDestroy;
+
+    float time;
+    const float timeUntilDestroy = 5f;
 
     //We want to be able to know what object this script is attact to, and what it's affecting
     public GameObject attachedObj;
@@ -31,7 +35,10 @@ public class DamageableObj : MonoBehaviour
     private void Update()
     {
         if (objHealth < 0)
-            Destroy(attachedObj);
+        {
+            onDie.Invoke();
+            WaitForDestroy();
+        }
     }
 
     public void TakeDamage(float _damageVal)
@@ -52,4 +59,11 @@ public class DamageableObj : MonoBehaviour
     public float GetObjHealthVal() => objHealth;
 
     public float GetObjStrengthVal() => objStrength;
+
+    public void WaitForDestroy()
+    {
+        time += Time.deltaTime;
+        if (time >= timeUntilDestroy)
+            onDestroy.Invoke();
+    }
 }
