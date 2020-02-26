@@ -79,7 +79,7 @@ public abstract class Weapons : PickUps, IPickable
                 bullet.gameObject.SetActive(true);
                 bullet.transform.position = ammoSource.position;
                 bullet.transform.rotation = ammoSource.rotation;
-                bullet.Release(bullet.physicalProperty);
+                bullet.Release(bullet.physicalProperty, claimedBy);
                 canShoot = false;
                 ammoAmount--;
                 claimedBy.weaponHandler.UpdateAmmoProperties();
@@ -129,8 +129,24 @@ public abstract class Weapons : PickUps, IPickable
                 gameObject.transform.SetParent(pawn.weaponAttachedPoint);
             else
                 gameObject.transform.SetParent(pawn.weaponAttachedPointPistol);
+
+            //Now! If it happens to be an AI, we'll have the equip this weapon immediately.
+            CheckIfAI(claimedBy, this);
         }
         catch { }
+    }
+
+    public virtual void CheckIfAI(Pawn _obj, Weapons _weapon)
+    {
+        if (_obj.GetComponent<AIState>() != null)
+        {
+            _obj.weaponHandler.EquipWeapon(_weapon);
+
+            //Change the target destination for it, because we assume that it was
+            //after a weapon.
+            Transform newTarget = FindObjectOfType<PlayerPawn>().transform;
+            _obj.controller.target = newTarget;
+        }
     }
 
     //For Projectile Type Weapons

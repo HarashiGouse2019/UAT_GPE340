@@ -21,9 +21,14 @@ public class Bullet : MonoBehaviour
     public float bulletDamage;
     public PhysicalProperty physicalProperty;
 
-    public void Release(PhysicalProperty _physicalProperty)
+    //Know who shoot it
+    public Pawn shooterSource;
+    public void Release(PhysicalProperty _physicalProperty, Pawn _source)
     {
         gameObject.tag = "bullet";
+
+        shooterSource = _source;
+
         switch (_physicalProperty)
         {
             case PhysicalProperty.NONE:

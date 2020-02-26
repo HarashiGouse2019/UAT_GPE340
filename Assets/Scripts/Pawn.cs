@@ -42,6 +42,8 @@ public abstract class Pawn : MonoBehaviour, ISpawnable
 
     }
 
+    public virtual DamageableObj GetDamageableObj() => health;
+
     public virtual void Move(Vector3 worldDirectionToMove) { }
 
     public virtual void OnSpawn()
@@ -114,5 +116,18 @@ public abstract class Pawn : MonoBehaviour, ISpawnable
                 return obj;
         }
         return null;
+    }
+
+    public virtual void OnTriggerStay(Collider collider)
+    {
+        Bullet bullet = null;
+        try
+        {
+            bullet = collider.GetComponent<Bullet>();
+
+            if (bullet.shooterSource != this)
+                GetDamageableObj().TakeDamage(collider.GetComponent<Bullet>().bulletDamage);
+        }
+        catch { }
     }
 }

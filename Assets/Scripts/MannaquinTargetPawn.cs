@@ -6,17 +6,13 @@ public class MannaquinTargetPawn : Pawn
 {
     public override void Start()
     {
-        if (weaponHandler.weapons != null)
+        if (weaponHandler.weapons.Count != 0)
         {
             Weapons weapon = weaponHandler.EquipWeapon(weaponHandler.weapons[0]);
             weapon.claimed = true;
+            weapon.claimedBy = this;
+            weaponHandler.ammoKind = weapon.bulletPrefab.name;
         }
-    }
-
-    private void OnTriggerStay(Collider collision)
-    {
-        if (collision.gameObject.tag == "bullet")
-            GetComponent<DamageableObj>().TakeDamage(collision.gameObject.GetComponent<Bullet>().bulletDamage);
     }
 
     public override void OnSpawn()
