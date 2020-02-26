@@ -4,16 +4,30 @@ using UnityEngine;
 
 public class MannaquinTargetController : Controller
 {
+    Weapons[] allWeaponsInWorld;
     public override void Start()
     {
-        target = FindObjectOfType<PlayerPawn>().transform;
-        agent.SetDestination(target.position);
+        if (pawn.weaponHandler.weapons == null)
+        {
+            allWeaponsInWorld = FindObjectsOfType<Weapons>();
+
+            //We iterate and find the closest weapon nearby
+            foreach(Weapons obj in  allWeaponsInWorld)
+            {
+                if (Vector3.Distance(pawn.transform.position, obj.transform.position) <= 10)
+                    target = obj.transform;
+            }
+        }
+        else
+            target = FindObjectOfType<PlayerPawn>().transform;
+           
+
 
     }
 
     void Update()
     {
-        
+        agent.SetDestination(target.position);
     }
 
     private void FixedUpdate()

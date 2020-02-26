@@ -11,8 +11,6 @@ public class MannaquinTargetPawn : Pawn
             Weapons weapon = weaponHandler.EquipWeapon(weaponHandler.weapons[0]);
             weapon.claimed = true;
         }
-        else
-            controller.agent.SetDestination(FindObjectOfType<SquareMight>().gameObject.transform.position);
     }
 
     private void OnTriggerStay(Collider collision)

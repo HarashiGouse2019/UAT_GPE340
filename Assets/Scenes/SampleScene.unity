@@ -4881,6 +4881,11 @@ PrefabInstance:
       propertyPath: roundsPerSec
       value: 10
       objectReference: {fileID: 0}
+    - target: {fileID: 5201913263496605058, guid: 66d25c77ef31e5e45a3e9729f14d7c7f,
+        type: 3}
+      propertyPath: claimed
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 66d25c77ef31e5e45a3e9729f14d7c7f, type: 3}
 --- !u!1 &6801552498250139149
