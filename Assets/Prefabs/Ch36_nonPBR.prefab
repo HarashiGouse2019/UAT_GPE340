@@ -1166,6 +1166,7 @@ GameObject:
   - component: {fileID: 2868091855015455796}
   - component: {fileID: 7617109524829587034}
   - component: {fileID: 4878007201188522734}
+  - component: {fileID: -2834871937321560078}
   m_Layer: 0
   m_Name: Ch36_nonPBR
   m_TagString: Untagged
@@ -1259,6 +1260,7 @@ MonoBehaviour:
   weaponAttachedPointPistol: {fileID: 6005348642277597678}
   controller: {fileID: 6005348643131208421}
   weaponHandler: {fileID: 2868091855015455796}
+  itemDrop: {fileID: 0}
   movementSpeed: 0
   rollingSpeed: 1
   vSpeed: 0
@@ -1351,12 +1353,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   objHealth: 100
   objStrength: 1
-  onHeal:
-    m_PersistentCalls:
-      m_Calls: []
-  onDamage:
-    m_PersistentCalls:
-      m_Calls: []
   onDie:
     m_PersistentCalls:
       m_Calls:
@@ -1386,6 +1382,20 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
   attachedObj: {fileID: 0}
+--- !u!114 &-2834871937321560078
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2339239384743341034}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8c59c93ec97ea394fa42ce4f56154e1b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  items:
+  - {fileID: 4325792525368208375}
 --- !u!1 &2640044207860993928
 GameObject:
   m_ObjectHideFlags: 0
@@ -2070,7 +2080,7 @@ MonoBehaviour:
   ammoSource: {fileID: 7381424112377346210}
   ammoCapacity: 100
   ammoAmount: 0
-  roundsPerSec: 2
+  roundsPerSec: 10
   areRoundsInside: 1
   isPistol: 0
   RightHandIKTarget: {fileID: 1384475597544118904}

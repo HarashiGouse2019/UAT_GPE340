@@ -68,7 +68,7 @@ public abstract class Weapons : PickUps, IPickable
             base.Update();
     }
 
-    public virtual void OnShoot()
+    public virtual void Shoot()
     {
         if (canShoot && !OutOfAmmo() && claimedBy != null)
         {
@@ -89,8 +89,9 @@ public abstract class Weapons : PickUps, IPickable
             claimedBy.weaponHandler.CallForReload();
 
     }
-    public virtual void OnReload()
+    public virtual void Reload()
     {
+        //If someone actually has this weapon
         if (claimedBy != null)
         {
             //We want to check how much ammmo we need to put in first.
@@ -107,24 +108,44 @@ public abstract class Weapons : PickUps, IPickable
     }
     public virtual void OnUse() { }
 
+    public virtual void Drop()
+    {
+        claimed = false;
+        claimedBy = null;
+    }
+
     public override void OnPickUp(GameObject _source)
     {
         try
         {
+            //Getting our pawn based on value parameter
             Pawn pawn = _source.GetComponent<Pawn>();
 
+            //Add this weapon to pawn's weaponHandler
             pawn.weaponHandler.weapons.Add(this);
 
+            //We're contantly picking up our weapon
             claimed = true;
 
+            //For the player, we can use this to update UI and change values
+            //Specific to who pick it up
             claimedBy = pawn;
 
+            //Add the weapon to the pawn's ItemDrop list
+            claimedBy.itemDrop.AddItem(gameObject);
+
+            //Particularly for the player; updating Ui;
             claimedBy.weaponHandler.UpdateAmmoProperties();
 
+            //Passed name to shoot from object pooler
             claimedBy.weaponHandler.ammoKind = bulletPrefab.name;
 
+            //We don't want a full mess of errors, so set inactive
             gameObject.SetActive(false);
 
+            //We know that this is our weapon.
+            //And we can then use inverse kinematics by changing the parent of 
+            //the weapon object.
             if (!isPistol)
                 gameObject.transform.SetParent(pawn.weaponAttachedPoint);
             else

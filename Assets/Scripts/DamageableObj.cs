@@ -16,8 +16,6 @@ public class DamageableObj : MonoBehaviour
     [SerializeField] private float objStrength = 1;
 
     [Header("Events")]
-    [SerializeField] private UnityEvent onHeal;
-    [SerializeField] private UnityEvent onDamage;
     [SerializeField] private UnityEvent onDie;
     [SerializeField] private UnityEvent onDestroy;
 
@@ -43,11 +41,14 @@ public class DamageableObj : MonoBehaviour
 
     public void TakeDamage(float _damageVal)
     {
+        //When we take damage, we also what to consider the armor
+        //And divid the damage value from that.
         objHealth -= _damageVal / objStrength;
     }
 
     public void Heal(float _healVal)
     {
+        //Just heal the pawn
         objHealth += _healVal;
     }
 
@@ -56,10 +57,15 @@ public class DamageableObj : MonoBehaviour
         //Do a thing when you die.
     }
 
+    //Get the health val
     public float GetObjHealthVal() => objHealth;
 
+    //get the strength val
     public float GetObjStrengthVal() => objStrength;
 
+
+    /*This will be to destroy an instance of an object
+     or do something as objHealth is zero*/
     public void WaitForDestroy()
     {
         time += Time.deltaTime;

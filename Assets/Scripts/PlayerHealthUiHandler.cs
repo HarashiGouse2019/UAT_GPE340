@@ -28,6 +28,7 @@ public class PlayerHealthUiHandler : MonoBehaviour
     {
         while(true)
         {
+            //Every update, change the slider value for the health
             S_PLAYERHEALTH.value = damageableObj.GetObjHealthVal() / 100f;
 
             yield return new WaitForEndOfFrame();

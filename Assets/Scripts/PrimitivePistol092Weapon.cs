@@ -12,9 +12,9 @@ public class PrimitivePistol092Weapon : Weapons
         base.Update();
     }
 
-    public override void OnShoot()
+    public override void Shoot()
     {
-        base.OnShoot();
+        base.Shoot();
     }
 
     public override void OnPickUp(GameObject _source)

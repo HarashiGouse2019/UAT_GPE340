@@ -118,10 +118,10 @@ public class PlayerController : Controller
         }
 
         if (shootInput && pawn.weaponHandler.equippedWeapon != null) 
-                pawn.weaponHandler.equippedWeapon.OnShoot();
+                pawn.weaponHandler.equippedWeapon.Shoot();
 
         if (reloadInput && pawn.weaponHandler.equippedWeapon != null)
-            pawn.weaponHandler.equippedWeapon.OnReload();
+            pawn.weaponHandler.equippedWeapon.Reload();
 
         //This makes sure that our magnitude is not higher than 4
         input = Vector3.ClampMagnitude(input, 4f);

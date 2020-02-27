@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class Pawn : MonoBehaviour, ISpawnable
+public abstract class Pawn : MonoBehaviour, ISpawnable, IDropable
 {
     public CharacterController charController;
 
@@ -13,6 +13,8 @@ public abstract class Pawn : MonoBehaviour, ISpawnable
     public Controller controller;
 
     public WeaponHandler weaponHandler;
+
+    public ItemDrop itemDrop;
 
     //Movement
     public float movementSpeed;
@@ -32,6 +34,7 @@ public abstract class Pawn : MonoBehaviour, ISpawnable
     {
         if (health == null) health = gameObject.AddComponent<DamageableObj>();
         if (weaponHandler == null) weaponHandler = gameObject.AddComponent<WeaponHandler>();
+        if (itemDrop == null) itemDrop = gameObject.AddComponent<ItemDrop>();
         weaponHandler.pawn = this;
     }
 
@@ -53,6 +56,11 @@ public abstract class Pawn : MonoBehaviour, ISpawnable
     {
 
         animator = GetComponent<Animator>();
+    }
+
+    public virtual void OnDrop()
+    {
+        itemDrop.DropAllItems();
     }
 
     protected virtual void OnAnimatorIK(int indexLayer)
@@ -125,6 +133,7 @@ public abstract class Pawn : MonoBehaviour, ISpawnable
     {
         try
         {
+            weaponHandler.equippedWeapon.Drop();
             weaponHandler.UnequipWeapon();
             animator.enabled = false;
             charController.enabled = false;
