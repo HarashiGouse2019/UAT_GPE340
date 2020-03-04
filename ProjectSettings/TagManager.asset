@@ -7,6 +7,8 @@ TagManager:
   - bullet
   - Enemy
   - PLAYER
+  - DeathSpot
+  - DeathViewPosition
   layers:
   - Default
   - TransparentFX

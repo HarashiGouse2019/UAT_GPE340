@@ -46,7 +46,8 @@ public class MannaquinTargetController : Controller
     void Update()
     {
         //Every frame, go for our target
-        agent.SetDestination(target.position);
+        if(target != null)
+            agent.SetDestination(target.position);
     }
 
     private void FixedUpdate()

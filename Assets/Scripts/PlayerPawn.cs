@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class PlayerPawn : Pawn
 {
+    //This is unique to the player only, where the camera will rotate if they dies.
+    public ObjectPooler deathSpotPooler;
 
     //Our movement function for our player pawn
     public override void Move(Vector3 worldDirectionToMove)
@@ -21,17 +23,42 @@ public class PlayerPawn : Pawn
         charController.Move(directionToMove * Time.deltaTime);
     }
 
+    public override void OnSpawn()
+    {
+        PlayerStaminaUiHandler.RunStaminaUI();
+        PlayerAmmoTextHandler.RunAmmoTextUI();
+        PlayerHealthUiHandler.RunHealthUI();
+        base.OnSpawn();
+    }
+
     public override void EnableRagDoll()
     {
-        try
+        if (!isDead)
         {
-            GameCameraControls.Instance.GoToUnArmedPosition();
-            weaponHandler.UnequipWeapon();
-            animator.enabled = false;
-            charController.enabled = false;
-            GetComponent<Rigidbody>().isKinematic = true;
             isDead = true;
+
+            if (weaponHandler.equippedWeapon != null)
+            {
+                weaponHandler.equippedWeapon.Drop();
+                weaponHandler.UnequipWeapon();
+            }
+
+            var deathSpot = deathSpotPooler.GetMember("DeathSpot");
+
+            deathSpot.SetActive(true);
+
+            animator.enabled = false;
+
+            charController.enabled = false;
+
+            GetComponent<Rigidbody>().isKinematic = true;
+
+            GameManager.Instance.DecrementPlayerLives();
+
+            if (GameManager.Instance.GetPlayerLives() <= 0)
+            {
+                GetComponentInParent<SpawnerHandler>().End();
+            }
         }
-        catch { }
     }
 }

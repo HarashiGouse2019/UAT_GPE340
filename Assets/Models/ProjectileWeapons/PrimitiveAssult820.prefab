@@ -1457,7 +1457,7 @@ GameObject:
   - component: {fileID: 6211015624546306962}
   - component: {fileID: 3550243266980919578}
   - component: {fileID: 8686535286724223075}
-  - component: {fileID: 7170590368301406807}
+  - component: {fileID: 1660649516658991960}
   m_Layer: 0
   m_Name: PrimitiveAssult820
   m_TagString: Untagged
@@ -1472,8 +1472,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7436121153013149876}
-  m_LocalRotation: {x: 0.000000027706843, y: -0.00000008940696, z: -0.000000020954756,
-    w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0.164, y: -0.213, z: 0.125}
   m_LocalScale: {x: 0.32000056, y: 0.32, z: 0.32000053}
   m_Children:
@@ -1523,13 +1522,12 @@ MonoBehaviour:
   claimed: 0
   claimedBy: {fileID: 0}
   startInThisPosition: {x: 0.1, y: -0.22, z: 0.16}
+  ammoSource: {fileID: 4040371156872724890}
   weaponType: 2
+  weaponStats: {fileID: 11400000, guid: 2e773d8e68ede844d8564ed344528411, type: 2}
+  ammoAmount: 490
   bulletPrefab: {fileID: 2941774647536580244, guid: 79040fb6092e5034a93487c37b4c1733,
     type: 3}
-  ammoSource: {fileID: 4040371156872724890}
-  ammoCapacity: 500
-  ammoAmount: 490
-  roundsPerSec: 50
   areRoundsInside: 1
   isPistol: 0
   RightHandIKTarget: {fileID: 3126665997920278841}
@@ -1551,7 +1549,7 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 5.086693, y: 1.160334, z: 0.59976554}
   m_Center: {x: 0.0808896, y: 0.22112013, z: -0.21252626}
---- !u!114 &7170590368301406807
+--- !u!114 &1660649516658991960
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1565,10 +1563,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spawnInParent: 0
   itemsToPool:
-  - name: Sphere
-    size: 30
-    prefab: {fileID: 2941774647536580244, guid: 79040fb6092e5034a93487c37b4c1733,
-      type: 3}
+  - name: MuzzleFlash
+    size: 10
+    prefab: {fileID: 1743301284569550, guid: ad2ab49d0a2a17148bd51c93d977bdbc, type: 3}
     expandPool: 1
   pooledObjects: []
   poolIndex: 0

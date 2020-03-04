@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class SpawnerHandler : MonoBehaviour
 {
+    public static SpawnerHandler Instance;
     public enum Tag
     {
         PLAYER,
@@ -24,6 +25,13 @@ public class SpawnerHandler : MonoBehaviour
     public float time;
 
     private const uint reset = 0;
+
+    private bool breakOut = false;
+
+    void Awake()
+    {
+        Instance = this;
+    }
 
     private void Start()
     {
@@ -60,7 +68,7 @@ public class SpawnerHandler : MonoBehaviour
     public void ResetTime() { time = reset; }
     public IEnumerator SpawningRoutine()
     {
-        while (true)
+        while (breakOut == false)
         {
             if (spawner.repeatSpawning)
                 SetSpawningInterval(spawner.repeatDuration);
@@ -69,5 +77,11 @@ public class SpawnerHandler : MonoBehaviour
 
             yield return new WaitForEndOfFrame();
         }
+    }
+
+    public void End()
+    {
+        Debug.Log("Spawning has ended...");
+        breakOut = true;
     }
 }

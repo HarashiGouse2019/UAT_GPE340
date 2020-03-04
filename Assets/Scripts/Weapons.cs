@@ -1,6 +1,10 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Collections;
 using UnityEngine;
+using UnityEngine.EventSystems;
+
+using Rand = UnityEngine.Random;
 
 public abstract class Weapons : PickUps, IPickable
 {
@@ -8,6 +12,7 @@ public abstract class Weapons : PickUps, IPickable
     public bool claimed = false;
     public Pawn claimedBy;
     public Vector3 startInThisPosition;
+    public Transform ammoSource;
     public enum WeaponType
     {
         Melee,
@@ -16,15 +21,13 @@ public abstract class Weapons : PickUps, IPickable
     }
     public WeaponType weaponType;
 
-    [Header("For Projectile Weapons Only")]
-    public GameObject bulletPrefab;
-    public Transform ammoSource;
-    public int ammoCapacity;
+    [Header("Weapon Stats")] public WeaponStats weaponStats;
+
+    [Header("How Much Ammo is Left???")]
     public int ammoAmount;
 
-    [Header("Automatic Weapons Only")]
-    public float roundsPerSec = 10;
-
+    public GameObject bulletPrefab;
+    
     [Header("Are there rounds inside?")]
     public bool areRoundsInside = true;
 
@@ -45,15 +48,18 @@ public abstract class Weapons : PickUps, IPickable
 
     protected float time;
 
-    protected ObjectPooler weaponBulletPooler;
+    protected ObjectPooler weaponObjectPooler;
+
+    public virtual void Awake()
+    {
+        weaponObjectPooler = GetComponent<ObjectPooler>();
+    }
 
     public virtual void Start()
     {
         //The gun is already loaded with bullets
-        if (areRoundsInside)
-            ammoAmount = ammoCapacity;
-
-        weaponBulletPooler = GetComponent<ObjectPooler>();
+        if (areRoundsInside && weaponStats != null)
+            ammoAmount = weaponStats.weaponAmmoCapacity;
     }
 
     public override void Update()
@@ -76,28 +82,110 @@ public abstract class Weapons : PickUps, IPickable
     {
         if (canShoot && !OutOfAmmo() && claimedBy != null)
         {
-            
-            Bullet bullet = weaponBulletPooler.GetMember(claimedBy.weaponHandler.ammoKind).GetComponent<Bullet>();
-            if (!bullet.gameObject.activeInHierarchy)
+            //We'll be now using a raycast to shoot! Luckily, this is simple to do.
+
+            Ray ray = new Ray(ammoSource.position, ammoSource.right);
+
+            //Then we need to create a RaycastHit object
+            RaycastHit hitInfo;
+
+            //This will be a test whether our ray is showing/working
+            Debug.DrawRay(ammoSource.position, ammoSource.right * weaponStats.weaponRange, Color.red, 2f);
+
+            //We'll now create a muzzle effect
+            GameObject muzzelFlash = weaponObjectPooler.GetMember("MuzzleFlash");
+
+            if (!muzzelFlash.gameObject.activeInHierarchy)
+
             {
-                bullet.gameObject.SetActive(true);
-                bullet.transform.position = ammoSource.position;
-                bullet.transform.rotation = ammoSource.rotation;
-                bullet.Release(bullet.physicalProperty, claimedBy);
+                muzzelFlash.gameObject.SetActive(true);
+
+                muzzelFlash.transform.position = ammoSource.position;
+
+                muzzelFlash.transform.rotation = ammoSource.rotation;
+
+                muzzelFlash.GetComponent<ParticleSystem>().Play();
+
                 canShoot = false;
+
                 ammoAmount--;
+
                 claimedBy.weaponHandler.UpdateAmmoProperties();
+
             }
+
+            //Now that we should our weapon, we have to wait for the recoil
+            canShoot = false;
+
+            //The amount of ammo we have decreases...
+            ammoAmount--;
+
+            //And we want to update our UI, changing our ammoValue.
+            claimedBy.weaponHandler.UpdateAmmoProperties();
+
+            //Now if we hit something....
+            if (Physics.Raycast(ray, out hitInfo, weaponStats.weaponRange) && hitInfo.collider.gameObject != claimedBy.gameObject)
+                OnHit(hitInfo);
         }
         else
             claimedBy.weaponHandler.CallForReload();
 
     }
 
+    public virtual void OnHit(RaycastHit _hitInfo)
+    {
+        if (_hitInfo.collider != null)
+        {
+
+
+            //Randomize between the weapons min and max damage
+            var damageInflicted = Rand.Range(weaponStats.weaponMinDamage, weaponStats.weaponMaxDamage);
+
+            //Then we had crit damage (if we ever get one). 
+            damageInflicted += ApplyCritDamage();
+
+            //Find the health component
+            try
+            {
+                _hitInfo.collider.GetComponentInParent<Pawn>().GetDamageableObj().TakeDamage(damageInflicted);
+            }
+            catch { }
+            
+        }
+    }
+
+    public virtual float ApplyCritDamage()
+    {
+        //If a crit has been successful, it'll return
+        //the weapon's critical damage value
+
+        //chances of Critical will be converted to a percent.
+        var chancesForCritical = (weaponStats.weaponCritChance / 100);
+
+        //Now we get a value between 0 and one, since
+        //chances of Critical is in a percentage.
+        var getChance = Rand.Range(0f, 1f);
+
+        /*If we are smaller than our equal to the chancesForCritical,
+         we return the weaponCritValue.*/
+        if (getChance <= chancesForCritical)
+        {
+            //We get a value between our critical min and max
+            var criticalDamageInflicted = Rand.Range(weaponStats.weaponCritMinDamage, weaponStats.weaponCritMaxDamage);
+
+            //And then we return it.
+            return criticalDamageInflicted;
+        }
+
+        //Otherwise, we get no critical bonus
+        return 0f;
+    }
+
     public virtual void OnEquip()
     {
-
+        transform.localPosition = startInThisPosition;
     }
+
 
     public virtual void Reload()
     {
@@ -107,7 +195,7 @@ public abstract class Weapons : PickUps, IPickable
             //We want to check how much ammmo we need to put in first.
             //It'll basically be a transfer between the weaponHandler's packOfAmmo to ammoLeft
             //which then that value will be set back to it's ammoCapacity
-            int ammoToFill = ammoCapacity - ammoAmount; //This will get use the value of how much we need to into our weapon
+            int ammoToFill = weaponStats.weaponAmmoCapacity - ammoAmount; //This will get use the value of how much we need to into our weapon
 
             //Now we "Send the packOfAmmo" to the "ammoLeft"
             ammoAmount += ammoToFill;
@@ -146,9 +234,6 @@ public abstract class Weapons : PickUps, IPickable
 
             //Particularly for the player; updating Ui;
             claimedBy.weaponHandler.UpdateAmmoProperties();
-
-            //Passed name to shoot from object pooler
-            claimedBy.weaponHandler.ammoKind = bulletPrefab.name;
 
             //We don't want a full mess of errors, so set inactive
             gameObject.SetActive(false);
@@ -192,7 +277,7 @@ public abstract class Weapons : PickUps, IPickable
     public virtual void Recoil()
     {
         time += Time.deltaTime;
-        if(time >= (1 / roundsPerSec))
+        if(time >= (1 / weaponStats.weaponRoundsPer))
             SetNextRound();
             
     }

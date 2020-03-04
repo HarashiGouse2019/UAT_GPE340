@@ -18,10 +18,11 @@ public class ItemDrop : MonoBehaviour
 
     public void DropAllItems()
     {
-        foreach(GameObject item in items)
+        Debug.Log("Dropping All Items...");
+        foreach (GameObject item in items)
         {
             item.SetActive(true);
-            item.transform.SetParent(item.transform);
+            item.transform.parent = transform;
             item.transform.position = Source.transform.position;
             items.Remove(item);
         }

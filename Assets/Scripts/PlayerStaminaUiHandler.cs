@@ -5,24 +5,33 @@ using UnityEngine.UI;
 
 public class PlayerStaminaUiHandler : MonoBehaviour
 {
+    private static PlayerStaminaUiHandler uiHandler;
+
     /*This will handle the blue bar that is the Stamina.
      It'll just simply take the stamina up or down. That's about it.*/
-    private PlayerPawn playerPawn;
-    private Slider S_PLAYERSTAMINA;
+    private static PlayerPawn playerPawn;
+    private static Slider S_PLAYERSTAMINA;
 
-    private ExhaustibleObj exhaustibleObj;
-    // Start is called before the first frame update
-    void Start()
+    private static ExhaustibleObj exhaustibleObj;
+
+    void Awake()
     {
-        playerPawn = FindObjectOfType<PlayerPawn>();
-        S_PLAYERSTAMINA = GetComponent<Slider>();
-        exhaustibleObj = playerPawn.GetComponent<ExhaustibleObj>();
-
-        StartCoroutine(UpdateStaminaUI());
+        uiHandler = this;
     }
 
 
-    IEnumerator UpdateStaminaUI()
+    // Start is called before the first frame update
+    public static void RunStaminaUI()
+    {
+        playerPawn = FindObjectOfType<PlayerPawn>();
+        S_PLAYERSTAMINA = uiHandler.GetComponent<Slider>();
+        exhaustibleObj = playerPawn.GetComponent<ExhaustibleObj>();
+
+        uiHandler.StartCoroutine(UpdateStaminaUI());
+    }
+
+
+    static IEnumerator UpdateStaminaUI()
     {
         while (true)
         {

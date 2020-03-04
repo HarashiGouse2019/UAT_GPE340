@@ -14,8 +14,8 @@ public class GameCameraControls : MonoBehaviour
     public Transform armedPosition;
     public Transform unarmedPosition;
 
-    //Reference our PlayerController so we can keep if we're strifing
-    public PlayerController playerController;
+    //Reference our PlayerPawn so we can check if they are dead
+    public PlayerPawn player;
 
     //This will be our script that will be responsible for basic camera movement
     public float cameraRotationSpeed = 1;
@@ -34,12 +34,19 @@ public class GameCameraControls : MonoBehaviour
 
     bool playerIsArmed = false;
 
+    private float rotation;
+
     private void Awake()
     {
         #region Singleton
         if (Instance == null)
         {
             Instance = this;
+            m_camera = FindObjectOfType<Camera>();
+            player = GetComponentInParent<PlayerPawn>();
+            camPivotPoint = gameObject.transform;
+            obstructionTarget = camPivotPoint;
+            ReturnToPlayerOrbit();
             DontDestroyOnLoad(Instance);
         }
         else
@@ -49,28 +56,39 @@ public class GameCameraControls : MonoBehaviour
         #endregion
     }
 
+    private void Start()
+    {
+        ReturnToPlayerOrbit();
+    }
+
     void Update()
     {
         //Have obstruction equal to our camPivotPoint
-        obstructionTarget = camPivotPoint;
+            obstructionTarget = camPivotPoint;
 
-        //Make sure out cursor is in the center
-        Cursor.visible = false;
-        Cursor.lockState = CursorLockMode.Locked;
+            //Make sure out cursor is in the center
+            Cursor.visible = false;
+            Cursor.lockState = CursorLockMode.Locked;
 
 
-        //We create a plane that is using the world's z-coordinates
-        Plane plane = new Plane(Vector3.up, transform.parent.position);
+            //We create a plane that is using the world's z-coordinates
+            Plane plane = new Plane(Vector3.up, transform.parent.position);
 
-        //We take the position of the mouse to our ray point into the world
-        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            //We take the position of the mouse to our ray point into the world
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 
+            
     }
 
     private void FixedUpdate()
     {
-        RunMouseControls();
-        if (playerIsArmed == false) ViewObstructed();
+        if (!player.IsDead() && !GameManager.IsGamePaused)
+        {
+            RunMouseControls();
+            if (playerIsArmed == false && obstructionTarget != null) ViewObstructed();
+        }
+        else 
+            CircleAroundDeathSpot();
     }
 
     //This is the main mouse controls
@@ -100,6 +118,7 @@ public class GameCameraControls : MonoBehaviour
     //allowing us to see the player.
     void ViewObstructed()
     {
+        
         MeshRenderer obstructionRender = obstructionTarget.gameObject.GetComponent<MeshRenderer>();
         RaycastHit hit;
         if (Physics.Raycast(transform.position, camPivotPoint.position - transform.position, out hit, 4.5f))
@@ -145,5 +164,31 @@ public class GameCameraControls : MonoBehaviour
         m_camera.transform.position = unarmedPosition.position;
         m_camera.transform.rotation = unarmedPosition.rotation;
         playerIsArmed = false;
+    }
+
+
+    public void CircleAroundDeathSpot()
+    {
+        //Make sure that it has no parents
+        if (m_camera.transform.parent != null )m_camera.transform.SetParent(null);
+
+        camPivotPoint = GameObject.FindGameObjectWithTag("DeathSpot").transform;
+
+        //We want to look at the target object
+        //or in this cause, have the camera point to
+        //a point for it to pivot around
+        transform.LookAt(camPivotPoint);
+
+        rotation += Time.deltaTime;
+
+        camPivotPoint.rotation = Quaternion.Euler(0f, rotation, 0);
+    }
+
+    public void ReturnToPlayerOrbit()
+    {
+        player = GetComponentInParent<PlayerPawn>();
+        m_camera.transform.SetParent(gameObject.transform);
+        GoToUnArmedPosition();
+        ViewObstructed();
     }
 }

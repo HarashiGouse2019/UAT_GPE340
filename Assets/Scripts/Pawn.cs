@@ -28,7 +28,7 @@ public abstract class Pawn : MonoBehaviour, ISpawnable, IDropable
     [SerializeField]
     protected DamageableObj health;
 
-    protected bool isDead;
+    protected bool isDead = false;
 
     public virtual void Awake()
     {
@@ -56,6 +56,7 @@ public abstract class Pawn : MonoBehaviour, ISpawnable, IDropable
     {
 
         animator = GetComponent<Animator>();
+        isDead = false;
     }
 
     public virtual void OnDrop()
@@ -133,25 +134,16 @@ public abstract class Pawn : MonoBehaviour, ISpawnable, IDropable
     {
         try
         {
-            weaponHandler.equippedWeapon.Drop();
-            weaponHandler.UnequipWeapon();
+            if (weaponHandler.equippedWeapon != null)
+            {
+                weaponHandler.equippedWeapon.Drop();
+                weaponHandler.UnequipWeapon();
+            }
+            
             animator.enabled = false;
             charController.enabled = false;
             GetComponent<Rigidbody>().isKinematic = true;
             isDead = true;
-        }
-        catch { }
-    }
-
-    public virtual void OnTriggerStay(Collider collider)
-    {
-        Bullet bullet = null;
-        try
-        {
-            bullet = collider.GetComponent<Bullet>();
-
-            if (bullet.shooterSource != this)
-                GetDamageableObj().TakeDamage(collider.GetComponent<Bullet>().bulletDamage);
         }
         catch { }
     }

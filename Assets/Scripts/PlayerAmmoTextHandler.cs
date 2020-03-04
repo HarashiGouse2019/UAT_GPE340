@@ -6,24 +6,32 @@ using TMPro;
 
 public class PlayerAmmoTextHandler : MonoBehaviour
 {
+    private static PlayerAmmoTextHandler uiHandler;
+
     /*This will handle the blue bar that is the Stamina.
    It'll just simply take the stamina up or down. That's about it.*/
-    private PlayerPawn playerPawn;
-    private TextMeshProUGUI TMP_AMMO;
+    private static PlayerPawn playerPawn;
+    private static TextMeshProUGUI TMP_AMMO;
 
-    private WeaponHandler weaponHandler;
-    // Start is called before the first frame update
-    void Start()
+    private static WeaponHandler weaponHandler;
+    void Awake()
     {
-        playerPawn = FindObjectOfType<PlayerPawn>();
-        TMP_AMMO = GetComponent<TextMeshProUGUI>();
-        weaponHandler = playerPawn.GetComponent<WeaponHandler>();
-
-        StartCoroutine(UpdateAmmoText());
+        uiHandler = this;
     }
 
 
-    IEnumerator UpdateAmmoText()
+    // Start is called before the first frame update
+    public static void RunAmmoTextUI()
+    {
+        playerPawn = FindObjectOfType<PlayerPawn>();
+        TMP_AMMO = uiHandler.GetComponent<TextMeshProUGUI>();
+        weaponHandler = playerPawn.GetComponent<WeaponHandler>();
+
+        uiHandler.StartCoroutine(UpdateAmmoText());
+    }
+
+
+    static IEnumerator UpdateAmmoText()
     {
         while (true)
         {

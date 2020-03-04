@@ -42,7 +42,7 @@ public class DamageableObj : MonoBehaviour
     public void TakeDamage(float _damageVal)
     {
         //When we take damage, we also what to consider the armor
-        //And divid the damage value from that.
+        //And divide the damage value from that.
         objHealth -= _damageVal / objStrength;
     }
 
