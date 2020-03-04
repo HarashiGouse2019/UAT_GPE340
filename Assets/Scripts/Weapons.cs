@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System.Collections.Generic;
+using System.Collections;
 using UnityEngine;
 
 public abstract class Weapons : PickUps, IPickable
@@ -6,6 +7,7 @@ public abstract class Weapons : PickUps, IPickable
     public string weaponName;
     public bool claimed = false;
     public Pawn claimedBy;
+    public Vector3 startInThisPosition;
     public enum WeaponType
     {
         Melee,
@@ -32,10 +34,12 @@ public abstract class Weapons : PickUps, IPickable
     [Header("IK Targets")]
     public Transform RightHandIKTarget;
     public Transform LeftHandIKTarget;
+    public List<Transform> OtherIKTargets = new List<Transform>();
 
     [Header("IK Hint Targets")]
     public Transform RightHandIKHintTarget;
     public Transform LeftHandIKHintTarget;
+    public List<Transform> OtherIKHintTargets = new List<Transform>();
 
     protected bool canShoot = true;
 
@@ -89,6 +93,12 @@ public abstract class Weapons : PickUps, IPickable
             claimedBy.weaponHandler.CallForReload();
 
     }
+
+    public virtual void OnEquip()
+    {
+
+    }
+
     public virtual void Reload()
     {
         //If someone actually has this weapon

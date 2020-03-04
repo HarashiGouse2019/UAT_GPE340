@@ -78,6 +78,36 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!1 &593015733722955964
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2255949645238424261}
+  m_Layer: 0
+  m_Name: SupportIKTargetHint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2255949645238424261
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 593015733722955964}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: -2.64, z: 1.68}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 8122164380182410813}
+  m_RootOrder: 10
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &747257920987289083
 GameObject:
   m_ObjectHideFlags: 0
@@ -382,9 +412,10 @@ Transform:
   - {fileID: 2713247919358679968}
   - {fileID: 1367047539440649853}
   - {fileID: 8317058059972926339}
+  - {fileID: 2255949645238424261}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 88.50001, z: -1.1700001}
 --- !u!114 &5201913263496605058
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -399,7 +430,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rotationVal: 0
   weaponName: SquareMight
-  claimed: 1
+  claimed: 0
   claimedBy: {fileID: 0}
   weaponType: 2
   bulletPrefab: {fileID: 2941774647536580244, guid: 79040fb6092e5034a93487c37b4c1733,
@@ -407,13 +438,16 @@ MonoBehaviour:
   ammoSource: {fileID: 8317058059972926339}
   ammoCapacity: 100
   ammoAmount: 0
-  roundsPerSec: 2
+  roundsPerSec: 10
   areRoundsInside: 1
   isPistol: 0
   RightHandIKTarget: {fileID: 444329254166804825}
   LeftHandIKTarget: {fileID: 6793462127318319354}
+  OtherIKTargets: []
   RightHandIKHintTarget: {fileID: 2713247919358679968}
   LeftHandIKHintTarget: {fileID: 1367047539440649853}
+  OtherIKHintTargets:
+  - {fileID: 2255949645238424261}
 --- !u!65 &468965757
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -442,7 +476,7 @@ MonoBehaviour:
   spawnInParent: 0
   itemsToPool:
   - name: Sphere
-    size: 50
+    size: 30
     prefab: {fileID: 2941774647536580244, guid: 79040fb6092e5034a93487c37b4c1733,
       type: 3}
     expandPool: 1
@@ -640,7 +674,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8577309094935168374}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.667, y: -11.72, z: 2.8}
+  m_LocalPosition: {x: 0.61, y: -3.92, z: 1.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 8122164380182410813}

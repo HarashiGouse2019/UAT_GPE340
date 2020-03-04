@@ -56,6 +56,7 @@ public class WeaponHandler : MonoBehaviour
     {
         equippedWeapon = weapon;
         isEquipped = true;
+        
         if (!equippedWeapon.gameObject.activeInHierarchy)
         {
             equippedWeapon.enabled = true;
@@ -69,6 +70,7 @@ public class WeaponHandler : MonoBehaviour
                 equippedWeapon.GetComponent<Transform>().SetParent(pawn.weaponAttachedPoint);
                 equippedWeapon.GetComponent<Transform>().position = pawn.weaponAttachedPoint.position;
                 equippedWeapon.GetComponent<Transform>().rotation = pawn.weaponAttachedPoint.rotation;
+                equippedWeapon.OnEquip();
                 return weapon;
             }
 
@@ -77,8 +79,11 @@ public class WeaponHandler : MonoBehaviour
                 equippedWeapon.GetComponent<Transform>().SetParent(pawn.weaponAttachedPointPistol);
                 equippedWeapon.GetComponent<Transform>().position = pawn.weaponAttachedPointPistol.position;
                 equippedWeapon.GetComponent<Transform>().rotation = pawn.weaponAttachedPointPistol.rotation;
+                equippedWeapon.OnEquip();
                 return weapon;
             }
+
+            
         }
         return null;
     }

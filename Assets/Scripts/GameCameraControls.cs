@@ -84,7 +84,7 @@ public class GameCameraControls : MonoBehaviour
         mousePositionY -= Input.GetAxis("Mouse Y") * cameraRotationSpeed * Time.deltaTime;
 
         //We make sure that mouse position y is within -90 and 60
-        mousePositionY = Mathf.Clamp(mousePositionY, -90, 35);
+        mousePositionY = Mathf.Clamp(mousePositionY, -35, 30);
 
         //We want to look at the target object
         //or in this cause, have the camera point to
