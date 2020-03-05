@@ -56,7 +56,7 @@ public class WeaponHandler : MonoBehaviour
     {
         equippedWeapon = weapon;
         isEquipped = true;
-        
+
         if (!equippedWeapon.gameObject.activeInHierarchy)
         {
             equippedWeapon.enabled = true;

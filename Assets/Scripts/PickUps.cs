@@ -7,7 +7,7 @@ public abstract class PickUps : MonoBehaviour, IPickable
     protected uint reset = 0;
     protected uint full360 = 360;
     public float rotationVal = 0f;
-    protected float rotationRate = 1f;
+    protected float rotationRate = 100f;
 
     public virtual void Update()
     {
@@ -17,7 +17,7 @@ public abstract class PickUps : MonoBehaviour, IPickable
     public virtual void Rotate()
     {
         //We rotate based on the rate
-        gameObject.transform.Rotate(new Vector3(0, rotationRate, 0f));
+        gameObject.transform.Rotate(new Vector3(0, rotationRate * Time.deltaTime, 0f));
 
         //This prevent an overflow of the float value in our rotation y
         if (rotationVal >= full360)

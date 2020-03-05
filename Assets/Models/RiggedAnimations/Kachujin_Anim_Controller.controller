@@ -7,7 +7,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: PlayerArmed
+  m_Name: PlayerArmedRifleType
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions:
@@ -44,7 +44,7 @@ AnimatorStateMachine:
     m_Position: {x: 260, y: 140, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -9099525293279820752}
-    m_Position: {x: 260, y: 0, z: 0}
+    m_Position: {x: 130, y: 10, z: 0}
   m_ChildStateMachines: []
   m_AnyStateTransitions: []
   m_EntryTransitions: []
@@ -464,6 +464,24 @@ BlendTree:
       type: 3}
     m_Threshold: 0
     m_Position: {x: -0.0002544243, y: 1.8}
+    m_TimeScale: 1
+    m_CycleOffset: 0
+    m_DirectBlendParameter: Horizontal
+    m_Mirror: 0
+  - serializedVersion: 2
+    m_Motion: {fileID: -203655887218126122, guid: db7d9b38ad9c807489eeb307a57a8ed7,
+      type: 3}
+    m_Threshold: 0
+    m_Position: {x: -1.82, y: 0.94}
+    m_TimeScale: 1
+    m_CycleOffset: 0
+    m_DirectBlendParameter: Horizontal
+    m_Mirror: 0
+  - serializedVersion: 2
+    m_Motion: {fileID: -203655887218126122, guid: 615c3276ce2948f46bddd92f6bdf1a9f,
+      type: 3}
+    m_Threshold: 0
+    m_Position: {x: 1.82, y: 0.94}
     m_TimeScale: 1
     m_CycleOffset: 0
     m_DirectBlendParameter: Horizontal

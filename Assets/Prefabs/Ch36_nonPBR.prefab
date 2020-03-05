@@ -846,7 +846,7 @@ Transform:
   - {fileID: 7905701546346318833}
   - {fileID: 5223362299579568515}
   - {fileID: 6005348642277597678}
-  - {fileID: 2288602947138817036}
+  - {fileID: 708424354082454207}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -977,7 +977,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   weapons:
-  - {fileID: 2829828145821964211}
+  - {fileID: 3554331622957392128}
   equippedWeapon: {fileID: 0}
   ammoKind: 
   isEquipped: 0
@@ -3235,23 +3235,13 @@ Transform:
   m_Father: {fileID: 2783565344991005892}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1001 &8031458799426828849
+--- !u!1001 &8746955069490695298
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
     m_TransformParent: {fileID: 1598210568901892601}
     m_Modifications:
-    - target: {fileID: 2960126385947003094, guid: 66d25c77ef31e5e45a3e9729f14d7c7f,
-        type: 3}
-      propertyPath: m_Name
-      value: SquareMight
-      objectReference: {fileID: 0}
-    - target: {fileID: 2960126385947003094, guid: 66d25c77ef31e5e45a3e9729f14d7c7f,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 8122164380182410813, guid: 66d25c77ef31e5e45a3e9729f14d7c7f,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -3270,22 +3260,22 @@ PrefabInstance:
     - target: {fileID: 8122164380182410813, guid: 66d25c77ef31e5e45a3e9729f14d7c7f,
         type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0.0071244454
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8122164380182410813, guid: 66d25c77ef31e5e45a3e9729f14d7c7f,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.6977541
+      value: 0.69779044
       objectReference: {fileID: 0}
     - target: {fileID: 8122164380182410813, guid: 66d25c77ef31e5e45a3e9729f14d7c7f,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0.007313448
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8122164380182410813, guid: 66d25c77ef31e5e45a3e9729f14d7c7f,
         type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.7162646
+      value: 0.7163019
       objectReference: {fileID: 0}
     - target: {fileID: 8122164380182410813, guid: 66d25c77ef31e5e45a3e9729f14d7c7f,
         type: 3}
@@ -3305,31 +3295,31 @@ PrefabInstance:
     - target: {fileID: 8122164380182410813, guid: 66d25c77ef31e5e45a3e9729f14d7c7f,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: -1.1700001
+      value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 5201913263496605058, guid: 66d25c77ef31e5e45a3e9729f14d7c7f,
+    - target: {fileID: 2960126385947003094, guid: 66d25c77ef31e5e45a3e9729f14d7c7f,
         type: 3}
-      propertyPath: claimed
-      value: 1
+      propertyPath: m_Name
+      value: SquareMight
       objectReference: {fileID: 0}
-    - target: {fileID: 5201913263496605058, guid: 66d25c77ef31e5e45a3e9729f14d7c7f,
+    - target: {fileID: 2960126385947003094, guid: 66d25c77ef31e5e45a3e9729f14d7c7f,
         type: 3}
-      propertyPath: claimedBy
-      value: 
-      objectReference: {fileID: 6005348643131208422}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 66d25c77ef31e5e45a3e9729f14d7c7f, type: 3}
---- !u!4 &2288602947138817036 stripped
+--- !u!4 &708424354082454207 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8122164380182410813, guid: 66d25c77ef31e5e45a3e9729f14d7c7f,
     type: 3}
-  m_PrefabInstance: {fileID: 8031458799426828849}
+  m_PrefabInstance: {fileID: 8746955069490695298}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &2829828145821964211 stripped
+--- !u!114 &3554331622957392128 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 5201913263496605058, guid: 66d25c77ef31e5e45a3e9729f14d7c7f,
     type: 3}
-  m_PrefabInstance: {fileID: 8031458799426828849}
+  m_PrefabInstance: {fileID: 8746955069490695298}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
   m_Enabled: 1

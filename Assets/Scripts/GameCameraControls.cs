@@ -52,7 +52,7 @@ public class GameCameraControls : MonoBehaviour
         else
         {
             Destroy(gameObject);
-        } 
+        }
         #endregion
     }
 
@@ -63,21 +63,28 @@ public class GameCameraControls : MonoBehaviour
 
     void Update()
     {
-        //Have obstruction equal to our camPivotPoint
-            obstructionTarget = camPivotPoint;
-
-            //Make sure out cursor is in the center
+        /*Make sure the cursor is in the center of the screen
+         when we are not paused!*/
+        if (!GameManager.IsGamePaused)
+        {
             Cursor.visible = false;
             Cursor.lockState = CursorLockMode.Locked;
+        } else
+        {
+            Cursor.visible = true;
+            Cursor.lockState = CursorLockMode.None;
+        }
+
+        //Have obstruction equal to our camPivotPoint
+        obstructionTarget = camPivotPoint;
+
+        //We create a plane that is using the world's z-coordinates
+        Plane plane = new Plane(Vector3.up, transform.parent.position);
+
+        //We take the position of the mouse to our ray point into the world
+        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 
 
-            //We create a plane that is using the world's z-coordinates
-            Plane plane = new Plane(Vector3.up, transform.parent.position);
-
-            //We take the position of the mouse to our ray point into the world
-            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-
-            
     }
 
     private void FixedUpdate()
@@ -87,7 +94,7 @@ public class GameCameraControls : MonoBehaviour
             RunMouseControls();
             if (playerIsArmed == false && obstructionTarget != null) ViewObstructed();
         }
-        else 
+        else
             CircleAroundDeathSpot();
     }
 
@@ -118,7 +125,7 @@ public class GameCameraControls : MonoBehaviour
     //allowing us to see the player.
     void ViewObstructed()
     {
-        
+
         MeshRenderer obstructionRender = obstructionTarget.gameObject.GetComponent<MeshRenderer>();
         RaycastHit hit;
         if (Physics.Raycast(transform.position, camPivotPoint.position - transform.position, out hit, 4.5f))
@@ -170,7 +177,7 @@ public class GameCameraControls : MonoBehaviour
     public void CircleAroundDeathSpot()
     {
         //Make sure that it has no parents
-        if (m_camera.transform.parent != null )m_camera.transform.SetParent(null);
+        if (m_camera.transform.parent != null) m_camera.transform.SetParent(null);
 
         camPivotPoint = GameObject.FindGameObjectWithTag("DeathSpot").transform;
 

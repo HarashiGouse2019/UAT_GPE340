@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections;
+﻿using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.EventSystems;
-
 using Rand = UnityEngine.Random;
 
 public abstract class Weapons : PickUps, IPickable
@@ -43,6 +39,8 @@ public abstract class Weapons : PickUps, IPickable
     public Transform RightHandIKHintTarget;
     public Transform LeftHandIKHintTarget;
     public List<Transform> OtherIKHintTargets = new List<Transform>();
+
+    [Header("Weapon Icon")] public Sprite weaponIcon;
 
     protected bool canShoot = true;
 
@@ -108,20 +106,11 @@ public abstract class Weapons : PickUps, IPickable
 
                 canShoot = false;
 
-                ammoAmount--;
+                ammoAmount -= 1;
 
                 claimedBy.weaponHandler.UpdateAmmoProperties();
 
             }
-
-            //Now that we should our weapon, we have to wait for the recoil
-            canShoot = false;
-
-            //The amount of ammo we have decreases...
-            ammoAmount--;
-
-            //And we want to update our UI, changing our ammoValue.
-            claimedBy.weaponHandler.UpdateAmmoProperties();
 
             //Now if we hit something....
             if (Physics.Raycast(ray, out hitInfo, weaponStats.weaponRange) && hitInfo.collider.gameObject != claimedBy.gameObject)
@@ -134,10 +123,8 @@ public abstract class Weapons : PickUps, IPickable
 
     public virtual void OnHit(RaycastHit _hitInfo)
     {
-        if (_hitInfo.collider != null)
+        if (_hitInfo.collider.gameObject != gameObject)
         {
-
-
             //Randomize between the weapons min and max damage
             var damageInflicted = Rand.Range(weaponStats.weaponMinDamage, weaponStats.weaponMaxDamage);
 
@@ -189,6 +176,8 @@ public abstract class Weapons : PickUps, IPickable
 
     public virtual void Reload()
     {
+        Debug.Log("Reloading");
+
         //If someone actually has this weapon
         if (claimedBy != null)
         {
@@ -197,11 +186,26 @@ public abstract class Weapons : PickUps, IPickable
             //which then that value will be set back to it's ammoCapacity
             int ammoToFill = weaponStats.weaponAmmoCapacity - ammoAmount; //This will get use the value of how much we need to into our weapon
 
-            //Now we "Send the packOfAmmo" to the "ammoLeft"
-            ammoAmount += ammoToFill;
-            claimedBy.weaponHandler.packOfAmmoLeft -= ammoToFill;
+            //Now we get how much packs of ammo we have left
+            int packsOfAmmoLeft = claimedBy.weaponHandler.packOfAmmoLeft;
 
-            claimedBy.weaponHandler.UpdateAmmoProperties();
+            //Now we "Send the packOfAmmo" to the "ammoLeft"
+            //I'll iterate it this time.
+            for (int ammoAdded = 0; ammoAdded < ammoToFill; ammoAdded++)
+            {
+                if (packsOfAmmoLeft > 0)
+                {
+                    packsOfAmmoLeft -= 1;
+                    claimedBy.weaponHandler.packOfAmmoLeft = packsOfAmmoLeft;
+                    ammoAmount += 1;
+                    claimedBy.weaponHandler.UpdateAmmoProperties();
+                }
+                else
+                {
+                    claimedBy.weaponHandler.UpdateAmmoProperties();
+                    return;
+                }
+            }
         }
     }
     public virtual void OnUse() { }

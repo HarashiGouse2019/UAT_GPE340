@@ -55,7 +55,7 @@ public class PlayerPawn : Pawn
 
             GameManager.Instance.DecrementPlayerLives();
 
-            if (GameManager.Instance.GetPlayerLives() <= 0)
+            if (GameManager.GetPlayerLives() <= 0)
             {
                 GetComponentInParent<SpawnerHandler>().End();
             }

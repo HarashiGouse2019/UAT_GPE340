@@ -35,7 +35,9 @@ public class PlayerAmmoTextHandler : MonoBehaviour
     {
         while (true)
         {
-            TMP_AMMO.text = weaponHandler.ammoLeft + " / " + weaponHandler.packOfAmmoLeft;
+            if (playerPawn.weaponHandler.equippedWeapon != null)
+                TMP_AMMO.text = weaponHandler.ammoLeft + " / " + weaponHandler.packOfAmmoLeft;
+            else TMP_AMMO.text = "";
 
             yield return new WaitForEndOfFrame();
         }
