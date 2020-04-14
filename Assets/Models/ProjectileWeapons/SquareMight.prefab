@@ -102,7 +102,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 147937321758796451}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.348, y: -1.81, z: 1.4999938}
+  m_LocalPosition: {x: 0.348, y: -1.81, z: -13.3}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 8122164380182410813}
@@ -679,6 +679,7 @@ MonoBehaviour:
   ammoSource: {fileID: 8317058059972926339}
   weaponType: 2
   weaponStats: {fileID: 11400000, guid: 29d363ea57b8cd045ba8e3f35dc2121a, type: 2}
+  weaponSound: SquareMightSound
   ammoAmount: 100
   bulletPrefab: {fileID: 2941774647536580244, guid: 79040fb6092e5034a93487c37b4c1733,
     type: 3}

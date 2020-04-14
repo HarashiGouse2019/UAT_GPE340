@@ -61,6 +61,7 @@ public abstract class Pawn : MonoBehaviour, ISpawnable, IDropable
 
     public virtual void OnDrop()
     {
+        
         itemDrop.DropAllItems();
     }
 

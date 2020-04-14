@@ -237,6 +237,7 @@ public class AIState : MonoBehaviour
             else
             {
                 AI_Controller.agent.SetDestination(Vector3.zero);
+                AI_Controller.pawn.itemDrop.DropAllItems();
             }
             yield return new WaitForEndOfFrame();
         }

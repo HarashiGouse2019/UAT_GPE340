@@ -41,6 +41,7 @@ public class PlayerPawn : Pawn
             {
                 weaponHandler.equippedWeapon.Drop();
                 weaponHandler.UnequipWeapon();
+                WeaponIconHandler.SetIconInfo();
             }
 
             var deathSpot = deathSpotPooler.GetMember("DeathSpot");

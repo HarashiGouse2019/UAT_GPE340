@@ -57,6 +57,8 @@ public class PlayerController : Controller, IPlayable
 
     private void Update()
     {
+        if (GameManager.IsGamePaused) return;
+
         //If we start rolling, have it last for 1 second
         //since the whole rolling animation last that long
         if (isRolling)
@@ -70,8 +72,6 @@ public class PlayerController : Controller, IPlayable
 
         //Handling thhe Changing of Weapons
         RunWeaponChangeSystem();
-
-        
     }
 
     private void FixedUpdate()
@@ -86,6 +86,8 @@ public class PlayerController : Controller, IPlayable
 
     void RunWeaponEquipSystem(int weaponIndex)
     {
+        if (GameManager.IsGamePaused)  return;
+
         //Link our equip control to our Equipping system
         OnEquipWeaponButtonDown = Input.GetButtonDown("Equip Weapon");
 
@@ -118,6 +120,8 @@ public class PlayerController : Controller, IPlayable
 
     void RunWeaponChangeSystem()
     {
+        if (GameManager.IsGamePaused) return;
+
         //Link our change weapon controls to Weapon Change System.
         OnChangeWeapon = Input.GetAxis("Mouse ScrollWheel");
 
@@ -157,6 +161,8 @@ public class PlayerController : Controller, IPlayable
 
     void RunShootingSystem()
     {
+        if (GameManager.IsGamePaused) return;
+
         //Link our controls to the shooting system
         OnShootButtonDown = Input.GetButton("Shoot");
         OnReloadButtonDown = Input.GetButtonDown("Reload");
@@ -172,6 +178,8 @@ public class PlayerController : Controller, IPlayable
 
     void RunMovementSystem()
     {
+        if (GameManager.IsGamePaused) return;
+
         //So we know what button is being pressed, so that it's always updating
         OnMoveHorizontal = Input.GetAxis("Horizontal");
         OnMoveVertical = Input.GetAxis("Vertical");

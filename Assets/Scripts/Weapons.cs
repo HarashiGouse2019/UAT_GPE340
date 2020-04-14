@@ -19,6 +19,8 @@ public abstract class Weapons : PickUps, IPickable
 
     [Header("Weapon Stats")] public WeaponStats weaponStats;
 
+    [Header("Weapon Sound")] public string weaponSound;
+
     [Header("How Much Ammo is Left???")]
     public int ammoAmount;
 
@@ -110,6 +112,8 @@ public abstract class Weapons : PickUps, IPickable
 
                 claimedBy.weaponHandler.UpdateAmmoProperties();
 
+                AudioManager.Instance.PlayAudio(weaponSound, _oneShot: true);
+
             }
 
             //Now if we hit something....
@@ -176,8 +180,6 @@ public abstract class Weapons : PickUps, IPickable
 
     public virtual void Reload()
     {
-        Debug.Log("Reloading");
-
         //If someone actually has this weapon
         if (claimedBy != null)
         {

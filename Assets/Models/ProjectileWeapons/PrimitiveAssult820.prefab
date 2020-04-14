@@ -1459,7 +1459,7 @@ GameObject:
   - component: {fileID: 8686535286724223075}
   - component: {fileID: 1660649516658991960}
   m_Layer: 0
-  m_Name: PrimitiveAssault820
+  m_Name: PrimitiveAssult820
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1518,15 +1518,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rotationVal: 0
-  weaponName: Primitive Assault 820
+  weaponName: PrimitiveAssult820
   claimed: 0
   claimedBy: {fileID: 0}
   startInThisPosition: {x: 0.1, y: -0.22, z: 0.16}
   ammoSource: {fileID: 4040371156872724890}
   weaponType: 2
   weaponStats: {fileID: 11400000, guid: 2e773d8e68ede844d8564ed344528411, type: 2}
-  weaponSound: PrimitiveAssault820Sound
-  ammoAmount: 100
+  ammoAmount: 490
   bulletPrefab: {fileID: 2941774647536580244, guid: 79040fb6092e5034a93487c37b4c1733,
     type: 3}
   areRoundsInside: 1
@@ -1537,7 +1536,6 @@ MonoBehaviour:
   RightHandIKHintTarget: {fileID: 3646045383897583499}
   LeftHandIKHintTarget: {fileID: 4034067823998397507}
   OtherIKHintTargets: []
-  weaponIcon: {fileID: 21300000, guid: b0bf8e815172c2b44892253c5e99429b, type: 3}
 --- !u!65 &8686535286724223075
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1563,7 +1561,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e3fc456a3e9330d48a9988fca69ddfae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spawnInParent: 1
+  spawnInParent: 0
   itemsToPool:
   - name: MuzzleFlash
     size: 10
