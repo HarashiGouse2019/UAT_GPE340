@@ -14,9 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   weaponMinDamage: 10
   weaponMaxDamage: 30
-  weaponCritChance: 5
-  weaponCritMinDamage: 25
-  weaponCritMaxDamage: 30
+  weaponCritChance: 2
+  weaponCritMinDamage: 50
+  weaponCritMaxDamage: 75
   weaponAmmoCapacity: 100
   weaponRoundsPer: 10
   weaponRange: 120

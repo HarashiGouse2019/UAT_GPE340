@@ -1524,7 +1524,8 @@ MonoBehaviour:
   startInThisPosition: {x: 0.1, y: -0.22, z: 0.16}
   ammoSource: {fileID: 4040371156872724890}
   weaponType: 2
-  weaponStats: {fileID: 11400000, guid: 2e773d8e68ede844d8564ed344528411, type: 2}
+  weaponStats: {fileID: 0}
+  weaponSound: PrimitiveAssault820Sound
   ammoAmount: 490
   bulletPrefab: {fileID: 2941774647536580244, guid: 79040fb6092e5034a93487c37b4c1733,
     type: 3}
@@ -1536,6 +1537,7 @@ MonoBehaviour:
   RightHandIKHintTarget: {fileID: 3646045383897583499}
   LeftHandIKHintTarget: {fileID: 4034067823998397507}
   OtherIKHintTargets: []
+  weaponIcon: {fileID: 0}
 --- !u!65 &8686535286724223075
 BoxCollider:
   m_ObjectHideFlags: 0
