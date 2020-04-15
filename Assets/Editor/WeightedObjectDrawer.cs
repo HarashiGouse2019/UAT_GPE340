@@ -14,8 +14,8 @@ public class WeightedObjectDrawer : PropertyDrawer
         var objectRect = new Rect(position.x, position.y, position.width - 40f, position.height);
         var chanceRect = new Rect(position.x + position.width - 40f, position.y, 40f, position.height);
 
-        EditorGUI.PropertyField(objectRect, property.FindPropertyRelative("value"), GUIContent.none);
-        EditorGUI.PropertyField(chanceRect, property.FindPropertyRelative("chance"), GUIContent.none);
+        EditorGUI.PropertyField(objectRect, property.FindPropertyRelative("pickUp"), GUIContent.none);
+        EditorGUI.PropertyField(chanceRect, property.FindPropertyRelative("weight"), GUIContent.none);
 
         EditorGUI.indentLevel = indent;
         EditorGUI.EndProperty();

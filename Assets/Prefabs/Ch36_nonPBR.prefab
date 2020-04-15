@@ -825,6 +825,7 @@ GameObject:
   - component: {fileID: 7617109524829587034}
   - component: {fileID: 4878007201188522734}
   - component: {fileID: -2834871937321560078}
+  - component: {fileID: 2939082546001232941}
   m_Layer: 0
   m_Name: Ch36_nonPBR
   m_TagString: Untagged
@@ -1055,6 +1056,25 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   items:
   - {fileID: 0}
+--- !u!114 &2939082546001232941
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2339239384743341034}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1e9c43e6ccd102545bbcfbe907121d71, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemsToDrop:
+  - pickUp: {fileID: 5144483234160776303, guid: eb157f4fe632ada4b995608d4f76605c,
+      type: 3}
+    weight: 50
+  - pickUp: {fileID: 5201913263496605058, guid: 66d25c77ef31e5e45a3e9729f14d7c7f,
+      type: 3}
+    weight: 25
 --- !u!1 &2640044207860993928
 GameObject:
   m_ObjectHideFlags: 0
@@ -3242,6 +3262,16 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1598210568901892601}
     m_Modifications:
+    - target: {fileID: 2960126385947003094, guid: 66d25c77ef31e5e45a3e9729f14d7c7f,
+        type: 3}
+      propertyPath: m_Name
+      value: SquareMight
+      objectReference: {fileID: 0}
+    - target: {fileID: 2960126385947003094, guid: 66d25c77ef31e5e45a3e9729f14d7c7f,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8122164380182410813, guid: 66d25c77ef31e5e45a3e9729f14d7c7f,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -3295,16 +3325,6 @@ PrefabInstance:
     - target: {fileID: 8122164380182410813, guid: 66d25c77ef31e5e45a3e9729f14d7c7f,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2960126385947003094, guid: 66d25c77ef31e5e45a3e9729f14d7c7f,
-        type: 3}
-      propertyPath: m_Name
-      value: SquareMight
-      objectReference: {fileID: 0}
-    - target: {fileID: 2960126385947003094, guid: 66d25c77ef31e5e45a3e9729f14d7c7f,
-        type: 3}
-      propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []

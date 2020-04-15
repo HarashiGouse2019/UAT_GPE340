@@ -6,8 +6,14 @@ public class ItemDrop : MonoBehaviour
 {
 
     public List<GameObject> items = new List<GameObject>();
+    WeightedItemDrop weightedDrop;
 
     public Pawn Source { get; set; }
+
+    void Awake()
+    {
+        weightedDrop = GetComponent<WeightedItemDrop>();
+    }
 
     public void AddItem(GameObject _obj)
     {
@@ -24,6 +30,7 @@ public class ItemDrop : MonoBehaviour
             item.transform.parent = transform;
             item.transform.position = Source.transform.position;
             items.Remove(item);
+            weightedDrop.OnDrop();
         }
     }
 }
