@@ -5,6 +5,8 @@ using UnityEngine.UI;
 
 public class MasterVolumeControl : MonoBehaviour
 {
+    //This is for controlling the master volume of the game
+
     private static MasterVolumeControl Instance;
 
     [SerializeField] private int controlValue = 0;
@@ -15,9 +17,15 @@ public class MasterVolumeControl : MonoBehaviour
         Instance = this;
     }
 
+
+    /// <summary>
+    /// Update the master volume in the game.
+    /// </summary>
     public void UpdateMasterValue()
     {
+        //Change master volum on the Audio Mixer
         AudioManager.Instance.MasterMixerGroup.audioMixer.SetFloat("MasterVolumeParam", S_MASTERVOLUME.value);
+
         GameManager.Settings.SetMasterVolume(S_MASTERVOLUME.value, S_MASTERVOLUME);
     }
 

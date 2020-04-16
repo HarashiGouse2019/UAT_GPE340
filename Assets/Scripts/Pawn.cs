@@ -16,6 +16,8 @@ public abstract class Pawn : MonoBehaviour, ISpawnable, IDropable
 
     public ItemDrop itemDrop;
 
+    public bool droppedSomething = false;
+
     //Movement
     public float movementSpeed;
     public float rollingSpeed = 1;

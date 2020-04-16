@@ -116,6 +116,9 @@ public abstract class Weapons : PickUps, IPickable
 
             }
 
+            //When we show, we want to update the ammo info;
+            PlayerAmmoTextHandler.UpdateAmmoTextUI();
+
             //Now if we hit something....
             if (Physics.Raycast(ray, out hitInfo, weaponStats.weaponRange) && hitInfo.collider.gameObject != claimedBy.gameObject)
                 OnHit(hitInfo);
@@ -175,6 +178,7 @@ public abstract class Weapons : PickUps, IPickable
     public virtual void OnEquip()
     {
         transform.localPosition = startInThisPosition;
+        PlayerAmmoTextHandler.UpdateAmmoTextUI();
     }
 
 
@@ -208,6 +212,9 @@ public abstract class Weapons : PickUps, IPickable
                     return;
                 }
             }
+
+            // We also want to update the ammo info when we reload
+            PlayerAmmoTextHandler.UpdateAmmoTextUI();
         }
     }
     public virtual void OnUse() { }

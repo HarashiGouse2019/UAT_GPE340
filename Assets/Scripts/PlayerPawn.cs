@@ -26,7 +26,6 @@ public class PlayerPawn : Pawn
     public override void OnSpawn()
     {
         PlayerStaminaUiHandler.RunStaminaUI();
-        PlayerAmmoTextHandler.RunAmmoTextUI();
         PlayerHealthUiHandler.RunHealthUI();
         base.OnSpawn();
     }

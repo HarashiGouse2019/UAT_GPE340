@@ -21,25 +21,14 @@ public class PlayerAmmoTextHandler : MonoBehaviour
 
 
     // Start is called before the first frame update
-    public static void RunAmmoTextUI()
+    public static void UpdateAmmoTextUI()
     {
         playerPawn = FindObjectOfType<PlayerPawn>();
         TMP_AMMO = uiHandler.GetComponent<TextMeshProUGUI>();
         weaponHandler = playerPawn.GetComponent<WeaponHandler>();
 
-        uiHandler.StartCoroutine(UpdateAmmoText());
-    }
-
-
-    static IEnumerator UpdateAmmoText()
-    {
-        while (true)
-        {
-            if (playerPawn.weaponHandler.equippedWeapon != null)
-                TMP_AMMO.text = weaponHandler.ammoLeft + " / " + weaponHandler.packOfAmmoLeft;
-            else TMP_AMMO.text = "";
-
-            yield return new WaitForEndOfFrame();
-        }
+        if (playerPawn.weaponHandler.equippedWeapon != null)
+            TMP_AMMO.text = weaponHandler.ammoLeft + " / " + weaponHandler.packOfAmmoLeft;
+        else TMP_AMMO.text = "";
     }
 }

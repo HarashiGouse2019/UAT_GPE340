@@ -40,6 +40,7 @@ public class GameManager : MonoBehaviour
         public static Screen ScreenDisplay { get; private set; }
         public static bool WindowMode { get; private set; }
 
+        //These Set Methods can be accessed with UI objects using events
         #region Set Methods
         public static void SetSFXVolume(float _value, Slider _sfxVolume)
         {
@@ -141,19 +142,23 @@ public class GameManager : MonoBehaviour
 
     public static GameManager Instance { get; private set; }
 
+    //The player's current lives
     [Header("Player Lives"), SerializeField] private int playerLives;
     public static int PlayerCurrentLives { get; private set; }
 
+    //The text that displays the player's lives
     [Header("Player Lives TMP"), SerializeField]
-    private TMPro.TextMeshProUGUI TMP_LIVES;
+    private TextMeshProUGUI TMP_LIVES;
 
+    //GUI that for setting
     [Header("UI Settings")]
     public TMP_Dropdown dropDownResolutionHandler;
     public Toggle windowModeToggleHandler;
     public Slider sfxVolumeControl;
     public Slider bgmVolumeControl;
     public Slider masterVolumeControl;
-
+    
+    //Check if the game is paused
     public static bool IsGamePaused { get; private set; }
 
     private delegate void Main();
@@ -169,10 +174,15 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         PlayerCurrentLives += playerLives;
+
+        //Update lives from start; the amount of lives that we start with
         UpdateTMPLIVES(PlayerCurrentLives);
 
         core += Run;
         core.Invoke();
+
+        //Update on play
+        LoadPreviousChanges();
     }
 
     void Run()
@@ -180,12 +190,17 @@ public class GameManager : MonoBehaviour
         StartCoroutine(RunGameManagerControls());
     }
 
+
+    /// <summary>
+    /// Runs the Game Controls like the key for pausing
+    /// </summary>
+    /// <returns></returns>
     IEnumerator RunGameManagerControls()
     {
-        LoadPreviousChanges();
-
         while (true)
         {
+
+            //If the key for pause is pressed, toggle on if the game is pause or not;
             if (Input.GetKeyDown(KeyCode.Escape))
             {
                 if (!IsGamePaused)
@@ -198,18 +213,31 @@ public class GameManager : MonoBehaviour
         }
     }
 
-
+    /// <summary>
+    /// To update TextMeshPro that draws our lives
+    /// </summary>
+    /// <param name="_value"></param>
     void UpdateTMPLIVES(int _value)
     {
+        //Since text is a string, take our integar, and turn it to a string
         TMP_LIVES.text = _value.ToString();
     }
 
+    /// <summary>
+    /// Decreases the player's lives.
+    /// </summary>
     public void DecrementPlayerLives()
     {
         PlayerCurrentLives--;
+
+        //We want to update our GUI
         UpdateTMPLIVES(PlayerCurrentLives);
     }
 
+    /// <summary>
+    /// Returns the player's current live.
+    /// </summary>
+    /// <returns></returns>
     public static int GetPlayerLives() => PlayerCurrentLives;
 
     public void PlayerRespawn()
@@ -217,32 +245,51 @@ public class GameManager : MonoBehaviour
        
     }
 
+    /// <summary>
+    /// Invoke to pause the game; Main purpose was to use for Unity Events
+    /// </summary>
     public void InvokePauseGame()
     {
         PauseGame();
     }
 
+    /// <summary>
+    /// INvoke to unpause the game; Main purpose was to use for Unity Events
+    /// </summary>
     public void InvokeUnPauseGame()
     {
         UnPauseGame();
     }
 
+    /// <summary>
+    /// Invoke the end of the application (works on a build)
+    /// </summary>
     public void InvokeApplicationEnd()
     {
         ApplicationEnd();
     }
 
+    /// <summary>
+    /// Apply changes to our settings
+    /// </summary>
     public void ApplyChanges()
     {
         Settings.Save();
     }
 
+
+    /// <summary>
+    /// Load our previously changed settings
+    /// </summary>
     public void LoadPreviousChanges()
     {
         Settings.Load();
     }
 
-    public static void PauseGame()
+    /// <summary>
+    /// Pauses the game
+    /// </summary>
+    private static void PauseGame()
     {
         PauseMenu.Instance.SetTo(EnableState.ENABLED);
         IsGamePaused = true;
@@ -250,7 +297,10 @@ public class GameManager : MonoBehaviour
         
     }
 
-    public static void UnPauseGame()
+    /// <summary>
+    /// Unpause the game
+    /// </summary>
+    private static void UnPauseGame()
     {
         PauseMenu.Instance.SetTo(EnableState.DISABLED);
         IsGamePaused = false;
@@ -258,6 +308,9 @@ public class GameManager : MonoBehaviour
 
     }
 
+    /// <summary>
+    /// Ends the application
+    /// </summary>
     public static void ApplicationEnd()
     {
         Application.Quit();

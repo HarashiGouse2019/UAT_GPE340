@@ -921,6 +921,7 @@ MonoBehaviour:
   controller: {fileID: 6005348643131208421}
   weaponHandler: {fileID: 2868091855015455796}
   itemDrop: {fileID: 0}
+  droppedSomething: 0
   movementSpeed: 0
   rollingSpeed: 1
   vSpeed: 0
@@ -1055,7 +1056,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   items:
-  - {fileID: 0}
+  - {fileID: 5798127274983834708}
 --- !u!114 &2939082546001232941
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1071,10 +1072,10 @@ MonoBehaviour:
   itemsToDrop:
   - pickUp: {fileID: 5144483234160776303, guid: eb157f4fe632ada4b995608d4f76605c,
       type: 3}
-    weight: 50
+    weight: 100
   - pickUp: {fileID: 5201913263496605058, guid: 66d25c77ef31e5e45a3e9729f14d7c7f,
       type: 3}
-    weight: 25
+    weight: 10
 --- !u!1 &2640044207860993928
 GameObject:
   m_ObjectHideFlags: 0
@@ -3329,6 +3330,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 66d25c77ef31e5e45a3e9729f14d7c7f, type: 3}
+--- !u!1 &5798127274983834708 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2960126385947003094, guid: 66d25c77ef31e5e45a3e9729f14d7c7f,
+    type: 3}
+  m_PrefabInstance: {fileID: 8746955069490695298}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &708424354082454207 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8122164380182410813, guid: 66d25c77ef31e5e45a3e9729f14d7c7f,
@@ -3341,7 +3348,7 @@ MonoBehaviour:
     type: 3}
   m_PrefabInstance: {fileID: 8746955069490695298}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 5798127274983834708}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 55930ef76c667f249b402180029f892d, type: 3}

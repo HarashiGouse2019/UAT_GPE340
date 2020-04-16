@@ -82,8 +82,8 @@ public class WeaponHandler : MonoBehaviour
                 equippedWeapon.OnEquip();
                 return weapon;
             }
+            PlayerAmmoTextHandler.UpdateAmmoTextUI();
 
-            
         }
         return null;
     }
@@ -93,6 +93,8 @@ public class WeaponHandler : MonoBehaviour
         equippedWeapon.gameObject.SetActive(false);
         equippedWeapon = null;
         isEquipped = false;
+
+        PlayerAmmoTextHandler.UpdateAmmoTextUI();
     }
 
     public void MonitorWeaponIndex()
@@ -116,6 +118,8 @@ public class WeaponHandler : MonoBehaviour
             ammoLeft = equippedWeapon.ammoAmount;
         else
             ammoLeft = (int)reset;
+
+        PlayerAmmoTextHandler.UpdateAmmoTextUI();
     }
 
     public void CallForReload()

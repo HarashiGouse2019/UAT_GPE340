@@ -6,10 +6,22 @@ using Random = UnityEngine.Random;
 
 public class WeightedItemDrop : MonoBehaviour
 {
+    //List of items that we spawn based on the weight (or chance) of it occuring
     public List<WeightedObject> itemsToDrop = new List<WeightedObject>();
+
+    //A random number that will be used to pick a random item from our list
     int randomNum;
+
+    //This is an array of values called the Cummulative Defintive Function
     List<int> CDFArray = new List<int>();
 
+    //We get the transform of our parent
+    Transform parent;
+
+    //An offset. This will be used to makes sure that the spawning item doesn't clip on the ground
+    Vector3 spawnOffset = new Vector3(0f, 1f, 0f);
+
+    //Our weighted objects
    [System.Serializable]
     public class WeightedObject
     {
@@ -20,7 +32,7 @@ public class WeightedItemDrop : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        parent = GetComponent<Transform>();
     }
 
     // Update is called once per frame
@@ -31,11 +43,13 @@ public class WeightedItemDrop : MonoBehaviour
 
     public void OnDrop()
     {
-        
+        //Spawn a pickup from our list
+        Instantiate(RandomPickUpFromList(), parent.position + spawnOffset, Quaternion.identity);
     }
 
     PickUps RandomPickUpFromList()
     {
+
         //Create a new array - parallel to our weighted drops, but contains a cumulative value (CDF)
         CDFArray.Clear();
 
@@ -50,20 +64,6 @@ public class WeightedItemDrop : MonoBehaviour
 
         //Choose a randome number between 0 and my maximum density
         randomNum = Random.Range(0, density);
-
-
-        //Remove if BinarySearch works!!!
-        ////Wealk through CDF array to find where our random number would fall on "our" array
-        //for(int index = 0; index < CDFArray.Count; index++)
-        //{
-        //    if(randomNum <= CDFArray[index])
-        //    {
-        //        //Return the same location from itemToDrop
-        //        return itemsToDrop[index].pickUp;
-        //    }
-        //}
-
-
 
         //Binary Search
         int selectedIndex = Array.BinarySearch(CDFArray.ToArray(), randomNum);
