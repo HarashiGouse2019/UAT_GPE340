@@ -25,7 +25,7 @@ public abstract class Weapons : PickUps, IPickable
     public int ammoAmount;
 
     public GameObject bulletPrefab;
-    
+
     [Header("Are there rounds inside?")]
     public bool areRoundsInside = true;
 
@@ -49,6 +49,10 @@ public abstract class Weapons : PickUps, IPickable
     protected float time;
 
     protected ObjectPooler weaponObjectPooler;
+
+    //Particle System
+    [SerializeField]
+    private ParticleSystem muzzleFlash;
 
     public virtual void Awake()
     {
@@ -93,28 +97,15 @@ public abstract class Weapons : PickUps, IPickable
             Debug.DrawRay(ammoSource.position, ammoSource.right * weaponStats.weaponRange, Color.red, 2f);
 
             //We'll now create a muzzle effect
-            GameObject muzzelFlash = weaponObjectPooler.GetMember("MuzzleFlash");
+            muzzleFlash.Play();
 
-            if (!muzzelFlash.gameObject.activeInHierarchy)
+            canShoot = false;
 
-            {
-                muzzelFlash.gameObject.SetActive(true);
+            ammoAmount -= 1;
 
-                muzzelFlash.transform.position = ammoSource.position;
+            claimedBy.weaponHandler.UpdateAmmoProperties();
 
-                muzzelFlash.transform.rotation = ammoSource.rotation;
-
-                muzzelFlash.GetComponent<ParticleSystem>().Play();
-
-                canShoot = false;
-
-                ammoAmount -= 1;
-
-                claimedBy.weaponHandler.UpdateAmmoProperties();
-
-                AudioManager.Instance.PlayAudio(weaponSound, _oneShot: true);
-
-            }
+            AudioManager.Instance.PlayAudio(weaponSound, _oneShot: true);
 
             //When we show, we want to update the ammo info;
             PlayerAmmoTextHandler.UpdateAmmoTextUI();
@@ -144,7 +135,7 @@ public abstract class Weapons : PickUps, IPickable
                 _hitInfo.collider.GetComponentInParent<Pawn>().GetDamageableObj().TakeDamage(damageInflicted);
             }
             catch { }
-            
+
         }
     }
 
@@ -290,8 +281,8 @@ public abstract class Weapons : PickUps, IPickable
     public virtual void Recoil()
     {
         time += Time.deltaTime;
-        if(time >= (1 / weaponStats.weaponRoundsPer))
+        if (time >= (1 / weaponStats.weaponRoundsPer))
             SetNextRound();
-            
+
     }
 }
