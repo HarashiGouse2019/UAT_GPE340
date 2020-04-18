@@ -1240,10 +1240,11 @@ MonoBehaviour:
   controller: {fileID: 3318957859090939658}
   weaponHandler: {fileID: 0}
   itemDrop: {fileID: 0}
+  droppedSomething: 0
   movementSpeed: 250
   rollingSpeed: 0
   vSpeed: 0
-  gravity: 90
+  gravity: 50
   animator: {fileID: 8565306149310128225}
   health: {fileID: 3318957859090939700}
   deathSpotPooler: {fileID: 1366736737085440659}

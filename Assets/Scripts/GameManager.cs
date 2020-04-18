@@ -39,6 +39,7 @@ public class GameManager : MonoBehaviour
         public static FrameRate TargetFrameRate { get; private set; }
         public static Screen ScreenDisplay { get; private set; }
         public static bool WindowMode { get; private set; }
+        public static bool PostProcessingEnabled { get; private set; }
 
         //These Set Methods can be accessed with UI objects using events
         #region Set Methods
@@ -63,6 +64,7 @@ public class GameManager : MonoBehaviour
         public static void SetGameQuality(Quality _quality)
         {
             GameQuality = _quality;
+            QualitySettings.SetQualityLevel((int)GameQuality);
         }
 
         public static void SetShadowQuality(ShadowQuality _quality)
@@ -101,11 +103,11 @@ public class GameManager : MonoBehaviour
             else Screen.fullScreenMode = FullScreenMode.FullScreenWindow;
         }
 
-        public static void ApplyChanges()
+        public static void SetPostProcessing(bool _enabled)
         {
+            PostProcessingEnabled = _enabled;
 
         }
-
         #endregion
 
         public static void Save()
@@ -121,6 +123,7 @@ public class GameManager : MonoBehaviour
             PlayerPrefs.SetString("Resolution", Resolution.ToString());
 
             PlayerPrefs.SetInt("Window Mode", WindowMode ? 1 : 0);
+            PlayerPrefs.SetInt("Post Processing Enabled", PostProcessingEnabled ? 1 : 0);
 
             PlayerPrefs.Save();
         }
@@ -130,12 +133,14 @@ public class GameManager : MonoBehaviour
             Instance.sfxVolumeControl.value = PlayerPrefs.GetFloat("SFX Volume");
             Instance.bgmVolumeControl.value = PlayerPrefs.GetFloat("BGM Volume");
             Instance.masterVolumeControl.value = PlayerPrefs.GetFloat("Master Volume");
+            Instance.qualityControlHandler.value = PlayerPrefs.GetInt("Game Quality");
 
             /*Resolution is already saved, as well as the set window move, but the UI will not update so easily... sooo */
             Instance.dropDownResolutionHandler.GetComponent<DropDownResolutionHandler>().UpdateResolutionList();
             Instance.dropDownResolutionHandler.value = PlayerPrefs.GetInt("Resolution Dropdown Value");
 
             Instance.windowModeToggleHandler.isOn = Convert.ToBoolean(PlayerPrefs.GetInt("Window Mode"));
+            Instance.postProcessingToggleHandler.isOn = Convert.ToBoolean(PlayerPrefs.GetInt("Post Processing Enabled"));
         }
     }
     #endregion
@@ -154,6 +159,8 @@ public class GameManager : MonoBehaviour
     [Header("UI Settings")]
     public TMP_Dropdown dropDownResolutionHandler;
     public Toggle windowModeToggleHandler;
+    public Toggle postProcessingToggleHandler;
+    public Slider qualityControlHandler;
     public Slider sfxVolumeControl;
     public Slider bgmVolumeControl;
     public Slider masterVolumeControl;

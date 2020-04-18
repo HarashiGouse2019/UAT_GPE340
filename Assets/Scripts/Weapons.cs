@@ -50,6 +50,8 @@ public abstract class Weapons : PickUps, IPickable
 
     protected ObjectPooler weaponObjectPooler;
 
+    protected AudioSource soundSource;
+
     //Particle System
     [SerializeField]
     private ParticleSystem muzzleFlash;
@@ -57,6 +59,7 @@ public abstract class Weapons : PickUps, IPickable
     public virtual void Awake()
     {
         weaponObjectPooler = GetComponent<ObjectPooler>();
+        soundSource = GetComponent<AudioSource>();
     }
 
     public virtual void Start()
@@ -105,7 +108,7 @@ public abstract class Weapons : PickUps, IPickable
 
             claimedBy.weaponHandler.UpdateAmmoProperties();
 
-            AudioManager.Instance.PlayAudio(weaponSound, _oneShot: true);
+            soundSource.PlayOneShot(AudioManager.Instance.GetAudio(weaponSound));
 
             //When we show, we want to update the ammo info;
             PlayerAmmoTextHandler.UpdateAmmoTextUI();
