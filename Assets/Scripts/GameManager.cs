@@ -293,11 +293,6 @@ public class GameManager : MonoBehaviour
     /// <returns></returns>
     public static int GetPlayerLives() => PlayerCurrentLives;
 
-    public void PlayerRespawn()
-    {
-       
-    }
-
     /// <summary>
     /// Invoke to pause the game; Main purpose was to use for Unity Events
     /// </summary>

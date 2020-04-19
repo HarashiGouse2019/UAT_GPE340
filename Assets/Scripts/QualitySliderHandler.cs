@@ -12,14 +12,17 @@ public class QualitySliderHandler : MonoBehaviour
 
     void Awake()
     {
-        if(Instance == null)
+        #region SINGLETON
+        if (Instance == null)
         {
             Instance = this;
             DontDestroyOnLoad(Instance);
-        } else
+        }
+        else
         {
             Destroy(gameObject);
-        }
+        } 
+        #endregion
     }
 
     public void UpdateQualityLevel()

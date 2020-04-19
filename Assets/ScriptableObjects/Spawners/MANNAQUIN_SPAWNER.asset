@@ -17,5 +17,5 @@ MonoBehaviour:
     type: 3}
   ableToSpawn: 1
   repeatSpawning: 1
-  repeatDuration: 5
-  spawnLimit: 35
+  repeatDuration: 20
+  spawnLimit: 50
