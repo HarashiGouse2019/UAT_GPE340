@@ -4603,7 +4603,7 @@ RectTransform:
   - {fileID: 1347479624}
   - {fileID: 1415850228}
   m_Father: {fileID: 1505640333}
-  m_RootOrder: 4
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -5800,7 +5800,7 @@ RectTransform:
   m_Children:
   - {fileID: 1085467178}
   m_Father: {fileID: 1505640333}
-  m_RootOrder: 0
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -6613,7 +6613,7 @@ RectTransform:
   m_Children:
   - {fileID: 108226677}
   m_Father: {fileID: 1505640333}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -13585,11 +13585,11 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_Children:
-  - {fileID: 664158244}
   - {fileID: 1792134428}
   - {fileID: 1556870206}
   - {fileID: 769356987}
   - {fileID: 538366935}
+  - {fileID: 664158244}
   - {fileID: 1399459363}
   - {fileID: 434676638}
   m_Father: {fileID: 0}
@@ -13889,7 +13889,7 @@ RectTransform:
   - {fileID: 1915069107}
   - {fileID: 2080659483}
   m_Father: {fileID: 1505640333}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -14490,7 +14490,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'QUALITY LEVEL (Very Low)
+  m_text: 'QUALITY LEVEL (VERY_LOW)
 
 '
   m_isRightToLeft: 0
@@ -14563,7 +14563,7 @@ MonoBehaviour:
     textComponent: {fileID: 1702535328}
     characterCount: 25
     spriteCount: 0
-    spaceCount: 4
+    spaceCount: 3
     wordCount: 4
     linkCount: 0
     lineCount: 1
@@ -15238,7 +15238,7 @@ Transform:
   m_LocalScale: {x: 3.0304706, y: 3.0304706, z: 3.0304706}
   m_Children: []
   m_Father: {fileID: 1505640333}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1792134429
 MonoBehaviour:
@@ -15635,6 +15635,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   qualitySlider: {fileID: 1916441105}
+  TMP_QUALITY: {fileID: 1702535328}
 --- !u!114 &1916441105
 MonoBehaviour:
   m_ObjectHideFlags: 0
