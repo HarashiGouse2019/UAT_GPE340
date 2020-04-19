@@ -201,9 +201,18 @@ public class GameManager : MonoBehaviour
     [Header("Post Processing Effects")]
     public PostProcessVolume postEffect;
     public PostProcessingGroup postProcessingGroup;
+
+    [Header("Player UI"), SerializeField]
+    private GameObject GroupStats;
+
+    //Is Player UI Enabled
+    public static bool UIEnabled { get; private set; }
     
     //Check if the game is paused
     public static bool IsGamePaused { get; private set; }
+
+    //Check if game has started
+    public static bool IsGameInitialized { get; private set; }
 
     private delegate void Main();
 
@@ -349,7 +358,6 @@ public class GameManager : MonoBehaviour
         PauseMenu.Instance.SetTo(EnableState.DISABLED);
         IsGamePaused = false;
         Time.timeScale = 1;
-
     }
 
     /// <summary>
@@ -364,4 +372,15 @@ public class GameManager : MonoBehaviour
     /// Return post processing volume to allow modifications
     /// </summary>
     public static PostProcessVolume GetPostEffect() => Instance.postEffect;
+
+    public void StartGame()
+    {
+        IsGameInitialized = true;
+        SpawnManager.Init();
+    }
+
+    public static void EnableUI()
+    {
+        Instance.GroupStats.SetActive(true);
+    }
 }

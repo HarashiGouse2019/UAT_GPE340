@@ -33,7 +33,7 @@ public class SpawnerHandler : MonoBehaviour
         Instance = this;
     }
 
-    private void Start()
+    public void OnGameStart()
     {
         spawningRoutine = SpawningRoutine();
         StartCoroutine(spawningRoutine);
@@ -44,6 +44,9 @@ public class SpawnerHandler : MonoBehaviour
     {
         if (spawner.ableToSpawn && (spawner.objectToSpawn is ISpawnable))
         {
+            if (tagAs == Tag.PLAYER)
+                GameManager.EnableUI();
+
             Pawn newSpawnee = Instantiate(spawner.objectToSpawn, transform);
 
             newSpawnee.OnSpawn();

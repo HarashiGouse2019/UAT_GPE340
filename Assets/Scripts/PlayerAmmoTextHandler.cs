@@ -1,7 +1,5 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System;
 using UnityEngine;
-using UnityEngine.UI;
 using TMPro;
 
 public class PlayerAmmoTextHandler : MonoBehaviour
@@ -31,4 +29,6 @@ public class PlayerAmmoTextHandler : MonoBehaviour
             TMP_AMMO.text = weaponHandler.ammoLeft + " / " + weaponHandler.packOfAmmoLeft;
         else TMP_AMMO.text = "";
     }
+
+    public static TextMeshProUGUI GETUI() => TMP_AMMO;
 }

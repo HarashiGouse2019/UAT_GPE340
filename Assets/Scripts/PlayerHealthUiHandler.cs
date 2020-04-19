@@ -1,5 +1,5 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -41,4 +41,6 @@ public class PlayerHealthUiHandler : MonoBehaviour
             yield return new WaitForEndOfFrame();
         }
     }
+
+    public static Slider GETUI() => S_PLAYERHEALTH;
 }

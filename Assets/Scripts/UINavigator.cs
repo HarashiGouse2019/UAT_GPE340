@@ -16,20 +16,31 @@ public class UINavigator : MonoBehaviour
         public List<GameObject> subGroups;
     }
 
+    [Header("Start on Bundle"), SerializeField]
+    private int initialBundle;
 
     [Header("UI Assets"), SerializeField]
     private List<UiBundle> uiObjects = new List<UiBundle>();
-    private static List<UiBundle>  UIObjects; 
+    private static List<UiBundle> UIObjects;
 
     //The index to turn on the asset
-    public static uint UIAssetIndex { get; private set; } = 0;
+    public static uint  UIAssetIndex { get; private set; } = 0;
 
     //Previous Bundle
     public static UiBundle PreviousBundle { get; private set; }
 
-    private UINavigator()
+    //Current Bundle
+    public static UiBundle CurrentBundle { get; private set; }
+
+    private void Awake()
     {
         UIObjects = uiObjects;
+        CurrentBundle = UIObjects[initialBundle];
+    }
+
+    public static void SetAssetIndex(uint _index)
+    {
+        UIAssetIndex = _index;
     }
 
     public void NextInIndex()
@@ -45,6 +56,9 @@ public class UINavigator : MonoBehaviour
 
         //We want to enable the targeted index
         UIObjects[(int)UIAssetIndex].uiBundle.SetActive(true);
+
+        //Set Current
+        CurrentBundle = UIObjects[(int)UIAssetIndex];
 
         //And then we want to disable the previous index
         PreviousBundle.uiBundle.SetActive(false);
@@ -63,6 +77,9 @@ public class UINavigator : MonoBehaviour
 
         //We want to enable the targeted index
         UIObjects[(int)UIAssetIndex].uiBundle.SetActive(true);
+
+        //Set Current
+        CurrentBundle = UIObjects[(int)UIAssetIndex];
 
         //And then we want to disable the previous index
         PreviousBundle.uiBundle.SetActive(false);
@@ -88,6 +105,9 @@ public class UINavigator : MonoBehaviour
                 //Set the target bundle to true
                 bundle.uiBundle.SetActive(true);
 
+                //Set Current
+                CurrentBundle = bundle;
+
                 //And set the previous to false.
                 PreviousBundle.uiBundle.SetActive(false);
             }
@@ -107,7 +127,34 @@ public class UINavigator : MonoBehaviour
         //Set the target bundle to true
         UIObjects[(int)UIAssetIndex].uiBundle.SetActive(true);
 
+        //Set Current
+        CurrentBundle = UIObjects[(int)UIAssetIndex];
+
         //And set the previous to false.
         PreviousBundle.uiBundle.SetActive(false);
+    }
+
+    public void GotoPrevious()
+    {
+
+        //Set the previous one on
+        PreviousBundle.uiBundle.SetActive(true);
+
+        //At this point, previousBundle should have changed to the one we are on
+        CurrentBundle.uiBundle.SetActive(false);
+
+        UiBundle temp = CurrentBundle;
+
+        //Our previous one is now our current one, which we will turn off;
+        CurrentBundle = PreviousBundle;
+        PreviousBundle = temp;
+
+        UIAssetIndex = (uint)Array.IndexOf(UIObjects.ToArray(), CurrentBundle);
+    }
+
+    public void Exit()
+    {
+        CurrentBundle.uiBundle.SetActive(false);
+        UIAssetIndex = 0;
     }
 }

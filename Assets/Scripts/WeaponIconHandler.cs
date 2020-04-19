@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
@@ -55,4 +56,7 @@ public class WeaponIconHandler : MonoBehaviour
         //bring back the alpha.
         IMG_ICONSLOT.color = new Color(initialColor.r, initialColor.g, initialColor.b, 1f);
     }
+
+    public static Image GetIcon() => Instance.IMG_ICONSLOT;
+    public static TextMeshProUGUI GetTMP() => Instance.TMP_WEAPONNAME;
 }

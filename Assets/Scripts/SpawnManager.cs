@@ -2,10 +2,38 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SpawnManager
+public class SpawnManager:MonoBehaviour
 {
+    private static SpawnManager _Instance;
+    public static SpawnManager Instance
+    {
+        get
+        {
+            return _Instance;
+        }
+    }
     //Keep track of all spawn points
-    public List<Spawner> spawnerPoint;
+    public List<SpawnerHandler> spawnerPoints;
 
-    public Spawner GetSpawner(int _index) => spawnerPoint[_index];
+    public SpawnerHandler GetSpawnerHandler(int _index) => spawnerPoints[_index];
+    void Awake()
+    {
+        if (_Instance == null)
+        {
+            _Instance = this;
+            DontDestroyOnLoad(_Instance);
+        } else
+        {
+            Destroy(gameObject);
+        }
+    }
+    public static void Init()
+    {
+        SpawnerHandler[] activeSpawners = GameObject.FindObjectsOfType<SpawnerHandler>();
+        foreach(SpawnerHandler spawner in activeSpawners)
+        {
+            Instance.spawnerPoints.Add(spawner);
+            spawner.OnGameStart();
+        }
+    }
 }
