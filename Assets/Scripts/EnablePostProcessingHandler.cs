@@ -32,4 +32,14 @@ public class EnablePostProcessingHandler : MonoBehaviour
         GameManager.Settings.SetPostProcessing(postProcessingToggle.isOn);
         postEffectVolumeObj.SetActive(GameManager.Settings.PostProcessingEnabled);
     }
+
+    public void UpdatePostProcessingToggle(bool _isOn)
+    {
+        postProcessingToggle.isOn = _isOn;
+        GameManager.Settings.SetPostProcessing(postProcessingToggle.isOn);
+        postEffectVolumeObj.SetActive(GameManager.Settings.PostProcessingEnabled);
+    }
+
+    public static bool IsEnabled() => Instance.postProcessingToggle.isOn;
+    public static bool NotNull() => (Instance != null);
 }

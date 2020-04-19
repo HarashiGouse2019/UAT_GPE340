@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
-
+using UnityEngine.Rendering.PostProcessing;
 public class GameManager : MonoBehaviour
 {
     #region Settings Class
@@ -40,6 +40,10 @@ public class GameManager : MonoBehaviour
         public static Screen ScreenDisplay { get; private set; }
         public static bool WindowMode { get; private set; }
         public static bool PostProcessingEnabled { get; private set; }
+        public static bool ColorGradingEnabled { get; private set; }
+        public static bool MotionBlurEnabled { get; private set; }
+        public static bool AutoExposureEnabled { get; private set; }
+        public static bool DepthOfFieldEnabled { get; private set; }
 
         //These Set Methods can be accessed with UI objects using events
         #region Set Methods
@@ -108,6 +112,26 @@ public class GameManager : MonoBehaviour
             PostProcessingEnabled = _enabled;
 
         }
+
+        public static void SetColorGrading(bool _enabled)
+        {
+            ColorGradingEnabled = _enabled;
+        }
+
+        public static void SetMotionBlur(bool _enabled)
+        {
+            MotionBlurEnabled = _enabled;
+        }
+
+        public static void SetAutoExposure(bool _enabled)
+        {
+            AutoExposureEnabled = _enabled;
+        }
+
+        public static void SetDepthOfField(bool _enabled)
+        {
+            DepthOfFieldEnabled = _enabled;
+        }
         #endregion
 
         public static void Save()
@@ -124,6 +148,10 @@ public class GameManager : MonoBehaviour
 
             PlayerPrefs.SetInt("Window Mode", WindowMode ? 1 : 0);
             PlayerPrefs.SetInt("Post Processing Enabled", PostProcessingEnabled ? 1 : 0);
+            PlayerPrefs.SetInt("Color Grading Enabled", ColorGradingEnabled ? 1 : 0);
+            PlayerPrefs.SetInt("Motion Blur Enabled", MotionBlurEnabled ? 1 : 0);
+            PlayerPrefs.SetInt("Auto Exposure Enabled", AutoExposureEnabled ? 1 : 0);
+            PlayerPrefs.SetInt("Depth Of Field Enabled", DepthOfFieldEnabled ? 1 : 0);
 
             PlayerPrefs.Save();
         }
@@ -141,6 +169,11 @@ public class GameManager : MonoBehaviour
 
             Instance.windowModeToggleHandler.isOn = Convert.ToBoolean(PlayerPrefs.GetInt("Window Mode"));
             Instance.postProcessingToggleHandler.isOn = Convert.ToBoolean(PlayerPrefs.GetInt("Post Processing Enabled"));
+
+            Instance.postProcessingGroup.configurationToggle[0].isOn = Convert.ToBoolean(PlayerPrefs.GetInt("Color Grading Enabled"));
+            Instance.postProcessingGroup.configurationToggle[1].isOn = Convert.ToBoolean(PlayerPrefs.GetInt("Motion Blur Enabled"));
+            Instance.postProcessingGroup.configurationToggle[2].isOn = Convert.ToBoolean(PlayerPrefs.GetInt("Auto Exposure Enabled"));
+            Instance.postProcessingGroup.configurationToggle[3].isOn = Convert.ToBoolean(PlayerPrefs.GetInt("Depth Of Field Enabled"));
         }
     }
     #endregion
@@ -164,6 +197,10 @@ public class GameManager : MonoBehaviour
     public Slider sfxVolumeControl;
     public Slider bgmVolumeControl;
     public Slider masterVolumeControl;
+
+    [Header("Post Processing Effects")]
+    public PostProcessVolume postEffect;
+    public PostProcessingGroup postProcessingGroup;
     
     //Check if the game is paused
     public static bool IsGamePaused { get; private set; }
@@ -322,4 +359,9 @@ public class GameManager : MonoBehaviour
     {
         Application.Quit();
     }
+
+    /// <summary>
+    /// Return post processing volume to allow modifications
+    /// </summary>
+    public static PostProcessVolume GetPostEffect() => Instance.postEffect;
 }
