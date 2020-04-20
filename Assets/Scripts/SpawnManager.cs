@@ -18,14 +18,17 @@ public class SpawnManager:MonoBehaviour
     public SpawnerHandler GetSpawnerHandler(int _index) => spawnerPoints[_index];
     void Awake()
     {
+        #region SINGLETON
         if (_Instance == null)
         {
             _Instance = this;
             DontDestroyOnLoad(_Instance);
-        } else
+        }
+        else
         {
             Destroy(gameObject);
-        }
+        } 
+        #endregion
     }
     public static void Init()
     {

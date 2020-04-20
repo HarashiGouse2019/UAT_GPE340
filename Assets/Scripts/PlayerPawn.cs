@@ -61,4 +61,16 @@ public class PlayerPawn : Pawn
             }
         }
     }
+
+    private void OnTriggerStay(Collider other)
+    {
+        #region Capture Flag
+        //Detect a flag if close to it.
+        FlagID currentFlag = other.GetComponent<FlagID>();
+        if (currentFlag != null)
+            FlagTracker.DetectFlag(currentFlag).UpdatePercentage();
+        else
+            FlagTracker.GetCaptureMeter().gameObject.SetActive(false);
+        #endregion
+    }
 }

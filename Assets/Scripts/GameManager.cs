@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections;
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Rendering.PostProcessing;
+
 public class GameManager : MonoBehaviour
 {
     #region Settings Class
@@ -24,7 +24,7 @@ public class GameManager : MonoBehaviour
             ULTRA
         }
 
-        public enum FrameRate 
+        public enum FrameRate
         {
             FRAMERATE_30,
             FRAMERATE_60,
@@ -47,35 +47,63 @@ public class GameManager : MonoBehaviour
 
         //These Set Methods can be accessed with UI objects using events
         #region Set Methods
+        /// <summary>
+        /// Set the volume for only Sound Effects
+        /// </summary>
+        /// <param name="_value"></param>
+        /// <param name="_sfxVolume"></param>
         public static void SetSFXVolume(float _value, Slider _sfxVolume)
         {
             SFXVolume = _value;
             _sfxVolume.value = SFXVolume;
         }
 
+        /// <summary>
+        /// Set the volume for only background music
+        /// </summary>
+        /// <param name="_value"></param>
+        /// <param name="_bgmVolume"></param>
         public static void SetBGMVolume(float _value, Slider _bgmVolume)
         {
             BGMVolume = _value;
             _bgmVolume.value = BGMVolume;
         }
 
+        /// <summary>
+        /// Set the overall volume of all sounds and music
+        /// </summary>
+        /// <param name="_value"></param>
+        /// <param name="_masterVolume"></param>
         public static void SetMasterVolume(float _value, Slider _masterVolume)
         {
             MasterVolume = _value;
             _masterVolume.value = MasterVolume;
         }
 
+        /// <summary>
+        /// Set overall quality of the game
+        /// </summary>
+        /// <param name="_quality"></param>
         public static void SetGameQuality(Quality _quality)
         {
             GameQuality = _quality;
             QualitySettings.SetQualityLevel((int)GameQuality);
         }
 
+        /// <summary>
+        /// Set the Shadow Quality of the game
+        /// </summary>
+        /// <param name="_quality"></param>
         public static void SetShadowQuality(ShadowQuality _quality)
         {
             ShadowQuality = _quality;
         }
 
+        /// <summary>
+        /// Set application's resolution
+        /// </summary>
+        /// <param name="_resolution"></param>
+        /// <param name="_value"></param>
         public static void SetGameResolution(Resolution _resolution, int _value)
         {
             Resolution = _resolution;
@@ -83,22 +111,34 @@ public class GameManager : MonoBehaviour
             Screen.SetResolution(Resolution.width, Resolution.height, Screen.fullScreenMode);
         }
 
+        /// <summary>
+        /// Set the application's target framerate
+        /// </summary>
+        /// <param name="_frameRate"></param>
         public static void SetTargetFrameRate(FrameRate _frameRate)
         {
             TargetFrameRate = _frameRate;
             switch (_frameRate)
             {
-                case FrameRate.FRAMERATE_30: Application.targetFrameRate = 30;
+                case FrameRate.FRAMERATE_30:
+                    Application.targetFrameRate = 30;
                     break;
-                case FrameRate.FRAMERATE_60: Application.targetFrameRate = 60;
+                case FrameRate.FRAMERATE_60:
+                    Application.targetFrameRate = 60;
                     break;
-                case FrameRate.FRAMERATE_120: Application.targetFrameRate = 120;
+                case FrameRate.FRAMERATE_120:
+                    Application.targetFrameRate = 120;
                     break;
-                case FrameRate.UNLIMITED: Application.targetFrameRate = 300;
+                case FrameRate.UNLIMITED:
+                    Application.targetFrameRate = 300;
                     break;
             }
         }
 
+        /// <summary>
+        /// Set Window Mode on or off
+        /// </summary>
+        /// <param name="_isON"></param>
         public static void SetWindowMode(bool _isON)
         {
             WindowMode = _isON;
@@ -107,57 +147,91 @@ public class GameManager : MonoBehaviour
             else Screen.fullScreenMode = FullScreenMode.FullScreenWindow;
         }
 
+        /// <summary>
+        /// Set enablement of Post-Processing
+        /// </summary>
+        /// <param name="_enabled"></param>
         public static void SetPostProcessing(bool _enabled)
         {
             PostProcessingEnabled = _enabled;
 
         }
 
+        /// <summary>
+        /// Set enablement of Color Grading
+        /// </summary>
+        /// <param name="_enabled"></param>
         public static void SetColorGrading(bool _enabled)
         {
             ColorGradingEnabled = _enabled;
         }
 
+        /// <summary>
+        /// Set enablement of Motion Blur
+        /// </summary>
+        /// <param name="_enabled"></param>
         public static void SetMotionBlur(bool _enabled)
         {
             MotionBlurEnabled = _enabled;
         }
 
+        /// <summary>
+        /// Set enablement of Auto Exposure
+        /// </summary>
+        /// <param name="_enabled"></param>
         public static void SetAutoExposure(bool _enabled)
         {
             AutoExposureEnabled = _enabled;
         }
 
+        /// <summary>
+        /// Set enablement of Depth of Field
+        /// </summary>
+        /// <param name="_enabled"></param>
         public static void SetDepthOfField(bool _enabled)
         {
             DepthOfFieldEnabled = _enabled;
         }
         #endregion
 
+        /// <summary>
+        /// Save desire setting into registry
+        /// </summary>
         public static void Save()
         {
+            //Save all volume values
             PlayerPrefs.SetFloat("SFX Volume", SFXVolume);
             PlayerPrefs.SetFloat("BGM Volume", BGMVolume);
             PlayerPrefs.SetFloat("Master Volume", MasterVolume);
 
+            //Save quality and resolution values
             PlayerPrefs.SetInt("Game Quality", (int)GameQuality);
             PlayerPrefs.SetInt("Shadow Quality", (int)ShadowQuality);
             PlayerPrefs.SetInt("Resolution Dropdown Value", ResValue);
 
+            //Save current resolution that's set
             PlayerPrefs.SetString("Resolution", Resolution.ToString());
 
+            //Save Window mode
             PlayerPrefs.SetInt("Window Mode", WindowMode ? 1 : 0);
+
+            //Save all post-processing options
             PlayerPrefs.SetInt("Post Processing Enabled", PostProcessingEnabled ? 1 : 0);
             PlayerPrefs.SetInt("Color Grading Enabled", ColorGradingEnabled ? 1 : 0);
             PlayerPrefs.SetInt("Motion Blur Enabled", MotionBlurEnabled ? 1 : 0);
             PlayerPrefs.SetInt("Auto Exposure Enabled", AutoExposureEnabled ? 1 : 0);
             PlayerPrefs.SetInt("Depth Of Field Enabled", DepthOfFieldEnabled ? 1 : 0);
 
+            //Save all keys
             PlayerPrefs.Save();
         }
 
+        /// <summary>
+        /// Load key values from registry, and assign them to respective objects
+        /// </summary>
         public static void Load()
-        { 
+        {
+            //Update all volume values
             Instance.sfxVolumeControl.value = PlayerPrefs.GetFloat("SFX Volume");
             Instance.bgmVolumeControl.value = PlayerPrefs.GetFloat("BGM Volume");
             Instance.masterVolumeControl.value = PlayerPrefs.GetFloat("Master Volume");
@@ -167,9 +241,13 @@ public class GameManager : MonoBehaviour
             Instance.dropDownResolutionHandler.GetComponent<DropDownResolutionHandler>().UpdateResolutionList();
             Instance.dropDownResolutionHandler.value = PlayerPrefs.GetInt("Resolution Dropdown Value");
 
+            //Update WindowMode
             Instance.windowModeToggleHandler.isOn = Convert.ToBoolean(PlayerPrefs.GetInt("Window Mode"));
+
+            //Update enablement of Post-Processing
             Instance.postProcessingToggleHandler.isOn = Convert.ToBoolean(PlayerPrefs.GetInt("Post Processing Enabled"));
 
+            //Update post processing effects from registry
             Instance.postProcessingGroup.configurationToggle[0].isOn = Convert.ToBoolean(PlayerPrefs.GetInt("Color Grading Enabled"));
             Instance.postProcessingGroup.configurationToggle[1].isOn = Convert.ToBoolean(PlayerPrefs.GetInt("Motion Blur Enabled"));
             Instance.postProcessingGroup.configurationToggle[2].isOn = Convert.ToBoolean(PlayerPrefs.GetInt("Auto Exposure Enabled"));
@@ -185,11 +263,11 @@ public class GameManager : MonoBehaviour
     public static int PlayerCurrentLives { get; private set; }
 
     //The text that displays the player's lives
-    [Header("Player Lives TMP"), SerializeField]
+    [Header("Player Lives TMP"), SerializeField, Tooltip("The text that displays the number of lives the player has.")]
     private TextMeshProUGUI TMP_LIVES;
 
     //GUI that for setting
-    [Header("UI Settings")]
+    [Header("UI Settings"), Tooltip("Handlers that helps alter settings.")]
     public TMP_Dropdown dropDownResolutionHandler;
     public Toggle windowModeToggleHandler;
     public Toggle postProcessingToggleHandler;
@@ -198,30 +276,52 @@ public class GameManager : MonoBehaviour
     public Slider bgmVolumeControl;
     public Slider masterVolumeControl;
 
-    [Header("Post Processing Effects")]
+    [Header("Post Processing Effects"), Tooltip("The Post Processing Volume that's causing the effects, which is altered by the PostProcessingGroup")]
     public PostProcessVolume postEffect;
     public PostProcessingGroup postProcessingGroup;
 
-    [Header("Player UI"), SerializeField]
+    [Header("Player UI"), SerializeField, Tooltip("The GameObject that holds all Player Status (HP, STAMINA, AMMO, ETC)")]
     private GameObject GroupStats;
+
+    [Header("Information Log"), SerializeField]
+    private TextMeshProUGUI TMP_INFOMATIONLOG;
 
     //Is Player UI Enabled
     public static bool UIEnabled { get; private set; }
-    
+
     //Check if the game is paused
     public static bool IsGamePaused { get; private set; }
 
     //Check if game has started
     public static bool IsGameInitialized { get; private set; }
 
+    //String null
+    private const string STRINGNULL = "";
+
+    //Time value
+    private float time = 0;
+
+    //If delaying clear
+    private bool clearDelay = false;
+
+    //Main Script Cycle
     private delegate void Main();
 
     private Main core;
 
     void Awake()
     {
-        Instance = this;
-        
+        #region SINGLETON
+        if (Instance == null)
+        {
+            Instance = this;
+            DontDestroyOnLoad(Instance);
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+        #endregion
     }
 
     void Start()
@@ -342,7 +442,7 @@ public class GameManager : MonoBehaviour
         PauseMenu.Instance.SetTo(EnableState.ENABLED);
         IsGamePaused = true;
         Time.timeScale = 0;
-        
+
     }
 
     /// <summary>
@@ -377,5 +477,33 @@ public class GameManager : MonoBehaviour
     public static void EnableUI()
     {
         Instance.GroupStats.SetActive(true);
+    }
+
+    public static void PrintInfoLog(string _info)
+    {
+        Instance.TMP_INFOMATIONLOG.text = _info;
+        Instance.ClearLog();
+    }
+
+    void ClearLog(float _duration = 5f)
+    {
+        StartCoroutine(ClearLogCycle(_duration));
+    }
+
+    IEnumerator ClearLogCycle(float _duration)
+    {
+        while (true)
+        {
+            time += Time.deltaTime;
+
+            if (time >= _duration)
+            {
+                TMP_INFOMATIONLOG.text = STRINGNULL;
+                Debug.Log("DAMMMMMMMMN!!!!");
+                time = 0;
+            }
+            
+            yield return new WaitForEndOfFrame();
+        }
     }
 }
