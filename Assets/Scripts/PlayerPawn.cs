@@ -72,5 +72,25 @@ public class PlayerPawn : Pawn
         else
             FlagTracker.GetCaptureMeter().gameObject.SetActive(false);
         #endregion
+
+        #region Base Flag Case
+        //Check if player is at Flag Case
+        BaseFlagCase flagCase = other.GetComponent<BaseFlagCase>();
+        if (flagCase != null && FlagTracker.GetCapturedFlags().Count != 0)
+        {
+            List<FlagID> toBeRemoved = new List<FlagID>();
+            foreach (FlagID _flags in FlagTracker.GetCapturedFlags())
+            {
+                BaseFlagCase.AddFlagIntoCase(_flags);
+                toBeRemoved.Add(_flags);
+            }
+
+            //After moving them to the case, we clear the list
+            foreach(FlagID _flagsToRemove in toBeRemoved)
+            {
+                FlagTracker.GetCapturedFlags().Remove(_flagsToRemove);
+            }
+        } 
+        #endregion
     }
 }

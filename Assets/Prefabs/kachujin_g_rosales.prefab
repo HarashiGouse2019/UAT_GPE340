@@ -1276,7 +1276,7 @@ CharacterController:
   serializedVersion: 2
   m_Height: 2
   m_Radius: 0.26
-  m_SlopeLimit: 45
+  m_SlopeLimit: 60
   m_StepOffset: 0.3
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
@@ -2507,6 +2507,7 @@ MonoBehaviour:
   unarmedPosition: {fileID: 6714483867788653672}
   player: {fileID: 0}
   cameraRotationSpeed: 100
+  initialCameraPosition: {fileID: 0}
   camPivotPoint: {fileID: 6714483867109907965}
   playerPoint: {fileID: 1753051780743023899}
   camOffsetX: 0

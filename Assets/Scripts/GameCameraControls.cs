@@ -20,6 +20,9 @@ public class GameCameraControls : MonoBehaviour
     //This will be our script that will be responsible for basic camera movement
     public float cameraRotationSpeed = 1;
 
+    //The Inital Spot before spawning the player
+    public Transform initialCameraPosition;
+
     public Transform camPivotPoint, playerPoint;
 
     float mousePositionX, mousePositionY;
@@ -54,6 +57,7 @@ public class GameCameraControls : MonoBehaviour
             Destroy(gameObject);
         }
         #endregion
+        initialCameraPosition = gameObject.transform;
     }
 
     private void Start()
@@ -197,5 +201,13 @@ public class GameCameraControls : MonoBehaviour
         m_camera.transform.SetParent(gameObject.transform);
         GoToUnArmedPosition();
         ViewObstructed();
+    }
+
+    /// <summary>
+    /// Reset Camera to how it was before;
+    /// </summary>
+    public static void ReturnToInitialPosition()
+    {
+        Instance.m_camera.transform.position = Instance.initialCameraPosition.transform.position;
     }
 }

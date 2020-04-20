@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class UINavigator : MonoBehaviour
 {
+    public static UINavigator Instance;
     /*UI Navigator will be responsible for the 
      movement of different UI Assets. One major example of this
      is having the Pause Menu navigate to the settings menu.*/
@@ -34,6 +35,15 @@ public class UINavigator : MonoBehaviour
 
     private void Awake()
     {
+        if(Instance == null)
+        {
+            Instance = this;
+            DontDestroyOnLoad(Instance);
+        } else
+        {
+            Destroy(gameObject);
+        }
+
         UIObjects = uiObjects;
         CurrentBundle = UIObjects[initialBundle];
     }

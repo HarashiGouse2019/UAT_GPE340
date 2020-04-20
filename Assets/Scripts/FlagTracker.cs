@@ -49,6 +49,9 @@ public class FlagTracker : MonoBehaviour
 
         public void SetAsCaptured()
         {
+            //Update Player Spawn Position
+            GameManager.UpdatePlayerSpawnerPosition(flagIndex.gameObject.transform.position);
+
             //Turn off our capture meter
             GetCaptureMeter().gameObject.SetActive(false);
 
@@ -82,8 +85,6 @@ public class FlagTracker : MonoBehaviour
 
     //Capturing Metter
     public Slider captureMeter;
-
-    
 
     // Start is called before the first frame update
     void Awake()
@@ -171,4 +172,6 @@ public class FlagTracker : MonoBehaviour
     }
 
     public static Slider GetCaptureMeter() => Instance.captureMeter;
+
+    public static List<FlagID> GetCapturedFlags() => Instance.capturedFlags;
 }

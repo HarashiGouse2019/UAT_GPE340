@@ -256,6 +256,8 @@ public class GameManager : MonoBehaviour
     }
     #endregion
 
+    [SerializeField]
+    private SpawnerHandler PlayerSpawnHandler;
     public static GameManager Instance { get; private set; }
 
     //The player's current lives
@@ -285,6 +287,9 @@ public class GameManager : MonoBehaviour
 
     [Header("Information Log"), SerializeField]
     private TextMeshProUGUI TMP_INFOMATIONLOG;
+
+    [Header("Results Text"), SerializeField]
+    private TextMeshProUGUI TMP_RESULTS, TMP_NOTES;
 
     //Is Player UI Enabled
     public static bool UIEnabled { get; private set; }
@@ -470,6 +475,15 @@ public class GameManager : MonoBehaviour
 
     public void StartGame()
     {
+        if (PlayerCurrentLives == 0)
+        {
+            PlayerCurrentLives += playerLives;
+
+            //Update lives from start; the amount of lives that we start with
+            UpdateTMPLIVES(PlayerCurrentLives);
+
+        }
+
         IsGameInitialized = true;
         SpawnManager.Init();
     }
@@ -501,9 +515,53 @@ public class GameManager : MonoBehaviour
                 TMP_INFOMATIONLOG.text = STRINGNULL;
                 Debug.Log("DAMMMMMMMMN!!!!");
                 time = 0;
+                StopCoroutine(ClearLogCycle(_duration));
             }
-            
+
             yield return new WaitForEndOfFrame();
         }
+    }
+
+    public static void EndGame()
+    {
+        IsGameInitialized = false;
+        Instance.GroupStats.SetActive(false);
+    }
+
+    public static void SetResultsValue(int _value)
+    {
+        switch (_value)
+        {
+            case 0:
+                Instance.TMP_RESULTS.text = "CONGRATULATIONS";
+                Instance.TMP_NOTES.text = "It looks like that you managed to get all of the flags with no issues.";
+                return;
+            case 1:
+                Instance.TMP_RESULTS.text = "Wow! You almost had it!";
+                Instance.TMP_NOTES.text = "One step closer to glory!!!";
+                return;
+            case 2:
+                Instance.TMP_RESULTS.text = "Oh! Not quite!";
+                Instance.TMP_NOTES.text = "Better luck next time... I guess?";
+                return;
+            case 3:
+                Instance.TMP_RESULTS.text = "Huh...";
+                Instance.TMP_NOTES.text = "Seems like you're having a rough day.";
+                return;
+            case 4:
+                Instance.TMP_RESULTS.text = "That... was Pathetic";
+                Instance.TMP_NOTES.text = "No comment...";
+                return;
+            case 5:
+                Instance.TMP_RESULTS.text = "...";
+                Instance.TMP_NOTES.text = "I can't even look at you right now. Such a sad existence.";
+                return;
+        }
+
+    }
+
+    public static void UpdatePlayerSpawnerPosition(Vector3 _location)
+    {
+        Instance.PlayerSpawnHandler.gameObject.transform.position = _location;
     }
 }

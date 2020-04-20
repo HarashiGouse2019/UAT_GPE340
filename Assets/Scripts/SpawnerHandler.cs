@@ -31,6 +31,7 @@ public class SpawnerHandler : MonoBehaviour
     void Awake()
     {
         Instance = this;
+
     }
 
     public void OnGameStart()
@@ -86,5 +87,7 @@ public class SpawnerHandler : MonoBehaviour
     {
         Debug.Log("Spawning has ended...");
         breakOut = true;
+        GameManager.EndGame();
+        GameManager.SetResultsValue(BaseFlagCase.FlagsLeft);
     }
 }
