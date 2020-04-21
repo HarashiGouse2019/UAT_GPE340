@@ -69,11 +69,12 @@ public class GameCameraControls : MonoBehaviour
     {
         /*Make sure the cursor is in the center of the screen
          when we are not paused!*/
-        if (!GameManager.IsGamePaused)
+        if (!GameManager.IsGamePaused || GameManager.IsGameInitialized)
         {
             Cursor.visible = false;
             Cursor.lockState = CursorLockMode.Locked;
-        } else
+        }
+        else
         {
             Cursor.visible = true;
             Cursor.lockState = CursorLockMode.None;
@@ -89,17 +90,19 @@ public class GameCameraControls : MonoBehaviour
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 
 
+
     }
 
     private void FixedUpdate()
     {
-        if (!player.IsDead() && !GameManager.IsGamePaused)
-        {
-            RunMouseControls();
-            if (playerIsArmed == false && obstructionTarget != null) ViewObstructed();
-        }
-        else
-            CircleAroundDeathSpot();
+        if (GameManager.IsGameInitialized)
+            if (!player.IsDead() && !GameManager.IsGamePaused)
+            {
+                RunMouseControls();
+                if (playerIsArmed == false && obstructionTarget != null) ViewObstructed();
+            }
+            else
+                CircleAroundDeathSpot();
     }
 
     //This is the main mouse controls
@@ -208,6 +211,9 @@ public class GameCameraControls : MonoBehaviour
     /// </summary>
     public static void ReturnToInitialPosition()
     {
+        Instance.m_camera.transform.SetParent(null);
         Instance.m_camera.transform.position = Instance.initialCameraPosition.transform.position;
+        Cursor.visible = true;
+        Cursor.lockState = CursorLockMode.None;
     }
 }

@@ -309,6 +309,9 @@ public class GameManager : MonoBehaviour
     //If delaying clear
     private bool clearDelay = false;
 
+    //The PlayerPawn
+    private PlayerPawn player;
+
     //Main Script Cycle
     private delegate void Main();
 
@@ -348,6 +351,11 @@ public class GameManager : MonoBehaviour
         StartCoroutine(RunGameManagerControls());
     }
 
+    public static void LogPlayer(PlayerPawn _player)
+    {
+        Instance.player = _player;
+    }
+
 
     /// <summary>
     /// Runs the Game Controls like the key for pausing
@@ -357,7 +365,6 @@ public class GameManager : MonoBehaviour
     {
         while (true)
         {
-
             //If the key for pause is pressed, toggle on if the game is pause or not;
             if (Input.GetKeyDown(KeyCode.Escape))
             {
@@ -478,6 +485,7 @@ public class GameManager : MonoBehaviour
         if (PlayerCurrentLives == 0)
         {
             PlayerCurrentLives += playerLives;
+            player.GetDamageableObj().Heal(100f);
 
             //Update lives from start; the amount of lives that we start with
             UpdateTMPLIVES(PlayerCurrentLives);
@@ -526,6 +534,7 @@ public class GameManager : MonoBehaviour
     {
         IsGameInitialized = false;
         Instance.GroupStats.SetActive(false);
+        SpawnManager.SetAllSpawnersOff(SpawnManager.Instance.spawnerPoints);
     }
 
     public static void SetResultsValue(int _value)

@@ -57,17 +57,23 @@ public class AudioManager : MonoBehaviour
 
     private void Awake()
     {
+        #region SINGLETON
         if (Instance == null)
         {
             Instance = this;
             DontDestroyOnLoad(gameObject);
-        } else
+        }
+        else
         {
             Destroy(gameObject);
         }
 
+        #endregion
+
+        //Loop through the audio that is defined in the inspector
         foreach (Audio a in getAudio)
         {
+            //We're going to create a AudioSource, and assign some values for sound
             a.source = gameObject.AddComponent<AudioSource>();
 
             a.source.clip = a.clip;
@@ -78,6 +84,7 @@ public class AudioManager : MonoBehaviour
             a.source.outputAudioMixerGroup = SFXMixerGroup;
         }
 
+        //We're going to create a AudioSource, and assign some values for music
         foreach (Music m in getMusic)
         {
             m.source = gameObject.AddComponent<AudioSource>();
@@ -100,7 +107,6 @@ public class AudioManager : MonoBehaviour
     /// <param name="_volume"></param>
     /// Support values between 0 and 100.
     ///
-
     public void PlayAudio(string _name, float _volume = 100, bool _oneShot = false)
     {
         Audio a = Array.Find(getAudio, sound => sound.name == _name);
@@ -108,7 +114,8 @@ public class AudioManager : MonoBehaviour
         {
             Debug.LogWarning("Sound name " + _name + " was not found.");
             return;
-        } else
+        }
+        else
         {
             switch (_oneShot)
             {
@@ -120,13 +127,20 @@ public class AudioManager : MonoBehaviour
                     a.source.volume = _volume / 100;
                     break;
             }
-            
+
         }
+    }
+
+    public void Select()
+    {
+        string name = "Select";
+        Audio a = Array.Find(getAudio, audio => audio.name == name);
+        a.source.PlayOneShot(a.clip);
     }
 
     public void PlayMusic(string _name, float _volume = 100, bool _oneShot = false)
     {
-        Music m = Array.Find(getMusic, music=> music.name == _name);
+        Music m = Array.Find(getMusic, music => music.name == _name);
         if (m == null)
         {
             Debug.LogWarning("Music name " + _name + " was not found.");
@@ -192,10 +206,10 @@ public class AudioManager : MonoBehaviour
         }
     }
 
-    public  AudioMixerGroup GetMasterAudioMixer() => MasterMixerGroup;
-    public  AudioMixerGroup GetBGMAudioMixer() => BGMMixerGroup;
-    public  AudioMixerGroup GetSFXAudioMixer() => SFXMixerGroup;
-    public  List<Slider> GetMasterSlider() => S_MASTERVOLUME;
+    public AudioMixerGroup GetMasterAudioMixer() => MasterMixerGroup;
+    public AudioMixerGroup GetBGMAudioMixer() => BGMMixerGroup;
+    public AudioMixerGroup GetSFXAudioMixer() => SFXMixerGroup;
+    public List<Slider> GetMasterSlider() => S_MASTERVOLUME;
     public List<Slider> GetBGMSlider() => S_BGMVOLUME;
-    public  List<Slider> GetSFXSliders() => S_SFXVOLUME;
+    public List<Slider> GetSFXSliders() => S_SFXVOLUME;
 }

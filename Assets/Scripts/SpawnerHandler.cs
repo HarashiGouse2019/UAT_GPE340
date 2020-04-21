@@ -26,17 +26,17 @@ public class SpawnerHandler : MonoBehaviour
 
     private const uint reset = 0;
 
-    private bool breakOut = false;
+    public bool breakOut = false;
 
     void Awake()
     {
         Instance = this;
-
     }
 
     public void OnGameStart()
     {
         spawningRoutine = SpawningRoutine();
+        breakOut = false;
         StartCoroutine(spawningRoutine);
     }
 

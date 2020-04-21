@@ -25,6 +25,7 @@ public class PlayerPawn : Pawn
 
     public override void OnSpawn()
     {
+        GameManager.LogPlayer(this);
         PlayerStaminaUiHandler.RunStaminaUI();
         PlayerHealthUiHandler.RunHealthUI();
         base.OnSpawn();
@@ -62,7 +63,7 @@ public class PlayerPawn : Pawn
         }
     }
 
-    private void OnTriggerStay(Collider other)
+    void OnFlagInRange(Collider other)
     {
         #region Capture Flag
         //Detect a flag if close to it.
@@ -72,7 +73,10 @@ public class PlayerPawn : Pawn
         else
             FlagTracker.GetCaptureMeter().gameObject.SetActive(false);
         #endregion
+    }
 
+    void OnCaseInRange(Collider other)
+    {
         #region Base Flag Case
         //Check if player is at Flag Case
         BaseFlagCase flagCase = other.GetComponent<BaseFlagCase>();
@@ -86,11 +90,19 @@ public class PlayerPawn : Pawn
             }
 
             //After moving them to the case, we clear the list
-            foreach(FlagID _flagsToRemove in toBeRemoved)
+            foreach (FlagID _flagsToRemove in toBeRemoved)
             {
                 FlagTracker.GetCapturedFlags().Remove(_flagsToRemove);
             }
-        } 
+        }
         #endregion
+    }
+
+    private void OnTriggerStay(Collider collider)
+    {
+        OnFlagInRange(collider);
+        OnCaseInRange(collider);
+
+
     }
 }

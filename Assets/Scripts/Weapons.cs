@@ -242,6 +242,9 @@ public abstract class Weapons : PickUps, IPickable
             //Particularly for the player; updating Ui;
             claimedBy.weaponHandler.UpdateAmmoProperties();
 
+            //Turn off the collider
+            gameObject.GetComponent<Collider>().enabled = false;
+
             //We don't want a full mess of errors, so set inactive
             gameObject.SetActive(false);
 

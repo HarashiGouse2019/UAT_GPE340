@@ -49,8 +49,8 @@ public class FlagTracker : MonoBehaviour
 
         public void SetAsCaptured()
         {
-            //Update Player Spawn Position
-            GameManager.UpdatePlayerSpawnerPosition(flagIndex.gameObject.transform.position);
+            ////Update Player Spawn Position
+            //GameManager.UpdatePlayerSpawnerPosition(flagIndex.gameObject.transform.position);
 
             //Turn off our capture meter
             GetCaptureMeter().gameObject.SetActive(false);

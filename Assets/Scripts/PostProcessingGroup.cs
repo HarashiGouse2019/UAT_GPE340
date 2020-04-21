@@ -12,17 +12,25 @@ public class PostProcessingGroup : MonoBehaviour
     [SerializeField]
     public Toggle[] configurationToggle = new Toggle[4];
 
-
+    //Post-Processing Color Grading Effect
     ColorGrading colorGrading = null;
+
+    //Post-Processing Motion Blur Effect
     MotionBlur motionBlur = null;
+
+    //Post-Processing Auto Exposure
     AutoExposure autoExposure = null;
+
+    //Post-Processing 
     DepthOfField depthOfField = null;
 
+    //Two constant that hold alpha value for PostProcessingGroup
     const float ENABLE_TRANSPARENCY = 1f;
     const float DISABLE_TRANSPARENCY = 0.1f;
 
     void Awake()
     {
+        #region SINGLETON
         if (Instance == null)
         {
             Instance = this;
@@ -31,11 +39,13 @@ public class PostProcessingGroup : MonoBehaviour
         else
         {
             Destroy(gameObject);
-        }
+        } 
+        #endregion
     }
 
     void Start()
     {
+        //Enable Post-Processing if toggle in PlayerPrefs
         EnablePostProcessingOptions();
     }
 
@@ -51,6 +61,9 @@ public class PostProcessingGroup : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Turn on Post Processing toggled if one of the option is toggle on
+    /// </summary>
     public void TurnOnPostProcessing()
     {
 
@@ -59,22 +72,26 @@ public class PostProcessingGroup : MonoBehaviour
             try
             {
                 if (toggle.isOn && !EnablePostProcessingHandler.IsEnabled())
-                {
-                    Debug.Log("Doing things");
-                    Debug.Log("ConfigureToggle " + Array.IndexOf(configurationToggle, toggle));
                     EnablePostProcessingHandler.Instance.UpdatePostProcessingToggle(toggle.isOn);
-                }
             }
             catch { }
         }
     }
 
+    /// <summary>
+    /// Enable an effect for Post-Processing
+    /// </summary>
     public void UpdateEffect()
     {
         foreach (Toggle toggle in configurationToggle)
             ModifyPostProcessingEffects(Array.IndexOf(configurationToggle, toggle), toggle.isOn);
     }
 
+    /// <summary>
+    /// Modify and enable a Post-Processing Effect
+    /// </summary>
+    /// <param name="_index"></param>
+    /// <param name="_enable"></param>
     void ModifyPostProcessingEffects(int _index, bool _enable)
     {
         switch (_index)

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SpawnManager:MonoBehaviour
+public class SpawnManager : MonoBehaviour
 {
     private static SpawnManager _Instance;
     public static SpawnManager Instance
@@ -38,5 +38,13 @@ public class SpawnManager:MonoBehaviour
             Instance.spawnerPoints.Add(spawner);
             spawner.OnGameStart();
         }
+    }
+
+    public static void SetAllSpawnersOff(List<SpawnerHandler> spawners)
+    {
+        foreach (SpawnerHandler spawner in spawners)
+            spawner.breakOut = true;
+
+        Instance.spawnerPoints.Clear();
     }
 }

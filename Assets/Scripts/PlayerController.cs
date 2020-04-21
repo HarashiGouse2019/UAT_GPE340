@@ -57,7 +57,7 @@ public class PlayerController : Controller, IPlayable
 
     private void Update()
     {
-        if (GameManager.IsGamePaused) return;
+        if (GameManager.IsGamePaused || !GameManager.IsGameInitialized) return;
 
         //If we start rolling, have it last for 1 second
         //since the whole rolling animation last that long
@@ -76,6 +76,8 @@ public class PlayerController : Controller, IPlayable
 
     private void FixedUpdate()
     {
+        if (GameManager.IsGamePaused || !GameManager.IsGameInitialized) return;
+
         //Since movement is physic's based...
         //we run our Movement System in FixedUpdate();
         RunMovementSystem();
