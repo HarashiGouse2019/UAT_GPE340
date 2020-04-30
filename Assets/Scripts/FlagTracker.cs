@@ -28,15 +28,20 @@ public class FlagTracker : MonoBehaviour
             //Only update percentage if not captured
             if (!captured)
             {
+                //Turn on our flag capture meter
                 GetCaptureMeter().gameObject.SetActive(true);
 
+                //The moddedGain will depend on how many flags the player has.
+                //This value is what makes it take longer to capture a flag.
                 float moddedGain = (float)Instance.capturedFlags.Count + 1f;
 
+                //We have moddedGain increase exponentially to really show that it's harder to capture a flag.
                 percentageTilCapture += GAIN / (moddedGain * moddedGain);
 
                 //Update Capture Meter
                 GetCaptureMeter().value = percentageTilCapture;
 
+                //Check if capture meter is 100%
                 CheckStatus();
             }
                 
@@ -49,8 +54,8 @@ public class FlagTracker : MonoBehaviour
 
         public void SetAsCaptured()
         {
-            ////Update Player Spawn Position
-            //GameManager.UpdatePlayerSpawnerPosition(flagIndex.gameObject.transform.position);
+            //Update Player Spawn Position
+            GameManager.UpdatePlayerSpawnerPosition(flagIndex.gameObject.transform.position);
 
             //Turn off our capture meter
             GetCaptureMeter().gameObject.SetActive(false);

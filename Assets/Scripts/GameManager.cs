@@ -571,6 +571,6 @@ public class GameManager : MonoBehaviour
 
     public static void UpdatePlayerSpawnerPosition(Vector3 _location)
     {
-        Instance.PlayerSpawnHandler.gameObject.transform.position = _location;
+        Instance.PlayerSpawnHandler.GetAssociatedSpawner().SetSpawnLocation(_location);
     }
 }
