@@ -69,7 +69,7 @@ public class GameCameraControls : MonoBehaviour
     {
         /*Make sure the cursor is in the center of the screen
          when we are not paused!*/
-        if (!GameManager.IsGamePaused || GameManager.IsGameInitialized)
+        if (!GameManager.IsGamePaused && GameManager.IsGameInitialized)
         {
             Cursor.visible = false;
             Cursor.lockState = CursorLockMode.Locked;
