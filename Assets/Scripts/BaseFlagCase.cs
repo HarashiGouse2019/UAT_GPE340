@@ -49,8 +49,6 @@ public class BaseFlagCase : MonoBehaviour
             GameManager.EndGame();
             GameManager.PrintInfoLog("VICTORY IS YOURS!!!");
             GameManager.SetResultsValue(FlagsLeft);
-            GameCameraControls.ReturnToInitialPosition();
-            UINavigator.Instance.Goto("RESULTS");
         }
     }
 }

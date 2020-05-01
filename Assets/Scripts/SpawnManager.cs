@@ -47,7 +47,7 @@ public class SpawnManager : MonoBehaviour
             spawner.breakOut = true;
             spawner.End();
         }
-
         Instance.spawnerPoints.Clear();
+        return;
     }
 }
