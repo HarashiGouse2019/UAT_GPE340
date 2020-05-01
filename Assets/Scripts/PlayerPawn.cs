@@ -7,7 +7,10 @@ public class PlayerPawn : Pawn
     //This is unique to the player only, where the camera will rotate if they dies.
     public ObjectPooler deathSpotPooler;
 
-    //Our movement function for our player pawn
+    /// <summary>
+    /// Move the pawn in a direction in World Space
+    /// </summary>
+    /// <param name="worldDirectionToMove"></param>
     public override void Move(Vector3 worldDirectionToMove)
     {
         //Calculate our direction based on our rotation (so 0,0,1 becomes our forward)
@@ -23,6 +26,9 @@ public class PlayerPawn : Pawn
         charController.Move(directionToMove * Time.deltaTime);
     }
 
+    /// <summary>
+    /// Execute an action the moment an object spawns.
+    /// </summary>
     public override void OnSpawn()
     {
         GameManager.LogPlayer(this);
@@ -31,6 +37,9 @@ public class PlayerPawn : Pawn
         base.OnSpawn();
     }
 
+    /// <summary>
+    /// Enable Ragdoll physics
+    /// </summary>
     public override void EnableRagDoll()
     {
         if (!isDead)
@@ -54,15 +63,31 @@ public class PlayerPawn : Pawn
 
             GetComponent<Rigidbody>().isKinematic = true;
 
-            GameManager.Instance.DecrementPlayerLives();
-
-            if (GameManager.GetPlayerLives() <= 0)
-            {
-                GetComponentInParent<SpawnerHandler>().End();
-            }
+            //Lose player lives
+            LoseLives();
         }
     }
 
+    /// <summary>
+    /// Lose 1 Player Life Stock
+    /// </summary>
+    void LoseLives()
+    {
+        //Decrease player lives
+        GameManager.Instance.DecrementPlayerLives();
+
+        //Check if player lives is 0
+        if (GameManager.GetPlayerLives() <= 0)
+        {
+            GetComponentInParent<SpawnerHandler>().End();
+            GameManager.EndGame();
+        }
+    }
+
+    /// <summary>
+    /// Check if a flag is within capture range
+    /// </summary>
+    /// <param name="other"></param>
     void OnFlagInRange(Collider other)
     {
         #region Capture Flag
@@ -75,6 +100,10 @@ public class PlayerPawn : Pawn
         #endregion
     }
 
+    /// <summary>
+    /// Check if flag case is within range
+    /// </summary>
+    /// <param name="other"></param>
     void OnCaseInRange(Collider other)
     {
         #region Base Flag Case

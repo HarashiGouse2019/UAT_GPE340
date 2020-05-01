@@ -57,7 +57,7 @@ public class GameCameraControls : MonoBehaviour
             Destroy(gameObject);
         }
         #endregion
-        initialCameraPosition = gameObject.transform;
+        initialCameraPosition = m_camera.transform.parent;
     }
 
     private void Start()

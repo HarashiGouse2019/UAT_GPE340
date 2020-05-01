@@ -366,7 +366,7 @@ public class GameManager : MonoBehaviour
         while (true)
         {
             //If the key for pause is pressed, toggle on if the game is pause or not;
-            if (Input.GetKeyDown(KeyCode.Escape))
+            if (Input.GetKeyDown(KeyCode.Escape) && IsGameInitialized)
             {
                 if (!IsGamePaused)
                     PauseGame();
