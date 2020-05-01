@@ -29,10 +29,10 @@ public class Spawner : ScriptableObject
     public int spawnLimit = 1;
 
     //The initial position of the spawner object in world space.
-    public Vector3 initialPosition { get; private set; }
+    public Vector3 InitialPosition { get; private set; }
 
     //This is not the position of the spawner, but the position where the spawner will pawn an object relative to it's position in world space.
-    public Vector3 spawnPointLocation { get; private set; }
+    public Vector3 SpawnPointLocation { get; private set; }
 
     /// <summary>
     /// Set the position of where the object is located.
@@ -40,7 +40,7 @@ public class Spawner : ScriptableObject
     /// <param name="_startPosition"></param>
     public void SetInitialPosition(Vector3 _startPosition)
     {
-        initialPosition = _startPosition;
+        InitialPosition = _startPosition;
     }
 
     /// <summary>
@@ -57,12 +57,12 @@ public class Spawner : ScriptableObject
         {
             case PositionType.RELATIVE:
                 //We'll take the intial position plus the location we want to spawn
-                spawnPointLocation = initialPosition + _spawnPosition;
+                SpawnPointLocation = InitialPosition + _spawnPosition;
                 return;
 
             case PositionType.ABSOLUTE:
                 //We'll directly pass the value of our spawn position;
-                spawnPointLocation = _spawnPosition;
+                SpawnPointLocation = _spawnPosition;
                 return;
         }
     }

@@ -53,7 +53,7 @@ public abstract class Weapons : PickUps, IPickable
     protected AudioSource soundSource;
 
     //Particle System
-    [SerializeField]
+    [Header("Muzzle Flash Particle Effect"), SerializeField]
     private ParticleSystem muzzleFlash;
 
     public virtual void Awake()

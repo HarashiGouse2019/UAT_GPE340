@@ -43,10 +43,8 @@ public class SpawnManager : MonoBehaviour
     public static void SetAllSpawnersOff(List<SpawnerHandler> spawners)
     {
         foreach (SpawnerHandler spawner in spawners)
-        {
             spawner.breakOut = true;
-            spawner.End();
-        }
+
         Instance.spawnerPoints.Clear();
         return;
     }

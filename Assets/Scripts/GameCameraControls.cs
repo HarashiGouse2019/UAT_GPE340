@@ -11,6 +11,7 @@ public class GameCameraControls : MonoBehaviour
     public Camera m_camera;
 
     //Armed and Unarmed Position for camera
+    public Transform cameraOriginalParent;
     public Transform armedPosition;
     public Transform unarmedPosition;
 
@@ -41,23 +42,15 @@ public class GameCameraControls : MonoBehaviour
 
     private void Awake()
     {
-        #region Singleton
-        if (Instance == null)
-        {
-            Instance = this;
-            m_camera = FindObjectOfType<Camera>();
-            player = GetComponentInParent<PlayerPawn>();
-            camPivotPoint = gameObject.transform;
-            obstructionTarget = camPivotPoint;
-            ReturnToPlayerOrbit();
-            DontDestroyOnLoad(Instance);
-        }
-        else
-        {
-            Destroy(gameObject);
-        }
-        #endregion
-        initialCameraPosition = m_camera.transform.parent;
+        Instance = this;
+        m_camera = FindObjectOfType<Camera>();
+        player = GetComponentInParent<PlayerPawn>();
+        camPivotPoint = gameObject.transform;
+        obstructionTarget = camPivotPoint;
+        ReturnToPlayerOrbit();
+
+        cameraOriginalParent = m_camera.transform.parent;
+        initialCameraPosition = gameObject.transform;
     }
 
     private void Start()
@@ -211,8 +204,8 @@ public class GameCameraControls : MonoBehaviour
     /// </summary>
     public static void ReturnToInitialPosition()
     {
-        Instance.m_camera.transform.SetParent(null);
-        Instance.m_camera.transform.position = Instance.initialCameraPosition.transform.position;
+        Instance.m_camera.transform.SetParent(Instance.cameraOriginalParent);
+        
         Cursor.visible = true;
         Cursor.lockState = CursorLockMode.None;
     }

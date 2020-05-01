@@ -14,6 +14,7 @@ public class GameManager : MonoBehaviour
         public static float SFXVolume { get; private set; }
         public static float BGMVolume { get; private set; }
         public static float MasterVolume { get; private set; }
+
         public enum Quality
         {
             VERY_LOW,
@@ -534,6 +535,8 @@ public class GameManager : MonoBehaviour
         IsGameInitialized = false;
         Instance.GroupStats.SetActive(false);
         SpawnManager.SetAllSpawnersOff(SpawnManager.Instance.spawnerPoints);
+        GameCameraControls.ReturnToInitialPosition();
+        UINavigator.Instance.Goto("RESULTS");
     }
 
     public static void SetResultsValue(int _value)

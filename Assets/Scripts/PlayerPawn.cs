@@ -93,6 +93,7 @@ public class PlayerPawn : Pawn
         #region Capture Flag
         //Detect a flag if close to it.
         FlagID currentFlag = other.GetComponent<FlagID>();
+
         if (currentFlag != null)
             FlagTracker.DetectFlag(currentFlag).UpdatePercentage();
         else
@@ -131,7 +132,5 @@ public class PlayerPawn : Pawn
     {
         OnFlagInRange(collider);
         OnCaseInRange(collider);
-
-
     }
 }

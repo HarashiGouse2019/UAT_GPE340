@@ -52,7 +52,7 @@ public class SpawnerHandler : MonoBehaviour
 
         //Set the spawner's intial position;
         spawner.SetInitialPosition(transform.position);
-        spawner.SetSpawnLocation(spawner.initialPosition);
+        spawner.SetSpawnLocation(spawner.InitialPosition);
 
         //Begin spawning loop
         StartCoroutine(spawningRoutine);
@@ -79,7 +79,7 @@ public class SpawnerHandler : MonoBehaviour
 
             //Spawn a new spawnee
             Pawn newSpawnee = Instantiate(spawner.objectToSpawn, transform);
-            newSpawnee.transform.position = spawner.spawnPointLocation;
+            newSpawnee.transform.position = spawner.SpawnPointLocation;
 
             //Execute OnSpawn code
             newSpawnee.OnSpawn();
@@ -137,7 +137,6 @@ public class SpawnerHandler : MonoBehaviour
     {
         Debug.Log("Spawning has ended...");
         breakOut = true;
-        GameManager.EndGame();
         GameManager.SetResultsValue(BaseFlagCase.FlagsLeft);
     }
 }
