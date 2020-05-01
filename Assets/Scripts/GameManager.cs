@@ -521,7 +521,6 @@ public class GameManager : MonoBehaviour
             if (time >= _duration)
             {
                 TMP_INFOMATIONLOG.text = STRINGNULL;
-                Debug.Log("DAMMMMMMMMN!!!!");
                 time = 0;
                 StopCoroutine(ClearLogCycle(_duration));
             }

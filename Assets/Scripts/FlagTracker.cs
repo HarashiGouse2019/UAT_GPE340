@@ -72,9 +72,13 @@ public class FlagTracker : MonoBehaviour
             //Set this flag to inactive.
             flagIndex.gameObject.SetActive(false);
         }
+
         public FlagID GetFlagID() => flagIndex;
+
         public float GetPercentageTilCapture() => percentageTilCapture;
+
         public bool Captured() => captured;
+
         void CheckStatus()
         {
             if (percentageTilCapture >= CAPTURE_VALUE)

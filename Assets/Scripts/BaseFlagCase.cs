@@ -46,6 +46,7 @@ public class BaseFlagCase : MonoBehaviour
     {
         if(FlagsLeft == 0)
         {
+            GameManager.EndGame();
             GameManager.PrintInfoLog("VICTORY IS YOURS!!!");
             GameManager.SetResultsValue(FlagsLeft);
             GameCameraControls.ReturnToInitialPosition();
