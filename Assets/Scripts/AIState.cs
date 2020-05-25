@@ -166,7 +166,7 @@ public class AIState : MonoBehaviour
                                  this. This is what the controller reference is handy for.*/
                                 AI_Controller.agent.SetDestination(target.position);
 
-                                AI_Controller.agent.speed = 10f;
+                                AI_Controller.agent.speed = 20f;
 
                                 //While pursuing, we want to check if we are at shooting distance.
                                 if (Vector3.Distance(AI_Controller.pawn.transform.position, target.position) < pursuitDistance)
@@ -240,7 +240,7 @@ public class AIState : MonoBehaviour
                 AI_Controller.pawn.itemDrop.DropAllItems();
                 yield return false;
             }
-            yield return new WaitForEndOfFrame();
+            yield return new WaitForFixedUpdate();
         }
     }
 }

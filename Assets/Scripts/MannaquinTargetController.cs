@@ -53,7 +53,7 @@ public class MannaquinTargetController : Controller
     private void FixedUpdate()
     {
         //We create a vector that is from this to our target/trasnform.
-        Vector3 desiredVelocity = Vector3.MoveTowards(transform.position, agent.desiredVelocity, agent.acceleration);
+        Vector3 desiredVelocity = Vector3.MoveTowards(transform.position, agent.desiredVelocity, agent.acceleration * 2);
 
         //Innstead of going with the x, go with the z.
         Vector3 input = transform.InverseTransformDirection(desiredVelocity);

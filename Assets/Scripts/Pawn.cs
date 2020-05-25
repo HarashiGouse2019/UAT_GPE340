@@ -120,7 +120,7 @@ public abstract class Pawn : MonoBehaviour, ISpawnable, IDropable
         }
     }
 
-    public virtual GameObject GetGameObject() { return null; }
+    public virtual GameObject GetGameObject() => gameObject;
 
     public virtual GameObject FindGameObjectOnLayer(string _layerName)
     {
@@ -145,6 +145,7 @@ public abstract class Pawn : MonoBehaviour, ISpawnable, IDropable
             
             animator.enabled = false;
             charController.enabled = false;
+            
             GetComponent<Rigidbody>().isKinematic = true;
             isDead = true;
         }
